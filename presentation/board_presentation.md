@@ -33,8 +33,8 @@
 | Category of Loss | Physical Mechanism | Financial and Operational Impact |
 |---|---|---|
 | **Direct Sales Loss** | Website slowdowns during peak shopping hours cause customers to abandon checkout carts. | **~800 lost customer orders per month (~280,000 Ghana Cedis monthly top-line loss).** |
-| **Wasted Leadership Time** | Operations and Finance manually extracting, formatting, and debating conflicting spreadsheets. | **Over 420 hours per year** (equivalent to **10+ full working weeks of senior leadership bandwidth**). |
-| **Legal and Regulatory Exposure** | 300,000 customer records stored on unmanaged laptops with a 90-day regulatory complaint clock. | Potential statutory enforcement notices, legal defense fees, and reputational damage under Ghana Act 843 (**500,000 to 1,200,000 Ghana Cedis**). |
+| **Wasted Leadership Time** | Operations and Finance manually extracting, formatting, and debating conflicting spreadsheets. | **416+ hours per year** (equivalent to **10+ full working weeks of senior leadership bandwidth**). |
+| **Legal and Regulatory Exposure** | 300,000 customer records stored on unmanaged laptops with a 90-day regulatory complaint clock. | Illustrative risk-weighted exposure of **500,000 to 1,200,000 Ghana Cedis** in regulatory sanctions, legal costs, and audit friction. |
 
 > **Nana's Speaker Notes:** *"This is not just a software inconvenience; it is costing us real revenue. Those two Monday slowdowns cost us an estimated 800 customer orders. Between myself and the Finance lead, we waste ten full working weeks every year manually cleaning spreadsheets. Doing nothing is already our most expensive option."*
 
@@ -49,8 +49,8 @@
   - Kloud Kart holds approximately 40 gigabytes of structured data. 40 gigabytes easily fits inside standard computer memory.
   - Buying massive enterprise platforms would create unpredictable monthly bills and overwhelm a small team.
 - **Our Practical Solution:**
-  1. **Activate the Pre-Approved Second Server:** Create an automated, real-time mirror (read replica) of our database. All reporting queries run on the mirror. Shoppers on the live website never experience a slowdown again.
-  2. **Centralized Reporting Database:** Move data into a dedicated, standard reporting database on an automated nightly schedule (02:00 AM).
+  1. **Activate the Pre-Approved Second Server:** Create an automated, real-time mirror copy of our database on our pre-approved second server. All reporting queries run on the mirror. Shoppers on the live website never experience a slowdown again.
+  2. **Dedicated Reporting Schema on Server 2:** Store clean reporting tables inside a protected area on that same second server, requiring zero new database servers.
   3. **One Single Source of Truth:** Replace personal spreadsheets with locked, automated business definitions in standard database queries.
 
 > **Nana's Speaker Notes:** *"Investors often ask if we are building a lakehouse or buying Snowflake. The honest answer is that for a 40-gigabyte company, those tools are expensive over-engineering. We are using our already-budgeted second server to create a duplicate database for reporting. Shoppers use the store; reports read from the copy. Simple, reliable, and affordable."*
@@ -61,12 +61,11 @@
 
 ### Title: Protecting Customer Privacy and Meeting Our 90-Day Legal Clock
 
-- **The Legal Reality under Ghana's Data Protection Act, 2012 (Act 843):**
-  - Section 33 grants every customer the legal right to request complete deletion of their personal information.
-  - Kloud Kart has a strict 90-day statutory window to respond to formal regulatory complaints.
-  - **The Golden Rule:** *"Every copy you create is a place a deletion request must reach."*
+- **The Legal Reality (Ghana Data Protection Act, 2012 / Act 843):**
+  - As I understand Ghana's Data Protection Act (Act 843), customers have the right to request deletion of their personal details, and Kloud Kart must answer the Data Protection Commission's active complaint within 90 days.
+  - **The Golden Rule:** Every copy you create is a place a deletion request must reach.
 - **Our Two-Step Privacy Protection Approach:**
-  - **Step 1 (Sanitization at the Gate):** As operational data is moved to our reporting system, customer names, telephone numbers, and street delivery addresses are removed. Emails are converted to anonymous account codes.
+  - **Step 1 (Sanitization at the Gate):** As operational data is moved to our reporting schema, customer names, telephone numbers, and street delivery addresses are removed. Emails are converted to anonymous account codes.
   - **Step 2 (Safe Business Calculations):** Order values, dates, and item quantities remain untouched so business reporting works perfectly, but zero personal customer contact details leak into analytics tables.
 - **The Outcome:** When a customer requests deletion, we only have to erase their record from our primary store database. Our reporting system is completely safe from privacy audits.
 
@@ -119,25 +118,23 @@ Goal: Guarantee Operations and Finance report identical numbers down to the last
 
 ### Title: Verifiable Quarterly Milestones
 
-```
-Q1: STOP THE BLEEDING
-Outcome: Reporting queries move to the second server. The live website never slows down. 
-Verified By: Live checkout page loads under 1 second during Monday 09:00 AM export.
+- **Q1 (Months 1 to 3): Stop the Bleeding and Meet the 90-Day Privacy Deadline**
+  - **Outcome:** Reporting moves to the second server (ending Monday site slowdowns), marketing customer spreadsheets are retired, and customer deletion works within 90 days.
+  - **Verified By:** Live checkout loads under 2 seconds during Monday 09:00 AM reporting; test deleted customer returns zero contact records before Day 90.
 
-Q2: SINGLE SOURCE OF TRUTH
-Outcome: Operations and Finance view identical revenue numbers down to the last cedi.
-Verified By: Monthly revenue summaries match bank settlements on the first business day.
+- **Q2 (Months 4 to 6): Single Source of Truth**
+  - **Outcome:** Operations and Finance view identical daily and monthly revenue numbers down to the last cedi.
+  - **Verified By:** Monthly revenue summaries match payment gateway settlements on the first business day.
 
-Q3: REGULATORY COMPLIANCE AND EXPANSION
-Outcome: Act 843 automated deletion pipeline active; Nigeria pilot metrics cleanly isolated.
-Verified By: Test customer deletion completed across all systems within 5 business days.
+- **Q3 (Months 7 to 9): Nigeria Expansion Visibility and Team Self-Service**
+  - **Outcome:** Nigeria pilot sales and delivery numbers are tracked separately from Ghana, and department leads pull their own standard reports.
+  - **Verified By:** Board review displays a dedicated Nigeria view without mixing Ghana totals, and leads run monthly reports without developer help.
 
-Q4: SELF-SERVICE AND OBSERVABILITY
-Outcome: Departmental leads generate own reports; automated warehouse stock-drift alerts.
-Verified By: Department leads self-serve reports with zero technical support tickets.
-```
+- **Q4 (Months 10 to 12): Automatic Stock Accuracy Alerts**
+  - **Outcome:** Automated alerts flag mismatches between website stock counts and physical warehouse shelves before items oversell.
+  - **Verified By:** Overselling refund tickets drop below 0.5% of total orders.
 
-> **Nana's Speaker Notes:** *"Here is our commitment for the next four quarters. Every milestone can be verified by myself or Finance without asking an engineer. In Quarter 1, the website stops slowing down. In Quarter 2, Finance and Operations report identical revenue. In Quarter 3, our privacy deletion system is fully certified. In Quarter 4, teams self-serve their own reports."*
+> **Nana's Speaker Notes:** *"Here is our commitment for the next four quarters. Every milestone can be verified by myself or Finance without asking an engineer. In Quarter 1, the website stops slowing down and we meet our 90-day privacy deadline. In Quarter 2, Finance and Operations report identical revenue. In Quarter 3, Nigeria reporting is cleanly isolated. In Quarter 4, automated alerts catch stock mismatches before items oversell."*
 
 ---
 
@@ -147,11 +144,12 @@ Verified By: Department leads self-serve reports with zero technical support tic
 
 Because we formulated this strategy with available company records, we explicitly disclose the following design assumptions:
 
-1. **Current Server Hardware Capacity:** We assume our single hosting server has standard modern commercial specifications (at least 8 processor cores and 32 gigabytes of RAM). If smaller, activating the second server is an emergency priority.
-2. **Payment Gateway Settlement Timing:** We assume our payment processors (such as Paystack or mobile money providers) settle completed customer payments on a standard 24-to-48-hour rolling window.
-3. **Nigeria Pilot Data Transfer:** We assume data from the Nigeria pilot currently flows into our Accra MySQL database, making it subject to Section 18(2) of Ghana's Data Protection Act (requiring us to protect foreign data subjects).
+1. **Revenue Formula Definitions:** We assume Finance reports net paid orders (cleared in bank accounts) and Operations reports gross placed orders; neither team was available to confirm whether the gap comes from order timing or refunds.
+2. **Current Server Hardware Capacity:** We assume our single hosting server has standard modern commercial specifications (at least 8 processor cores and 32 gigabytes of RAM). If smaller, activating the second server is an emergency priority.
+3. **Payment Gateway Settlement Timing:** We assume our payment processors (such as Paystack or mobile money providers) settle completed customer payments on a standard 24-to-48-hour rolling window.
+4. **Nigeria Pilot Data Storage:** We assume Nigeria pilot orders currently land in our Accra database. As I understand Act 843, our core security and privacy duties apply wherever data is stored, and we must also respect Nigerian customer privacy rules as advised by legal counsel.
 
-> **Nana's Speaker Notes:** *"A defensible plan states its assumptions openly. We have assumed our server hardware meets standard specifications and that Nigeria pilot data is hosted centrally in Accra. If any of these assumptions change, our architecture adapts without altering our core strategy."*
+> **Nana's Speaker Notes:** *"A defensible plan states its assumptions openly. We have assumed our server hardware meets standard specifications, that our revenue definitions follow standard e-commerce patterns, and that Nigeria pilot data is hosted centrally in Accra. If any of these assumptions change, our architecture adapts without altering our core strategy."*
 
 ---
 
@@ -159,11 +157,11 @@ Because we formulated this strategy with available company records, we explicitl
 
 ### Title: The Recommendation in One Sentence
 
-> *"We recommend activating our pre-approved duplicate server, establishing a nightly sanitized reporting database, and hiring one Data Engineer and one Analytics Engineer to eliminate website slowdowns and deliver a single source of truth for Kloud Kart."*
+> *"We recommend activating our pre-approved duplicate server, establishing a nightly sanitized reporting schema on that server, and hiring one Data Engineer and one Analytics Engineer to eliminate website slowdowns and deliver a single source of truth for Kloud Kart."*
 
 - **Total Investment Required:**
   - Capital Hardware: Pre-approved in existing budget (second server).
-  - Software Subscriptions: Under 800 Ghana Cedis per month for managed reporting storage.
+  - Software Subscriptions: Under 800 Ghana Cedis per month for dashboard hosting and automated backups (zero new database server fees).
   - Headcount: Exactly two approved data hires.
 - **Immediate Next Steps (Next 14 Days):**
   1. Authorize provisioning of the pre-approved duplicate database server.
