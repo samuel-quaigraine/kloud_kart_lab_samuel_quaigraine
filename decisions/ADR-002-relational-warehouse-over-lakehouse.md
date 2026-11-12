@@ -1,39 +1,40 @@
-# ADR-002: Deploy a standard relational reporting database rather than a distributed data lakehouse
+# ADR-002: Use a Simple Relational Reporting Database Instead of an Expensive Data Lakehouse
 
 - **Status:** Accepted
 - **Date:** 2026-11-12
-- **Decision owner:** External Data Engineering Practice
+- **Decision owner:** Nana Adjei (Head of Operations) and Kloud Kart Leadership (advised by External Data Consultant)
 
 ## Context
 
-Following the recent funding round, board members and investors asked whether Kloud Kart should build "a data warehouse, or maybe a lakehouse." The company's total data footprint is approximately 40 gigabytes, growing by 15% to 20% annually. All data consists exclusively of structured, relational business records: customer accounts, inventory catalog items, orders, and order line items. The engineering team is limited to two data hires for the entire financial year, neither of whom has operated distributed big data clusters.
+Following the recent funding round, board members and investors asked whether Kloud Kart should build "a modern data warehouse, or maybe a lakehouse." 
+
+The company's total data footprint is approximately 40 gigabytes, growing by 15% to 20% annually. All company data consists exclusively of structured retail records: customer accounts, inventory items, orders, and line items. The technical budget allows for exactly two data hires for the entire year, neither of whom has experience running distributed big-data computer clusters.
 
 ## Decision
 
-We reject building a distributed data lakehouse. We establish our analytical reporting layer on a standard, managed relational database (such as PostgreSQL or a dedicated analytical reporting schema) that stores clean, structured tables optimized for SQL queries.
+We reject building a complex data lakehouse. We establish our reporting system on a standard, managed relational database (such as PostgreSQL or a dedicated reporting schema) that stores clean, structured tables designed for standard SQL queries.
 
 ## Alternatives considered
 
-### Alternative A: Build a cloud data lakehouse using Databricks and open table formats (Delta Lake or Apache Iceberg)
+### Alternative A: Build a cloud data lakehouse using Databricks and open table formats
 
-- **How it would work:** Raw database dumps are written to cloud object storage (such as Amazon S3) wrapped with metadata transaction layers (Delta Lake or Apache Iceberg). A distributed computing engine (such as Apache Spark or Databricks) executes queries across both business reports and future machine learning models.
-- **Why it is attractive:** It represents the leading industry buzzword and promises a single platform that unifies traditional business intelligence with future machine learning experiments.
-- **Why rejected:** Lakehouses were specifically invented to solve a problem Kloud Kart does not have: managing petabytes of messy, unstructured data (such as video recordings, customer service audio logs, and high-frequency sensor streams) alongside tabular data. Operating a distributed lakehouse requires extensive cluster tuning, complex file compaction routines, and specialized distributed computing skills. For a 40-gigabyte structured database managed by two engineers, a lakehouse is extreme over-engineering that would consume the team's entire capacity in maintenance overhead with zero measurable business benefit.
+- **How it would work:** Raw database dumps are written to cloud storage buckets (such as Amazon S3) wrapped with file transaction layers (such as Delta Lake or Apache Iceberg). A distributed computing engine (such as Apache Spark or Databricks) runs queries across both reports and future machine learning models.
+- **Why it is attractive:** It is a major industry buzzword and provides an all-in-one system for companies with petabytes of data combining text, audio, and image files.
+- **Why rejected on Kloud Kart's numbers:** Lakehouses were designed for massive enterprises processing petabytes of unstructured data (such as millions of audio files and video streams). Kloud Kart has 40 gigabytes of structured retail tables. Running a distributed lakehouse requires constant cluster configuration, file compaction routines, and specialized big-data engineering skills. For two data hires managing 40 gigabytes, a lakehouse is expensive over-engineering that would consume the team's entire working hours just keeping the cluster running, with zero measurable benefit to Nana's Monday reports.
 
-### Alternative B: Build a low-cost data lake using flat cloud object storage (Amazon S3 or Google Cloud Storage)
+### Alternative B: Build a low-cost data lake using flat cloud file storage
 
-- **How it would work:** Raw CSV or JSON data extracts are dumped into cloud storage buckets, and analysts run queries directly over the raw files using serverless query tools (such as Amazon Athena).
-- **Why it is attractive:** Extremely inexpensive storage cost and zero database servers to manage.
-- **Why rejected:** Without rigid schema enforcement on write, data lakes rapidly degenerate into "data swamps" where multiple outdated versions of customer lists coexist. Crucially, under Section 33 of Ghana's Data Protection Act, 2012 (Act 843), when a customer requests data deletion, locating and purging their specific records across thousands of flat files in cloud storage is technically complex and prone to audit failure. Flat files do not support reliable record-level updates and transactional consistency.
+- **How it would work:** Raw CSV spreadsheet files or JSON files are dumped into cloud storage buckets, and staff query the raw files directly using serverless query tools (such as Amazon Athena).
+- **Why it is attractive:** Extremely cheap file storage cost and no database server software to manage.
+- **Why rejected on Kloud Kart's numbers:** Under Section 33 of Ghana's Data Protection Act, 2012 (Act 843), when a customer requests that their personal data be deleted, Kloud Kart has a strict 90-day legal clock to locate and erase every copy. Finding and deleting an individual customer row across thousands of static files in cloud storage is technically difficult and creates a high risk of failing a legal audit. Furthermore, flat file storage does not prevent duplicate records, rapidly turning the storage into an untrusted "data swamp."
 
 ## Consequences
 
-- **What this buys:** Immediate compatibility with standard SQL, zero distributed cluster maintenance, predictable low operating costs (under 800 Ghana Cedis per month), and rigid enforcement of data types and relational integrity. The Analytics Engineer can begin modeling business revenue on day one using standard tools.
-- **What this costs:** Kloud Kart must define table schemas before loading data. Any new source data requires schema modeling rather than ad-hoc dumping.
-- **What it costs the client if I am wrong:** If Kloud Kart unexpectedly acquires another company with massive unstructured data or pivots into an image-heavy media platform, migrating data to an object-based lakehouse would cost several weeks of engineering transition time.
-- **What would make me revisit this:** Total data volume exceeding 500 gigabytes; analytical query execution times consistently exceeding acceptable reporting windows (over ten minutes) despite proper indexing; or a genuine business requirement to process vast unstructured clickstreams.
+- **What this buys:** Immediate compatibility with standard SQL queries, zero complex cluster management, predictable low costs (under 800 Ghana Cedis per month), and strict enforcement of data formats. Our second hire (the Analytics Engineer) can begin writing business models on their first day.
+- **What this costs:** Kloud Kart must define table formats before loading data. Any new data fields must be planned rather than dumped randomly.
+- **What it costs the client if I am wrong:** If Kloud Kart unexpectedly acquires another retail business with massive amounts of video data, migrating records to a cloud storage lakehouse would take several weeks of engineering time.
+- **What would make me revisit this:** Total data size growing beyond 500 gigabytes; analytical queries taking longer than 15 minutes to run despite proper database indexing; or a genuine business requirement to process billions of raw website clickstream events.
 
 ## What this survives
 
-This architecture comfortably survives Kloud Kart's steady 15% to 20% annual growth for the next five years (reaching approximately 100 gigabytes). It handles all standard e-commerce reporting, financial reconciliation, and regional market analysis for Ghana and Nigeria effortlessly.
-
+This decision comfortably survives Kloud Kart's 15% to 20% annual growth for the next five years (reaching roughly 100 gigabytes). It handles all standard e-commerce reporting, financial reconciliation, and regional sales tracking across Ghana and Nigeria effortlessly.
