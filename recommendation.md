@@ -83,3 +83,4 @@ We explicitly advise against hiring a Data Scientist or Artificial Intelligence 
   1. Recovers over 420 hours per year of senior leadership time previously wasted on manual spreadsheets.
   2. Protects an estimated 280,000 Ghana Cedis per month in customer orders previously lost during Monday website slowdowns.
   3. Eliminates regulatory penalty exposure under Ghana's Data Protection Act by retiring unmanaged customer CSV spreadsheets.
+

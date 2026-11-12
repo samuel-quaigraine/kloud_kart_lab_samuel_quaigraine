@@ -42,3 +42,4 @@ We explicitly decide **not to staff a Data Scientist or Artificial Intelligence 
 ## What this survives
 
 This hiring strategy comfortably survives Kloud Kart's current operational scale, keeps payroll strictly within the board's approved two-person budget, and builds an enduring foundation that can support machine learning in future years.
+

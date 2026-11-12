@@ -190,3 +190,4 @@ The table below explains exactly what happens to each operational field during t
    - Direct personal identifiers (names, phone numbers, addresses) are stripped at the gate.
    - Customer emails are converted to anonymous codes.
    - **Result:** When a customer requests deletion, Kloud Kart only needs to delete the record in the primary operational database; zero personal customer data exists in the reporting warehouse, meeting the 90-day statutory audit standard with 100% confidence.
+

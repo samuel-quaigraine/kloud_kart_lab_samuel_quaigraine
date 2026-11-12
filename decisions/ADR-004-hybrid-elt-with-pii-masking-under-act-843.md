@@ -40,3 +40,4 @@ We implement a two-step privacy sanitization and query loading mechanism. During
 ## What this survives
 
 This decision survives formal Data Protection Commission regulatory audits, investor due diligence reviews, and expansion into additional African jurisdictions (such as Nigeria under the Nigeria Data Protection Act).
+

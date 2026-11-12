@@ -38,3 +38,4 @@ We deploy the pre-approved second server as an automated, read-only mirror (read
 ## What this survives
 
 This architectural decision comfortably survives order volumes doubling to 8,000 orders per day and the Nigeria pilot scaling to match Ghana sales volume. The storefront transaction pathway remains completely unchanged and protected. It does not survive complex real-time distributed analytics across multiple international fulfillment hubs, which would justify a dedicated analytical warehouse in year two.
+

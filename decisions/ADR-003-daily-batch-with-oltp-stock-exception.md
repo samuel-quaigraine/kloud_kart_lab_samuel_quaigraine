@@ -38,3 +38,4 @@ We establish an automated 24-hour daily batch processing cadence (running at 02:
 ## What this survives
 
 This decision comfortably survives growth up to 10,000 orders per day across Ghana and Nigeria. It protects storefront checkout integrity while keeping operating costs and engineering overhead strictly bounded.
+

@@ -112,3 +112,4 @@ Because Nana Adjei and company leadership were unavailable for direct follow-up 
 1. **Exact Server Hardware Specification:** We assume the single production server possesses standard modern commercial specifications (at least 8 processor cores, 32 gigabytes of RAM, and solid-state storage). If the machine is significantly smaller, deploying the duplicate server replica must take place immediately.
 2. **Payment Gateway Settlement Cutoffs:** We assume payment processing providers (such as Paystack or local mobile money aggregators) settle transactions on a standard 24-to-48-hour rolling schedule.
 3. **Nigeria Pilot Data Residency:** We assume customer data from the Nigeria pilot is currently transmitted to and hosted within the Accra MySQL instance, falling under Section 18(2) of Ghana's Data Protection Act (requiring Kloud Kart to respect the data privacy standards of the originating country).
+
