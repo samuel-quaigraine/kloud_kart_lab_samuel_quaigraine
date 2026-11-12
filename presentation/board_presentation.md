@@ -1,22 +1,22 @@
 # Board Presentation: Practical Data Strategy for Kloud Kart
 
 **Presenter:** Nana Adjei, Head of Operations  
-**Audience:** Board of Directors & Investor Representatives  
-**Context:** Twelve-Month Data Strategy & Investment Allocation  
+**Audience:** Board of Directors and Investor Representatives  
+**Context:** Twelve-Month Data Strategy and Investment Allocation  
 
 ---
 
-## Slide 1: Executive Overview & The Problem We Are Solving
+## Slide 1: Executive Overview and The Problem We Are Solving
 
 ### Title: Securing Our Foundation for Sustainable Growth
 
 - **Where We Are Today:**
-  - Processing ~4,000 orders every day across Ghana, with active pilot operations in Nigeria.
+  - Processing approximately 4,000 orders every day across Ghana, with active pilot operations in Nigeria.
   - Delivering steady 15% to 20% annual growth with a single primary software developer.
 - **The Operational Crisis:**
-  - **Site Outages:** Twice last month, pulling Monday morning operational reports slowed our live online shop to a crawl for two hours during peak shopping time.
+  - **Site Slowdowns:** Twice last month, pulling Monday morning operational reports slowed our live online shop to a crawl for two hours during peak shopping time.
   - **Conflicting Numbers:** Operations and Finance calculate weekly company revenue using separate spreadsheets; the two figures never match, leading to weekly reconciliation disputes.
-  - **Customer Data Exposure:** Customer records are currently downloaded in spreadsheets across personal laptops, creating regulatory non-compliance under Ghana's Data Protection Act.
+  - **Customer Data Exposure:** Customer records are currently downloaded in spreadsheets across personal laptops, creating regulatory non-compliance under Ghana's Data Protection Act, 2012 (Act 843).
 - **The Strategic Objective:**
   - Stop storefront slowdowns immediately.
   - Create one agreed-upon company revenue figure.
@@ -30,11 +30,11 @@
 
 ### Title: The Financial Reality of Our Current Bottlenecks
 
-| Category of Loss | Physical Mechanism | Financial & Operational Impact |
+| Category of Loss | Physical Mechanism | Financial and Operational Impact |
 |---|---|---|
 | **Direct Sales Loss** | Website slowdowns during peak shopping hours cause customers to abandon checkout carts. | **~800 lost customer orders per month (~280,000 Ghana Cedis monthly top-line loss).** |
 | **Wasted Leadership Time** | Operations and Finance manually extracting, formatting, and debating conflicting spreadsheets. | **Over 420 hours per year** (equivalent to **10+ full working weeks of senior leadership bandwidth**). |
-| **Legal & Regulatory Exposure** | 300,000 customer records stored on unmanaged laptops with a 90-day regulatory complaint clock. | Potential statutory enforcement notices, legal defense fees, and reputational damage under Ghana Act 843. |
+| **Legal and Regulatory Exposure** | 300,000 customer records stored on unmanaged laptops with a 90-day regulatory complaint clock. | Potential statutory enforcement notices, legal defense fees, and reputational damage under Ghana Act 843 (**500,000 to 1,200,000 Ghana Cedis**). |
 
 > **Nana's Speaker Notes:** *"This is not just a software inconvenience; it is costing us real revenue. Those two Monday slowdowns cost us an estimated 800 customer orders. Between myself and the Finance lead, we waste ten full working weeks every year manually cleaning spreadsheets. Doing nothing is already our most expensive option."*
 
@@ -45,23 +45,23 @@
 ### Title: Sized for Our Real Scale, Not Amazon's
 
 - **The Mistake We Are Avoiding:**
-  - We were advised to consider expensive cloud warehouses like Snowflake or complex "data lakehouses". 
+  - We were advised to consider expensive cloud warehouses like Snowflake or complex data lakehouses. 
   - Kloud Kart holds approximately 40 gigabytes of structured data. 40 gigabytes easily fits inside standard computer memory.
   - Buying massive enterprise platforms would create unpredictable monthly bills and overwhelm a small team.
 - **Our Practical Solution:**
   1. **Activate the Pre-Approved Second Server:** Create an automated, real-time mirror (read replica) of our database. All reporting queries run on the mirror. Shoppers on the live website never experience a slowdown again.
   2. **Centralized Reporting Database:** Move data into a dedicated, standard reporting database on an automated nightly schedule (02:00 AM).
-  3. **One Single Source of Truth:** Replace personal spreadsheets with locked, automated business definitions in database queries.
+  3. **One Single Source of Truth:** Replace personal spreadsheets with locked, automated business definitions in standard database queries.
 
 > **Nana's Speaker Notes:** *"Investors often ask if we are building a lakehouse or buying Snowflake. The honest answer is that for a 40-gigabyte company, those tools are expensive over-engineering. We are using our already-budgeted second server to create a duplicate database for reporting. Shoppers use the store; reports read from the copy. Simple, reliable, and affordable."*
 
 ---
 
-## Slide 4: Data Protection & Legal Defensibility (Ghana Act 843)
+## Slide 4: Data Protection and Legal Defensibility (Ghana Act 843)
 
 ### Title: Protecting Customer Privacy and Meeting Our 90-Day Legal Clock
 
-- **The Legal Reality (Ghana Data Protection Act, 2012 / Act 843):**
+- **The Legal Reality under Ghana's Data Protection Act, 2012 (Act 843):**
   - Section 33 grants every customer the legal right to request complete deletion of their personal information.
   - Kloud Kart has a strict 90-day statutory window to respond to formal regulatory complaints.
   - **The Golden Rule:** *"Every copy you create is a place a deletion request must reach."*
@@ -97,11 +97,11 @@
 The board approved budget for **two data hires**. We sequence them chronologically to fix operational pain first:
 
 ```
-[Month 1] Hire #1: Data Engineer
+[Month 1] Hire 1: Data Engineer
 Accountable for: Infrastructure, database replication, nightly automation, Act 843 sanitization.
-Goal: Stop the live website crashes within 30 days.
+Goal: Stop the live website slowdowns within 30 days.
 
-[Month 3] Hire #2: Analytics Engineer
+[Month 3] Hire 2: Analytics Engineer
 Accountable for: Writing standardized revenue queries, building dashboards, reconciling numbers.
 Goal: Guarantee Operations and Finance report identical numbers down to the last cedi.
 ```
@@ -111,7 +111,7 @@ Goal: Guarantee Operations and Finance report identical numbers down to the last
   - Machine learning requires clean, trusted historical data. Predicting future demand on top of uncleaned inventory counts and disputed revenue numbers is an expensive mistake.
   - We establish our single source of truth in Year 1; we evaluate artificial intelligence in Year 2.
 
-> **Nana's Speaker Notes:** *"We have budget for two hires, not three. We are hiring a Data Engineer first to stop the site from crashing and automate data movement. We are hiring an Analytics Engineer second to write the single source of truth for revenue. We are deliberately not hiring an AI specialist yet, because you cannot build accurate predictions on top of untrusted data."*
+> **Nana's Speaker Notes:** *"We have budget for two hires, not three. We are hiring a Data Engineer first to stop the site from slowing down and automate data movement. We are hiring an Analytics Engineer second to write the single source of truth for revenue. We are deliberately not hiring an AI specialist yet, because you cannot build accurate predictions on top of untrusted data."*
 
 ---
 
@@ -128,11 +128,11 @@ Q2: SINGLE SOURCE OF TRUTH
 Outcome: Operations and Finance view identical revenue numbers down to the last cedi.
 Verified By: Monthly revenue summaries match bank settlements on the first business day.
 
-Q3: REGULATORY COMPLIANCE & EXPANSION
+Q3: REGULATORY COMPLIANCE AND EXPANSION
 Outcome: Act 843 automated deletion pipeline active; Nigeria pilot metrics cleanly isolated.
 Verified By: Test customer deletion completed across all systems within 5 business days.
 
-Q4: SELF-SERVICE & OBSERVABILITY
+Q4: SELF-SERVICE AND OBSERVABILITY
 Outcome: Departmental leads generate own reports; automated warehouse stock-drift alerts.
 Verified By: Department leads self-serve reports with zero technical support tickets.
 ```
@@ -155,11 +155,11 @@ Because we formulated this strategy with available company records, we explicitl
 
 ---
 
-## Slide 9: Summary & Board Decision Request
+## Slide 9: Summary and Board Decision Request
 
 ### Title: The Recommendation in One Sentence
 
-> *"We recommend activating our pre-approved duplicate server, establishing a nightly sanitized reporting database, and hiring one Data Engineer and one Analytics Engineer to eliminate website crashes and deliver a single source of truth for Kloud Kart."*
+> *"We recommend activating our pre-approved duplicate server, establishing a nightly sanitized reporting database, and hiring one Data Engineer and one Analytics Engineer to eliminate website slowdowns and deliver a single source of truth for Kloud Kart."*
 
 - **Total Investment Required:**
   - Capital Hardware: Pre-approved in existing budget (second server).
@@ -171,4 +171,3 @@ Because we formulated this strategy with available company records, we explicitl
   3. Submit Kloud Kart's official registration renewal with the Data Protection Commission.
 
 > **Nana's Speaker Notes:** *"Thank you for your time. This plan solves our real problems, protects our customers, respects our budget, and gives us numbers we can trust. I am ready for your questions."*
-

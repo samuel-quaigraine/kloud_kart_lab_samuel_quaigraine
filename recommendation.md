@@ -1,7 +1,7 @@
 # Strategic Recommendation: Building a Defensible Data Platform for Kloud Kart
 
 **To:** Nana Adjei, Head of Operations  
-**From:** External Data Engineering Strategy Practice  
+**From:** Data Strategy Practice  
 **Date:** November 12, 2026  
 **Subject:** Twelve-Month Data Strategy, Architecture, and Staffing Recommendation  
 
@@ -9,17 +9,17 @@
 
 ## 1. Executive Position: Sizing for Kloud Kart, Not Amazon
 
-Kloud Kart ships approximately 4,000 orders per day with steady 15% to 20% annual growth and operates roughly 40 gigabytes of relational data. 
+Kloud Kart ships approximately 4,000 orders per day with steady 15% to 20% annual sales growth and operates roughly 40 gigabytes of structured relational data. 
 
 Following the recent investment funding round, investors and internal developer discussions suggested building an enterprise data lakehouse, deploying real-time streaming dashboards, and hiring artificial intelligence engineers for machine learning demand forecasting. 
 
 **We advise the board to reject these proposals.** 
 
-A data lakehouse was designed for enterprises storing petabytes of unorganized video, audio, and sensor files. Cloud data warehouses like Snowflake charge metered fees for every second of compute time, which caused the Finance department to flinch. Real-time streaming requires complex 24-hour monitoring that would exhaust a small team. Most importantly, machine learning demand forecasting built on top of conflicting revenue numbers and uncleaned data will merely produce inaccurate forecasts with mathematical confidence.
+A data lakehouse was designed for giant enterprises storing petabytes of unorganized video, audio, and sensor files. Cloud data warehouses like Snowflake charge metered fees for every second of computer time, which caused the Finance department to flinch. Real-time streaming requires complex 24-hour monitoring that would exhaust a small team. Most importantly, machine learning demand forecasting built on top of conflicting revenue numbers and uncleaned data will merely produce inaccurate forecasts with mathematical confidence.
 
 Kloud Kart does not have a "big data" problem. Kloud Kart has a **data separation and definition problem**. 
 
-Our recommendation commits to an architecture with the smallest number of moving parts that stops site crashes, unifies company revenue reporting, complies with Ghanaian privacy law, and can be operated reliably by a two-person data team.
+Our recommendation commits to an architecture with the smallest number of moving parts that stops site slowdowns, unifies company revenue reporting, complies with Ghanaian privacy law, and can be operated reliably by a two-person data team.
 
 ---
 
@@ -30,18 +30,18 @@ Our recommendation commits to an architecture with the smallest number of moving
                                                  |
                                      (Automated Real-Time Mirror)
                                                  v
-                                   [Duplicate Server (Read Replica)]
+                                   [Duplicate Server: Read Replica]
                                                  |
                                 (Nightly 02:00 AM Automated Transfer)
                                                  v
                                [Two-Step Privacy Sanitization at Gate]
-                               (Mask Names, Phone Numbers & Addresses)
+                               (Remove Names, Phone Numbers and Addresses)
                                                  v
                               [Centralized Relational Reporting Database]
                                                  |
                                   (Standardized Business Logic)
                                                  v
-                           [Unified Dashboards: Operations & Finance]
+                           [Unified Dashboards: Operations and Finance]
 ```
 
 ### Component 1: Workload Isolation via the Duplicate Database Server
@@ -51,21 +51,21 @@ Our recommendation commits to an architecture with the smallest number of moving
 
 ### Component 2: Two-Step Privacy Sanitization and Query Loading
 - **The Decision:** Rather than dumping raw personal customer records into an unmonitored repository or relying on rigid legacy pipelines, we implement a two-step privacy sanitization mechanism:
-  1. *Step 1 (Sanitization at the Gate):* As data is extracted from the duplicate server, an automated script strips away direct customer identifiers (names, mobile phone numbers, and physical street addresses). Customer email addresses are converted into irreversible anonymous account codes (such as `cust_98234`).
-  2. *Step 2 (Flexible Query Calculations):* All business transaction facts—quantities, item prices, order timestamps, and cedi values—land in a central relational reporting database in their original form. Business definitions are written as standardized database queries.
+  1. *Step 1 (Sanitization at the Gate):* As data is extracted from the duplicate server, an automated process strips away direct customer identifiers (names, mobile phone numbers, and physical street addresses). Customer email addresses are converted into irreversible anonymous account codes (such as `cust_98234`).
+  2. *Step 2 (Flexible Query Calculations):* All business transaction facts, including quantities, item prices, order timestamps, and cedi values, land in a central relational reporting database in their original form. Business definitions are written as standardized database queries in SQL.
 - **Why It Works:** Under Ghana's Data Protection Act, 2012 (Act 843), "Every copy you create is a place a deletion request must reach within 90 days." By keeping personal contact details out of the analytics database, Kloud Kart drastically limits its regulatory audit footprint while preserving complete flexibility to adjust business calculations without touching the live shop.
 
 ### Component 3: Daily Scheduled Updates with One Named Real-Time Exception
 - **The Decision:** Ninety-nine percent of analytical reporting will refresh once every 24 hours on an automated nightly schedule (running at 02:00 AM). The **single exception** is physical warehouse stock counts, which remain live and transactional on the primary database.
-- **Why It Works:** We apply the operational test: *"What business decision changes if this number is 10 seconds old instead of 24 hours old?"* Strategic marketing evaluations, monthly financial ledgers, and regional sales trends do not require sub-second updates; yesterday's complete numbers are 100% sufficient. Conversely, inventory stock counts cannot go stale—even a five-minute delay risks selling items not on the warehouse shelf, triggering refunds and customer frustration. Live stock lookups stay on the primary database; all analytics refresh nightly.
+- **Why It Works:** We apply the operational test: *"What business decision changes if this number is 10 seconds old instead of 24 hours old?"* Strategic marketing evaluations, monthly financial ledgers, and regional sales trends do not require sub-second updates; yesterday's complete numbers are 100% sufficient. Conversely, inventory stock counts cannot go stale; even a five-minute delay risks selling items not on the warehouse shelf, triggering refunds and customer frustration. Live stock lookups stay on the primary database; all analytics refresh nightly.
 
 ---
 
-## 3. Team Structure & First 90 Days
+## 3. Team Structure and First 90 Days
 
 The board has budgeted **two data hires** for this financial year. We sequence these hires to stop operational loss first before standardizing reporting:
 
-| Role & Sequence | Primary Accountability | First 90 Days Deliverable | What They Do NOT Do |
+| Role and Sequence | Primary Accountability | First 90 Days Deliverable | What They Do NOT Do |
 |---|---|---|---|
 | **Hire 1: Data Engineer** *(Month 1)* | Data movement, server replication, pipeline automation, and data protection compliance. | Connect the duplicate server replica, automate the nightly transfer script, mask personal customer data, and eliminate manual Monday CSV exports. | Does not define business metrics or build executive presentation slides. |
 | **Hire 2: Analytics Engineer** *(Month 3)* | The business calculation layer inside the reporting database, metric definitions, and self-service dashboards. | Deliver a single standardized revenue model agreed upon by Nana and Finance, eliminating the weekly Monday reporting discrepancy. | Does not build predictive machine learning models or manage server infrastructure. |
@@ -75,12 +75,11 @@ We explicitly advise against hiring a Data Scientist or Artificial Intelligence 
 
 ---
 
-## 4. Financial Costs & Resource Justification
+## 4. Financial Costs and Resource Justification
 
 - **Hardware Infrastructure:** The duplicate server (read replica) is already pre-approved in the company budget. Storing 40 gigabytes in a managed relational reporting database adds a modest, predictable cost of roughly 400 to 800 Ghana Cedis per month.
 - **Software Licensing:** Zero proprietary vendor lock-in. Built entirely on robust, open-source standards (MySQL replication, Python ingestion, standard SQL, and open-source dashboard tooling such as Metabase).
 - **Return on Investment:** 
   1. Recovers over 420 hours per year of senior leadership time previously wasted on manual spreadsheets.
   2. Protects an estimated 280,000 Ghana Cedis per month in customer orders previously lost during Monday website slowdowns.
-  3. Eliminates regulatory penalty exposure under Ghana's Data Protection Act by retiring unmanaged customer CSV spreadsheets.
-
+  3. Eliminates regulatory penalty exposure under Ghana's Data Protection Act, 2012 (Act 843) by retiring unmanaged customer CSV spreadsheets.
