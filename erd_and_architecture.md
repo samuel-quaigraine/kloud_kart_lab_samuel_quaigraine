@@ -1,45 +1,46 @@
-# Architecture & Entity Relationship Diagrams — Kloud Kart
+# System Architecture and Entity Relationship Diagrams: Kloud Kart
 
-This document provides a visual and plain-English blueprint of all moving components in the recommended Kloud Kart data platform. It illustrates how data flows from customer checkout to executive dashboards, and how operational database entities connect to analytical reporting models.
+> **Note on this document:** This architectural diagram and the Entity Relationship Diagram below are not part of the required lab deliverables. They are included here to give you a clear, simple visual picture of all the moving parts, how they connect to each other, and how customer data is protected.
 
 ---
 
 ## 1. End-to-End System Component Architecture
 
-The diagram below maps every technical component, the physical hardware boundaries, and the direction of data flow:
+The diagram below shows every technical component, the physical hardware boundaries, and the direction of data flow:
 
 ```mermaid
 flowchart TD
-    subgraph LiveStore["1. LIVE STORE ENVIRONMENT (Hardware Server 1)"]
-        Shoppers["Online Customers (Ghana & Nigeria)"] -->|Browse & Checkout| WebApp["PHP Web Storefront"]
-        WebApp <-->|Instant ACID Transactions| PrimaryDB[("Primary MySQL Database (40 GB)<br/>- Live Order Processing<br/>- Immediate Stock Reservation")]
+    subgraph LiveStore["1. LIVE STORE ENVIRONMENT on Hardware Server 1"]
+        Shoppers["Online Customers in Ghana and Nigeria"] -->|"Browse and Checkout"| WebApp["PHP Web Storefront"]
+        WebApp <-->|"Live Transactions"| PrimaryDB[("Primary MySQL Database: 40 GB<br/>Live Order Processing<br/>Immediate Stock Reservation")]
     end
 
-    PrimaryDB -->|Automated Asynchronous Replication<br/>Pre-Approved Hardware Server 2| ReadReplica[("Duplicate Database Server (Read Replica)<br/>- Exact Real-Time Mirror<br/>- Zero Storefront Impact")]
+    PrimaryDB -->|"Automated Mirroring to Server 2"| ReadReplica[("Duplicate Database Server: Read Replica<br/>Exact Real-Time Mirror<br/>Zero Storefront Impact")]
 
-    subgraph DataPlatform["2. DATA PLATFORM & PRIVACY GATEWAY"]
-        ReadReplica -->|Nightly Automated Batch (02:00 AM)<br/>Extracts Changed Rows Only| IngestionScript["Automated Python Ingestion Engine"]
+    subgraph DataPlatform["2. DATA PLATFORM AND PRIVACY GATEWAY"]
+        ReadReplica -->|"Nightly Batch Extract at 02:00 AM"| IngestionProcess["Automated Ingestion Process"]
         
-        subgraph PrivacyGateway["Privacy Sanitization (Ghana Act 843 Gateway)"]
-            IngestionScript --> DropPII["1. Strip Personal Data<br/>(Names, Phone Numbers, Addresses)"]
-            IngestionScript --> HashEmail["2. One-Way Anonymization<br/>(email -> cust_98234)"]
+        subgraph PrivacyGateway["Privacy Protection: Ghana Act 843 Gateway"]
+            IngestionProcess --> DropPII["1. Remove Personal Data<br/>Strip Names, Phone Numbers, Addresses"]
+            IngestionProcess --> HashEmail["2. One-Way Anonymization<br/>Convert email to anonymous code"]
         end
         
-        PrivacyGateway --> LoadClean["Load Anonymized Transactional Rows"]
-        LoadClean --> WarehouseDB[("Central Relational Reporting Database")]
+        PrivacyGateway -->|"Load Cleaned Rows"| WarehouseDB[("Central Relational Reporting Database")]
         
-        subgraph WarehouseDB["Analytical Data Models (Written by Analytics Engineer)"]
-            StagingTables["Staging Layer"] --> TransformationSQL["Standardized SQL Models (dbt)"]
-            TransformationSQL --> CanonicalRevenue["Single Source of Truth: Canonical Revenue Mart"]
-            TransformationSQL --> DimensionalMarts["Business Analytics Marts<br/>(Sales, Cohorts, Geography)"]
+        subgraph AnalyticsDataModels["Analytical Models: Maintained by Analytics Engineer"]
+            WarehouseDB --> StagingTables["Clean Staging Tables"]
+            StagingTables --> TransformationSQL["Standardized Business Logic in SQL"]
+            TransformationSQL --> CanonicalRevenue["Single Source of Truth: Confirmed Revenue"]
+            TransformationSQL --> DimensionalMarts["Business Reporting Marts: Sales, Geography"]
         end
     end
 
-    subgraph ReportingConsumers["3. REPORTING & DECISION CONSUMERS"]
-        CanonicalRevenue --> UnifiedDashboard["Central Business Dashboard (Metabase / BI)"]
-        UnifiedDashboard --> NanaView["Nana Adjei (Head of Operations)"]
-        UnifiedDashboard --> FinanceView["Finance Department (Reconciliation)"]
-        UnifiedDashboard --> BoardView["Board of Directors & Investors"]
+    subgraph ReportingConsumers["3. REPORTING AND DECISION CONSUMERS"]
+        CanonicalRevenue --> UnifiedDashboard["Central Business Dashboard"]
+        DimensionalMarts --> UnifiedDashboard
+        UnifiedDashboard --> NanaView["Nana Adjei: Head of Operations"]
+        UnifiedDashboard --> FinanceView["Finance Department"]
+        UnifiedDashboard --> BoardView["Board of Directors and Investors"]
     end
 ```
 
@@ -47,26 +48,25 @@ flowchart TD
 
 ## 2. Entity Relationship Diagram: Operational vs. Analytical Schemas
 
-The Entity Relationship Diagram below details the schemas of both the live operational store and the central reporting warehouse, showing the exact relationships between business records:
+The diagram below details the data tables of both the live operational store and the central reporting database, showing how business records connect:
 
 ```mermaid
 erDiagram
-    %% OPERATIONAL (TRANSACTIONAL) SCHEMA - Primary MySQL
     CUSTOMERS {
         int customer_id PK "Unique customer account ID"
-        string full_name "Customer full name (Personal Data)"
-        string email_address "Customer email address (Personal Data)"
-        string phone_number "Mobile telephone number (Personal Data)"
-        string street_address "Delivery residential address (Personal Data)"
-        string region "Ghana / Nigeria delivery region"
+        string full_name "Customer full name: Personal Data"
+        string email_address "Customer email address: Personal Data"
+        string phone_number "Mobile phone number: Personal Data"
+        string street_address "Delivery address: Personal Data"
+        string region "Ghana or Nigeria delivery region"
         string country_code "Country of origin"
         timestamp created_at "Registration timestamp"
-        timestamp deleted_at "Statutory right-to-erasure timestamp"
+        timestamp deleted_at "Deletion timestamp"
     }
 
     ORDERS {
         int order_id PK "Unique order tracking number"
-        int customer_id FK "Customer who submitted order"
+        int customer_id FK "Customer who placed order"
         timestamp order_placed_at "Order placement timestamp"
         string order_status "Pending, Dispatched, Delivered, Returned"
         decimal total_order_value_ghs "Total transaction value in Cedis"
@@ -82,10 +82,10 @@ erDiagram
     }
 
     PRODUCTS {
-        int product_id PK "Unique inventory SKU identifier"
+        int product_id PK "Unique stock keeping unit identifier"
         string product_title "Catalog product title"
         string product_category "Merchandise category"
-        int physical_stock_available "CRITICAL: Live physical count (Zero staleness)"
+        int physical_stock_available "CRITICAL: Live physical count: Zero staleness"
         decimal retail_price_ghs "Current store price"
     }
 
@@ -93,14 +93,13 @@ erDiagram
     ORDERS ||--|{ ORDER_ITEMS : "contains"
     PRODUCTS ||--o{ ORDER_ITEMS : "ordered_in"
 
-    %% ANALYTICAL REPORTING SCHEMA - Central Warehouse Database
     DIM_CUSTOMER_ANONYMOUS {
         int customer_analytics_key PK "Internal warehouse surrogate key"
         int source_customer_id "Masked customer reference"
         string anonymous_account_code "Cryptographic one-way hash"
         string customer_delivery_region "Geographic territory"
         string customer_country "Ghana or Nigeria"
-        date cohort_first_order_date "First purchase cohort date"
+        date cohort_first_order_date "First purchase date"
     }
 
     DIM_PRODUCT {
@@ -113,11 +112,11 @@ erDiagram
 
     DIM_DATE {
         date date_calendar_key PK "Calendar date identifier"
-        int calendar_year "Calendar year (e.g., 2026)"
-        int calendar_quarter "Financial quarter (Q1-Q4)"
-        int calendar_month "Month number (1-12)"
-        string month_name "Month name (January-December)"
-        int week_of_year "Week number (1-52)"
+        int calendar_year "Calendar year"
+        int calendar_quarter "Financial quarter: Q1 to Q4"
+        int calendar_month "Month number: 1 to 12"
+        string month_name "Month name: January to December"
+        int week_of_year "Week number: 1 to 52"
         boolean is_weekend_day "True if Saturday or Sunday"
     }
 
@@ -137,10 +136,10 @@ erDiagram
         int reconciliation_id PK "Daily reconciliation ledger key"
         date business_date_key FK "Links to Dim_Date"
         string operating_country "Ghana or Nigeria"
-        decimal operations_dispatched_total_ghs "Total revenue from shipped orders"
-        int operations_dispatched_order_count "Total shipped order count"
-        decimal finance_settled_total_ghs "Total revenue settled in bank accounts"
-        int finance_settled_transaction_count "Total bank-cleared transaction count"
+        decimal operations_dispatched_total_ghs "Revenue from shipped orders"
+        int operations_dispatched_order_count "Shipped order count"
+        decimal finance_settled_total_ghs "Revenue settled in bank accounts"
+        int finance_settled_transaction_count "Bank cleared transaction count"
         decimal variance_delta_ghs "Variance between Operations and Finance"
         string audit_reconciliation_status "MATCH or VARIANCE_INVESTIGATION"
     }
@@ -153,41 +152,40 @@ erDiagram
 
 ---
 
-## 3. Data Transformation & Privacy Mapping: The Sanitization Mechanism
+## 3. Data Cleaning and Privacy Mapping: The Sanitization Mechanism
 
-The table below explains exactly what happens to each operational field during the nightly transfer to the reporting warehouse, illustrating how customer privacy is protected under Ghana's Data Protection Act, 2012 (Act 843):
+The table below explains what happens to each operational field during the nightly transfer to the reporting database, showing how customer privacy is protected under Ghana's Data Protection Act, 2012 (Act 843):
 
-| Source Table & Field | Operational Purpose | Action at Ingestion Boundary | Analytical Reporting Destination | Reason for Intervention |
+| Source Table and Field | Operational Purpose | Action at Ingestion Boundary | Analytical Reporting Destination | Reason for Action |
 |---|---|---|---|---|
-| `CUSTOMERS.full_name` | Storefront greeting & packaging | **Permanently Dropped** | *None* | Personal information not required for business metrics; prevents regulatory liability under Act 843. |
-| `CUSTOMERS.phone_number` | Delivery courier contact | **Permanently Dropped** | *None* | Direct personal identifier; removing it protects customer privacy from analytical access. |
-| `CUSTOMERS.street_address` | Home package delivery | **Permanently Dropped** | *None* | High-risk personal identifier; unnecessary for high-level regional market analysis. |
-| `CUSTOMERS.email_address` | Account login & order receipt | **One-Way Cryptographic Hash** | `DIM_CUSTOMER_ANONYMOUS.anonymous_account_code` | Converts email into an unreadable string (`cust_98234`) allowing cohort and repeat-purchase analysis without storing raw contact info. |
-| `CUSTOMERS.region` | Shipping zone calculation | **Standardized & Retained** | `DIM_CUSTOMER_ANONYMOUS.delivery_region` | Essential for regional sales tracking across Greater Accra, Ashanti, and Nigerian states. |
-| `ORDERS.total_amount_ghs` | Customer checkout charge | **Transferred Raw** | `FACT_ORDERS.gross_sale_amount_ghs` | Quantitative business metric; must remain exact down to the pesewa for financial auditing. |
-| `ORDERS.order_status` | Warehouse fulfillment state | **Classified into Canonical Metric** | `FACT_ORDERS.canonical_revenue_status` | Standardized in SQL by the Analytics Engineer so Operations and Finance use the exact same definition. |
-| `PRODUCTS.physical_stock_available` | Prevents overselling | **Kept Live on Primary DB Only** | *Excluded from Nightly Batch* | Inventory reservations must never go stale; queried live on primary database to guarantee zero overselling. |
+| `CUSTOMERS.full_name` | Storefront greeting and parcel label | **Permanently Dropped** | *None* | Personal details are not needed to calculate business metrics. Removing names prevents legal risk under Act 843. |
+| `CUSTOMERS.phone_number` | Delivery driver contact | **Permanently Dropped** | *None* | Personal contact information. Removing it keeps customer phones out of internal reports. |
+| `CUSTOMERS.street_address` | Home delivery address | **Permanently Dropped** | *None* | High-risk personal identifier. High-level regional reports do not need street names. |
+| `CUSTOMERS.email_address` | Account login and receipt email | **One-Way Anonymization** | `DIM_CUSTOMER_ANONYMOUS.anonymous_account_code` | Converts email into an unreadable random code (such as `cust_98234`), allowing repeat-purchase tracking without saving plain contact details. |
+| `CUSTOMERS.region` | Shipping fee calculation | **Standardized and Saved** | `DIM_CUSTOMER_ANONYMOUS.delivery_region` | Needed for regional sales tracking across Greater Accra, Ashanti, and Nigerian states. |
+| `ORDERS.total_amount_ghs` | Customer checkout total | **Transferred Raw** | `FACT_ORDERS.gross_sale_amount_ghs` | Standard financial metric. It must remain exact down to the pesewa for auditing. |
+| `ORDERS.order_status` | Warehouse packing status | **Grouped into Agreed Business Status** | `FACT_ORDERS.canonical_revenue_status` | Standardized in SQL by the Analytics Engineer so Operations and Finance use the exact same definition. |
+| `PRODUCTS.physical_stock_available` | Prevents selling items out of stock | **Checked Live on Primary Store Database Only** | *Excluded from Nightly Batch* | Shelf counts must never be out of date. Checked live on the primary database to guarantee zero overselling. |
 
 ---
 
 ## 4. How All the Pieces Connect to Solve Kloud Kart's Business Problems
 
 1. **How Website Slowdowns are Stopped:**
-   - Shoppers connect to the PHP storefront on Server 1.
-   - The primary MySQL database writes new customer orders.
-   - The pre-approved second server automatically mirrors every transaction in real-time.
-   - The automated nightly extraction runs exclusively against Server 2 at 02:00 AM.
-   - **Result:** Live shoppers never compete with analytical queries for memory or processor power.
+   - Shoppers browse and place orders on Server 1.
+   - The primary database writes new customer orders.
+   - The pre-approved second server automatically mirrors every transaction in real time.
+   - All reports and exports run exclusively against the second server (the reporting mirror).
+   - **Result:** Live shoppers never compete with staff reports for computer memory or processor speed.
 
 2. **How Conflicting Revenue Numbers are Resolved:**
-   - Both Nana and the Finance department stop exporting private CSV spreadsheets.
-   - The Analytics Engineer models `FACT_DAILY_REVENUE_RECONCILIATION` in standard SQL queries.
-   - The automated daily reconciliation engine matches shipped orders against bank settlements every morning at 08:00 AM.
-   - **Result:** Both teams open their dashboards and view the exact same revenue number, reconciled down to the cedi.
+   - Both Nana Adjei and the Finance department stop exporting separate spreadsheet files.
+   - The Analytics Engineer writes agreed business definitions directly in standard SQL database queries.
+   - An automated daily check compares shipped orders against bank settlements every morning.
+   - **Result:** Both teams look at the exact same dashboard and see the exact same revenue number.
 
 3. **How Ghana Act 843 Compliance is Guaranteed:**
-   - Unmanaged CSV downloads on staff laptops are eliminated.
-   - Direct personal identifiers (names, phone numbers, addresses) are stripped at the gate.
-   - Customer emails are converted to anonymous codes.
-   - **Result:** When a customer requests deletion, Kloud Kart only needs to delete the record in the primary operational database; zero personal customer data exists in the reporting warehouse, meeting the 90-day statutory audit standard with 100% confidence.
-
+   - Raw spreadsheet downloads on staff laptops are stopped.
+   - Names, phone numbers, and physical addresses are removed at the gate before data enters the reporting system.
+   - Customer emails are turned into anonymous codes.
+   - **Result:** When a customer asks for their personal data to be deleted, Kloud Kart only needs to delete the record from the primary store database. Zero personal customer records exist in the reporting database, meeting the 90-day legal response deadline with complete certainty.
