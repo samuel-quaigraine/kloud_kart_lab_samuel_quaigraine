@@ -3,6 +3,8 @@
 .env.*
 !.env.example
 
+h3lp
+
 # Reference documents
 git_handbook.pdf
 
