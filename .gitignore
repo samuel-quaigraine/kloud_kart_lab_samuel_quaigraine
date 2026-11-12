@@ -9,7 +9,10 @@ h3lp
 git_handbook.pdf
 
 
-# Python
+# Python and test scripts (brief requires strategic text deliverables only, no tracked code)
+src/
+tests/
+*.py
 __pycache__/
 *.py[cod]
 .venv/
