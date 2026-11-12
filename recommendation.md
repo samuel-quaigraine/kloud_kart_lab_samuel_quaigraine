@@ -26,22 +26,18 @@ Our recommendation commits to an architecture with the smallest number of moving
 ## 2. The Architectural Strategy
 
 ```
-[Shoppers] ---> [Online Web Store] <---> [Primary MySQL Database]
+[Shoppers] ---> [Online Web Store] <---> [Primary MySQL Database: Server 1]
                                                  |
                                      (Automated Real-Time Mirror)
                                                  v
-                                   [Duplicate Server: Read Replica]
+                                   [Duplicate Server: Server 2 (Read Replica)]
+                                   - Raw Replicated Tables (Mirror)
+                                   - Nightly Ingestion & PII Sanitization
+                                   - Clean Reporting Schema & Marts
                                                  |
-                                (Nightly 02:00 AM Automated Transfer)
+                                  (Standardized SQL Queries)
                                                  v
-                               [Two-Step Privacy Sanitization at Gate]
-                               (Remove Names, Phone Numbers and Addresses)
-                                                 v
-                              [Centralized Relational Reporting Database]
-                                                 |
-                                  (Standardized Business Logic)
-                                                 v
-                           [Unified Dashboards: Operations and Finance]
+                              [Unified Dashboards: Operations & Finance]
 ```
 
 ### Component 1: Workload Isolation via the Duplicate Database Server
@@ -50,10 +46,10 @@ Our recommendation commits to an architecture with the smallest number of moving
 - **The Business Outcome:** The Monday morning website slowdowns that crippled the store twice last month are permanently eliminated. The live website remains responsive regardless of analytical activity.
 
 ### Component 2: Two-Step Privacy Sanitization and Query Loading
-- **The Decision:** Rather than dumping raw personal customer records into an unmonitored repository or relying on rigid legacy pipelines, we implement a two-step privacy sanitization mechanism:
+- **The Decision:** Rather than dumping raw personal customer records into an unmonitored repository or maintaining separate physical database boxes, we implement privacy cleaning directly on the second server:
   1. *Step 1 (Sanitization at the Gate):* As data is extracted from the duplicate server, an automated process strips away direct customer identifiers (names, mobile phone numbers, and physical street addresses). Customer email addresses are converted into irreversible anonymous account codes (such as `cust_98234`).
-  2. *Step 2 (Flexible Query Calculations):* All business transaction facts, including quantities, item prices, order timestamps, and cedi values, land in a central relational reporting database in their original form. Business definitions are written as standardized database queries in SQL.
-- **Why It Works:** Under Ghana's Data Protection Act, 2012 (Act 843), "Every copy you create is a place a deletion request must reach within 90 days." By keeping personal contact details out of the analytics database, Kloud Kart drastically limits its regulatory audit footprint while preserving complete flexibility to adjust business calculations without touching the live shop.
+  2. *Step 2 (Flexible Query Calculations):* All business transaction facts (quantities, item prices, order timestamps, and cedi values) land in a dedicated reporting schema on that same second server. Business definitions are written as standardized database queries in SQL.
+- **Why It Works:** As I understand Act 843, individuals have the right to request deletion of their personal data, and Kloud Kart must answer the Data Protection Commission's active complaint within 90 days. Because every copy we create is a place a deletion request must reach, stripping names, phone numbers, and street addresses at the gate keeps personal details out of our reporting schema. Kloud Kart drastically limits its regulatory audit footprint, prepares for its mandatory DPC registration renewal (required every two years as I understand Act 843), and evaluates regional records under core statutory security principles while preserving complete flexibility to adjust business calculations without touching the live shop.
 
 ### Component 3: Daily Scheduled Updates with One Named Real-Time Exception
 - **The Decision:** Ninety-nine percent of analytical reporting will refresh once every 24 hours on an automated nightly schedule (running at 02:00 AM). The **single exception** is physical warehouse stock counts, which remain live and transactional on the primary database.
@@ -77,9 +73,22 @@ We explicitly advise against hiring a Data Scientist or Artificial Intelligence 
 
 ## 4. Financial Costs and Resource Justification
 
-- **Hardware Infrastructure:** The duplicate server (read replica) is already pre-approved in the company budget. Storing 40 gigabytes in a managed relational reporting database adds a modest, predictable cost of roughly 400 to 800 Ghana Cedis per month.
+- **Hardware Infrastructure:** The duplicate server (read replica) is already pre-approved in the company budget. Storing clean reporting tables in a dedicated reporting schema on this second server requires **zero additional database servers**, saving unnecessary cloud infrastructure costs.
 - **Software Licensing:** Zero proprietary vendor lock-in. Built entirely on robust, open-source standards (MySQL replication, Python ingestion, standard SQL, and open-source dashboard tooling such as Metabase).
 - **Return on Investment:** 
-  1. Recovers over 420 hours per year of senior leadership time previously wasted on manual spreadsheets.
+  1. Recovers **416 hours per year** of senior leadership time previously wasted on manual spreadsheets.
   2. Protects an estimated 280,000 Ghana Cedis per month in customer orders previously lost during Monday website slowdowns.
-  3. Eliminates regulatory penalty exposure under Ghana's Data Protection Act, 2012 (Act 843) by retiring unmanaged customer CSV spreadsheets.
+  3. Substantially reduces regulatory exposure under Act 843 (as I understand it) by retiring unmanaged customer CSV spreadsheets.
+
+---
+
+## 5. Direct Answers to Hard Investor Questions
+
+When presenting this strategy to the board, Nana can deliver these direct, plain-language answers to common investor questions:
+
+- **Q1: "Why aren't we building a modern data lakehouse or buying Snowflake or BigQuery?"**  
+  *Answer:* At 4,000 orders per day (~40 gigabytes total data), enterprise cloud warehouses charge metered compute fees that spike unpredictably, and lakehouses require a dedicated specialist team. A simple reporting mirror handles ten times our current volume on predictable infrastructure at a fraction of the cost.
+- **Q2: "Another portfolio company has real-time dashboards; why are we refreshing daily?"**  
+  *Answer:* Only live warehouse stock needs instant updates so we don't oversell items on the shelf. Marketing spend, regional sales, and weekly financial totals don't change decisions minute by minute; yesterday's verified numbers are faster, cheaper, and cleaner.
+- **Q3: "When will we use AI or machine learning for demand forecasting?"**  
+  *Answer:* In Year 2, after we fix our underlying data. Forecasting demand on top of disputed revenue totals and unchecked stock counts would produce confident-looking wrong answers.

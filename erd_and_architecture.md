@@ -15,9 +15,11 @@ flowchart TD
         WebApp <-->|"Live Transactions"| PrimaryDB[("Primary MySQL Database: 40 GB<br/>Live Order Processing<br/>Immediate Stock Reservation")]
     end
 
-    PrimaryDB -->|"Automated Mirroring to Server 2"| ReadReplica[("Duplicate Database Server: Read Replica<br/>Exact Real-Time Mirror<br/>Zero Storefront Impact")]
+    PrimaryDB -->|"Automated Mirroring to Server 2"| ReadReplica
 
-    subgraph DataPlatform["2. DATA PLATFORM AND PRIVACY GATEWAY"]
+    subgraph Server2["2. DUPLICATE SERVER: Server 2 (Pre-Approved Hardware)"]
+        ReadReplica[("Raw Replicated Mirror: Read Replica<br/>Exact Real-Time Mirror<br/>Zero Storefront Impact")]
+        
         ReadReplica -->|"Nightly Batch Extract at 02:00 AM"| IngestionProcess["Automated Ingestion Process"]
         
         subgraph PrivacyGateway["Privacy Protection: Ghana Act 843 Gateway"]
@@ -25,7 +27,7 @@ flowchart TD
             IngestionProcess --> HashEmail["2. One-Way Anonymization<br/>Convert email to anonymous code"]
         end
         
-        PrivacyGateway -->|"Load Cleaned Rows"| WarehouseDB[("Central Relational Reporting Database")]
+        PrivacyGateway -->|"Load Cleaned Rows"| WarehouseDB[("Dedicated Analytical Reporting Schema")]
         
         subgraph AnalyticsDataModels["Analytical Models: Maintained by Analytics Engineer"]
             WarehouseDB --> StagingTables["Clean Staging Tables"]

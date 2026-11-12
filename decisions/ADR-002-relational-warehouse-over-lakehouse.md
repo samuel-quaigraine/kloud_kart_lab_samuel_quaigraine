@@ -12,7 +12,7 @@ The company's total data footprint is approximately 40 gigabytes, growing by 15%
 
 ## Decision
 
-We reject building a complex data lakehouse. We establish our reporting system on a standard, managed relational database (such as PostgreSQL or a dedicated reporting schema) that stores clean, structured tables designed for standard SQL queries.
+We reject building a complex data lakehouse. We establish our reporting system in a dedicated analytical schema hosted directly on the pre-approved duplicate server (read replica), storing clean, structured tables designed for standard SQL queries with zero need for a separate third database server.
 
 ## Alternatives considered
 
@@ -26,11 +26,11 @@ We reject building a complex data lakehouse. We establish our reporting system o
 
 - **How it would work:** Raw CSV spreadsheet files or JSON files are dumped into cloud storage buckets, and staff query the raw files directly using serverless query tools (such as Amazon Athena).
 - **Why it is attractive:** Extremely cheap file storage cost and no database server software to manage.
-- **Why rejected on Kloud Kart's numbers:** Under Section 33 of Ghana's Data Protection Act, 2012 (Act 843), when a customer requests that their personal data be deleted, Kloud Kart has a strict 90-day legal clock to locate and erase every copy. Finding and deleting an individual customer row across thousands of static files in cloud storage is technically difficult and creates a high risk of failing a legal audit. Furthermore, flat file storage does not prevent duplicate records, rapidly turning the storage into an untrusted "data swamp."
+- **Why rejected on Kloud Kart's numbers:** As I understand Act 843, when a customer requests that their personal data be deleted, Kloud Kart has a strict 90-day legal clock to locate and erase every copy. Finding and deleting an individual customer row across thousands of static files in cloud storage is technically difficult and creates a high risk of failing a legal audit. Furthermore, flat file storage does not prevent duplicate records, rapidly turning the storage into an untrusted "data swamp."
 
 ## Consequences
 
-- **What this buys:** Immediate compatibility with standard SQL queries, zero complex cluster management, predictable low costs (under 800 Ghana Cedis per month), and strict enforcement of data formats. Our second hire (the Analytics Engineer) can begin writing business models on their first day.
+- **What this buys:** Immediate compatibility with standard SQL queries, zero complex cluster management, zero extra hosting fees beyond the pre-approved second server, and strict enforcement of data formats. Our second hire (the Analytics Engineer) can begin writing business models on their first day.
 - **What this costs:** Kloud Kart must define table formats before loading data. Any new data fields must be planned rather than dumped randomly.
 - **What it costs the client if I am wrong:** If Kloud Kart unexpectedly acquires another retail business with massive amounts of video data, migrating records to a cloud storage lakehouse would take several weeks of engineering time.
 - **What would make me revisit this:** Total data size growing beyond 500 gigabytes; analytical queries taking longer than 15 minutes to run despite proper database indexing; or a genuine business requirement to process billions of raw website clickstream events.

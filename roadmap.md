@@ -4,18 +4,18 @@ This roadmap is organized by quarterly business outcomes rather than internal en
 
 ---
 
-## Quarter 1: Stop the Bleeding and Protect the Live Shop (Months 1 to 3)
+## Quarter 1: Stop the Bleeding and Meet the 90-Day Privacy Deadline (Months 1 to 3)
 
-**Guiding Principle:** Remove immediate financial loss and legal exposure before creating new capabilities.
+**Guiding Principle:** Stop live website slowdowns and eliminate untracked customer data copies within the 90-day Data Protection Commission window.
 
-- **Outcome 1.1: Storefront Performance Guaranteed During Reports**
+- **Outcome 1.1: Storefront Speed Protected During Monday Reports**
   - **WHO is better off:** Online shoppers and Nana Adjei (Head of Operations).
-  - **WHAT changes:** Weekly reporting queries run exclusively on the duplicate server. The website never slows down or crashes on Monday mornings.
-  - **HOW it is verified:** On the first Monday of February at 09:00 AM, Nana runs her weekly operational query while monitoring the live website. Checkout response time stays under one second, with zero dropped transactions recorded in server logs.
-- **Outcome 1.2: Retirement of Unmanaged Marketing Spreadsheets**
-  - **WHO is better off:** Marketing team and Company Compliance Officer.
-  - **WHAT changes:** Marketing stops downloading unencrypted customer spreadsheets to personal laptops. Customer lists are accessed through secure, role-restricted views where personal contact details are masked.
-  - **HOW it is verified:** By March 15, the Compliance Officer audits all Marketing workstations and confirms zero unmanaged customer CSV files exist, and Kloud Kart's registration renewal with the Data Protection Commission is formally submitted.
+  - **WHAT changes:** Weekly reporting queries move off the live shop server onto the duplicate reporting server. Monday exports no longer slow down customer checkouts.
+  - **HOW it is verified:** On the first Monday of Month 2 at 09:00 AM, Nana runs her weekly report while placing a test checkout on the website; the page loads in under two seconds with zero customer slow-site complaints.
+- **Outcome 1.2: Unmanaged Customer Spreadsheets Retired and 90-Day Deletion Operational**
+  - **WHO is better off:** Kloud Kart leadership, Marketing staff, and customers exercising deletion rights.
+  - **WHAT changes:** Marketing stops downloading raw customer CSVs to laptops and uses masked customer views instead. A repeatable deletion process scrubs requested customer identifiers across live store and reporting tables within 90 days.
+  - **HOW it is verified:** Before Day 90, Nana confirms that existing customer CSVs are cleared from Marketing computers, DPC registration renewal is submitted, and searching a test deleted customer ID in the reporting dashboard returns zero personal contact details.
 
 ---
 
@@ -26,38 +26,38 @@ This roadmap is organized by quarterly business outcomes rather than internal en
 - **Outcome 2.1: Operations and Finance Report Identical Revenue**
   - **WHO is better off:** Nana Adjei (Operations) and the Finance Department Lead.
   - **WHAT changes:** Operations and Finance stop building private spreadsheet calculations. Both teams open a single automated dashboard that displays identical, verified daily and monthly revenue figures.
-  - **HOW it is verified:** On April 30 at 08:30 AM, Nana and the Finance Lead open the monthly revenue summary. Both screens display the exact same revenue number down to the last Ghana Cedi, matching bank gateway settlements.
+  - **HOW it is verified:** On April 30 at 08:30 AM, Nana and the Finance Lead open the monthly revenue summary; both screens display the exact same revenue number down to the last Ghana Cedi, matching bank gateway settlements.
 - **Outcome 2.2: Automated Daily Discrepancy Alerting**
   - **WHO is better off:** Nana Adjei and the Managing Director.
   - **WHAT changes:** If an operational order and a bank payment fail to reconcile, an automated system alert is delivered before the start of the business day.
-  - **HOW it is verified:** By June 15, an automated summary notification arrives in Nana's inbox every weekday morning at 08:00 AM confirming that all prior-day transactions reconciled with zero variance.
+  - **HOW it is verified:** By June 15, an automated notification arrives in Nana's inbox every weekday morning at 08:00 AM confirming that all prior-day transactions reconciled with zero variance.
 
 ---
 
-## Quarter 3: Customer Privacy Compliance and Regional Expansion (Months 7 to 9)
+## Quarter 3: Regional Expansion and Departmental Self-Service (Months 7 to 9)
 
-**Guiding Principle:** Build defensible regulatory audit capabilities and isolate regional market data.
+**Guiding Principle:** Isolate regional pilot data and remove engineering bottlenecks from routine reporting.
 
-- **Outcome 3.1: Guaranteed Customer Data Deletion Under Act 843**
-  - **WHO is better off:** Kloud Kart Legal Representative and Data Protection Commission Regulators.
-  - **WHAT changes:** When a customer requests that their account and data be erased, their information is removed across all operational and reporting tables automatically within five business days.
-  - **HOW it is verified:** By September 15, Nana submits a test deletion request for a simulated customer account. Within five business days, an automated audit report confirms that the user's name, phone, and address no longer exist in any database table or backup.
-- **Outcome 3.2: Isolated Reporting for the Nigeria Market Pilot**
+- **Outcome 3.1: Isolated Reporting for the Nigeria Market Pilot**
   - **WHO is better off:** Regional Expansion Manager and Board of Directors.
   - **WHAT changes:** Performance numbers for Nigeria (order volume, delivery success rates, and local currency totals) are separated cleanly from Ghana core operations.
-  - **HOW it is verified:** By September 30, the board presentation includes a dedicated Nigeria dashboard tab displaying separate order conversion and delivery timelines without contaminating Ghana revenue metrics.
+  - **HOW it is verified:** By September 30, the board dashboard includes a dedicated Nigeria tab displaying separate order conversion and delivery timelines without contaminating Ghana revenue metrics.
+- **Outcome 3.2: Departmental Self-Service Reporting**
+  - **WHO is better off:** Operations supervisors, Warehouse managers, and Marketing leads.
+  - **WHAT changes:** Department leads generate their own routine operational summaries using pre-built report views rather than submitting data requests to the developer.
+  - **HOW it is verified:** By September 30, department leads produce their required monthly reports independently without filing technical support tickets.
 
 ---
 
-## Quarter 4: Operational Self-Service and Stock Observability (Months 10 to 12)
+## Quarter 4: Inventory Observability and Deletion Auditing (Months 10 to 12)
 
-**Guiding Principle:** Enable departmental independence and protect against inventory overselling.
+**Guiding Principle:** Protect against warehouse overselling and ensure disaster recovery respects privacy deletions.
 
-- **Outcome 4.1: Departmental Self-Service Reporting**
-  - **WHO is better off:** Operations supervisors, Warehouse managers, and Marketing leads.
-  - **WHAT changes:** Departmental leads no longer submit data requests to the developer. They generate their own operational summaries using pre-built, drag-and-drop report views.
-  - **HOW it is verified:** By November 30, departmental leads produce all required monthly operational reports independently without filing a single technical support ticket.
-- **Outcome 4.2: Warehouse Shelf-to-Database Stock Drift Alerting**
-  - **WHO is better off:** Warehouse Inventory Manager and Customer Service Team.
+- **Outcome 4.1: Warehouse Shelf-to-Database Stock Drift Alerting**
+  - **WHO is better off:** Warehouse Inventory Manager, Customer Service Team, and online shoppers.
   - **WHAT changes:** Discrepancies between physical shelf counts and website stock counts are flagged before an oversold item triggers a customer refund.
   - **HOW it is verified:** By December 15, inventory logs confirm that stock discrepancies caught prior to customer purchase exceed 95%, reducing overselling cancellation tickets to under 0.5% of total volume.
+- **Outcome 4.2: Automated Deletion Re-Application on Backup Restores**
+  - **WHO is better off:** Data Engineer and Kloud Kart Leadership.
+  - **WHAT changes:** Database restoration procedures automatically re-apply customer deletion audit logs after any backup recovery, ensuring restored snapshots never resurrect deleted personal data.
+  - **HOW it is verified:** By December 20, a mock disaster recovery test confirms that restoring a primary database snapshot automatically applies the deletion logs, leaving zero restored records for deleted customer IDs.
