@@ -57,7 +57,7 @@ This roadmap is organized by quarterly business outcomes rather than internal en
   - **WHO is better off:** Warehouse Inventory Manager, Customer Service Team, and online shoppers.
   - **WHAT changes:** Discrepancies between physical shelf counts and website stock counts are flagged before an oversold item triggers a customer refund.
   - **HOW it is verified:** By December 15, inventory logs confirm that stock discrepancies caught prior to customer purchase exceed 95%, reducing overselling cancellation tickets to under 0.5% of total volume.
-- **Outcome 4.2: Automated Deletion Re-Application on Backup Restores**
-  - **WHO is better off:** Data Engineer and Kloud Kart Leadership.
-  - **WHAT changes:** Database restoration procedures automatically re-apply customer deletion audit logs after any backup recovery, ensuring restored snapshots never resurrect deleted personal data.
-  - **HOW it is verified:** By December 20, a mock disaster recovery test confirms that restoring a primary database snapshot automatically applies the deletion logs, leaving zero restored records for deleted customer IDs.
+- **Outcome 4.2: Customer Deletion Protection Across Backup Restores**
+  - **WHO is better off:** Kloud Kart Leadership and customers who requested data deletion.
+  - **WHAT changes:** Any system backup recovery automatically re-applies the customer deletion list so erased customer details can never accidentally reappear.
+  - **HOW it is verified:** By December 20, Nana receives a signed restoration test certificate showing that after a test backup recovery, searching a previously deleted customer ID in the reporting dashboard returns zero personal records.

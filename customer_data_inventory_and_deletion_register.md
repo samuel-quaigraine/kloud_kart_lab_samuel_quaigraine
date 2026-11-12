@@ -60,3 +60,4 @@ To end the weekly circular debates between Operations and Finance, both departme
 | **2026-11-02** | GH₵ 1,420,500 | GH₵ 1,310,200 | GH₵ 110,300 | Normal 48-hour weekend bank clearing window; 314 cash-on-delivery orders in transit with couriers. | N. Adjei | Finance Lead | **APPROVED** (Timing variance verified) |
 | **2026-11-09** | GH₵ 1,395,800 | GH₵ 1,388,400 | GH₵ 7,400 | Minor Paystack settlement fee timing; 18 returned items pending inspection. | N. Adjei | Finance Lead | **APPROVED** (Within 1% tolerance) |
 | **2026-11-16** | GH₵ 1,460,000 | GH₵ 1,340,000 | GH₵ 120,000 | Weekend flash sale orders placed Sunday night awaiting Monday courier pickup. | Pending | Pending | **PENDING REVIEW** |
+
