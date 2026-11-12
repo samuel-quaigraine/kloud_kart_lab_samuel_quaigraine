@@ -20,13 +20,13 @@ We deploy the pre-approved second server as an automated duplicate database mirr
 
 - **How it would work:** Kloud Kart stays on a single physical machine. Nana's export queries are rescheduled to run automatically at 02:00 AM on Monday morning with strict limits on processor usage.
 - **Why it is attractive:** Zero extra hosting cost, no second machine to configure, and no database replication links to monitor. It could be scheduled immediately by the existing PHP developer.
-- **Why rejected on Kloud Kart's numbers:** Kloud Kart processes 4,000 orders per day and is actively expanding into Nigeria, where shopping hours and night owl habits differ from Ghana. Relying on an off-peak window on a single shared box leaves customer checkouts permanently exposed. If an unplanned daytime query is run, the live cash register freezes again, losing an estimated 280,000 Ghana Cedis per month in customer sales. Treating the symptom on a shared box is unacceptable when a second server is already pre-approved in the budget.
+- **Why rejected:** Kloud Kart processes 4,000 orders per day and is actively expanding into Nigeria, where shopping hours and night owl habits differ from Ghana. Relying on an off-peak window on a single shared box leaves customer checkouts permanently exposed. If an unplanned daytime query is run, the live cash register freezes again, losing an estimated 280,000 Ghana Cedis per month in customer sales. Treating the symptom on a shared box is unacceptable when a second server is already pre-approved in the budget.
 
 ### Alternative B: Purchase an enterprise cloud data warehouse immediately
 
 - **How it would work:** Kloud Kart signs an enterprise contract with a cloud warehouse vendor (such as Snowflake or Google BigQuery), copies data out of MySQL nightly, and points all staff dashboards there.
 - **Why it is attractive:** It completely isolates reporting from the live shop and automatically scales processor power during heavy queries. The sole developer requested this tool.
-- **Why rejected on Kloud Kart's numbers:** Kloud Kart only possesses 40 gigabytes of structured operational data. Paying monthly recurring cloud platform fees and metered compute costs for 40 gigabytes of data is a financial mistake for an early-stage company with only two data hires. Furthermore, configuring cloud network tunnels and security models would take months, whereas turning on the pre-approved duplicate server stops website slowdowns immediately.
+- **Why rejected:** Kloud Kart only possesses 40 gigabytes of structured operational data. Paying monthly recurring cloud platform fees and metered compute costs for 40 gigabytes of data is a financial mistake for an early-stage company with only two data hires. Furthermore, configuring cloud network tunnels and security models would take months, whereas turning on the pre-approved duplicate server stops website slowdowns immediately.
 
 ## Consequences
 

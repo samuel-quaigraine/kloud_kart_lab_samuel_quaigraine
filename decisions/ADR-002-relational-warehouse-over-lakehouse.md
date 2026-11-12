@@ -20,13 +20,13 @@ We reject building a complex data lakehouse. We establish our reporting system i
 
 - **How it would work:** Raw database dumps are written to cloud storage buckets (such as Amazon S3) wrapped with file transaction layers (such as Delta Lake or Apache Iceberg). A distributed computing engine (such as Apache Spark or Databricks) runs queries across both reports and future machine learning models.
 - **Why it is attractive:** It is a major industry buzzword and provides an all-in-one system for companies with petabytes of data combining text, audio, and image files.
-- **Why rejected on Kloud Kart's numbers:** Lakehouses were designed for massive enterprises processing petabytes of unstructured data (such as millions of audio files and video streams). Kloud Kart has 40 gigabytes of structured retail tables. Running a distributed lakehouse requires constant cluster configuration, file compaction routines, and specialized big-data engineering skills. For two data hires managing 40 gigabytes, a lakehouse is expensive over-engineering that would consume the team's entire working hours just keeping the cluster running, with zero measurable benefit to Nana's Monday reports.
+- **Why rejected:** Lakehouses were designed for massive enterprises processing petabytes of unstructured data (such as millions of audio files and video streams). Kloud Kart has 40 gigabytes of structured retail tables. Running a distributed lakehouse requires constant cluster configuration, file compaction routines, and specialized big-data engineering skills. For two data hires managing 40 gigabytes, a lakehouse is expensive over-engineering that would consume the team's entire working hours just keeping the cluster running, with zero measurable benefit to Nana's Monday reports.
 
 ### Alternative B: Build a low-cost data lake using flat cloud file storage
 
 - **How it would work:** Raw CSV spreadsheet files or JSON files are dumped into cloud storage buckets, and staff query the raw files directly using serverless query tools (such as Amazon Athena).
 - **Why it is attractive:** Extremely cheap file storage cost and no database server software to manage.
-- **Why rejected on Kloud Kart's numbers:** As I understand Act 843, when a customer requests that their personal data be deleted, Kloud Kart has a strict 90-day legal clock to locate and erase every copy. Finding and deleting an individual customer row across thousands of static files in cloud storage is technically difficult and creates a high risk of failing a legal audit. Furthermore, flat file storage does not prevent duplicate records, rapidly turning the storage into an untrusted "data swamp."
+- **Why rejected:** As I understand Act 843, when a customer requests that their personal data be deleted, Kloud Kart has a strict 90-day legal clock to locate and erase every copy. Finding and deleting an individual customer row across thousands of static files in cloud storage is technically difficult and creates a high risk of failing a legal audit. Furthermore, flat file storage does not prevent duplicate records, rapidly turning the storage into an untrusted "data swamp."
 
 ## Consequences
 

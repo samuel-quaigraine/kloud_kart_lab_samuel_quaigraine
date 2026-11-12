@@ -22,13 +22,13 @@ We implement a two-step privacy cleaning and query loading mechanism. During nig
 
 - **How it would work:** Every table from the operational MySQL database is copied untouched, including full customer names, telephone numbers, home delivery addresses, and payment details, and dumped straight into the reporting database. All anonymization is delayed to future queries.
 - **Why it is attractive:** It is the fastest pipeline to write at first. It keeps 100% of the raw data in storage so developers can access any field in the future without re-querying the store database.
-- **Why rejected on Kloud Kart's numbers:** As I understand Act 843, if raw customer contact details are duplicated across staging tables, history tables, and reporting models, complying with a Data Protection Commission deletion request within 90 days means searching and erasing records across dozens of internal tables. If even one table or backup file is missed, Kloud Kart fails the regulatory audit, incurring illustrative fines of 500,000 to 1,200,000 Ghana Cedis. With only two data hires, managing deletion cascades across multiple raw tables is an audit disaster waiting to happen.
+- **Why rejected:** As I understand Act 843, if raw customer contact details are duplicated across staging tables, history tables, and reporting models, complying with a Data Protection Commission deletion request within 90 days means searching and erasing records across dozens of internal tables. If even one table or backup file is missed, Kloud Kart fails the regulatory audit, exposing Kloud Kart to regulatory sanctions, legal and audit costs, and investor due-diligence friction estimated at 500,000 to 1,200,000 Ghana Cedis. With only two data hires, managing deletion cascades across multiple raw tables is an audit disaster waiting to happen.
 
 ### Alternative B: Calculate and summarize everything inside custom code before saving (Traditional ETL)
 
 - **How it would work:** Data is extracted, and all business formulas (revenue definitions, order status checks, returns deductions) are calculated inside application code (such as Python or PHP) before saving only final summarized totals into the reporting database.
 - **Why it is attractive:** The reporting database receives only clean, summarized numbers with zero raw customer records, using very little disk space.
-- **Why rejected on Kloud Kart's numbers:** It is too rigid and fragile. When Operations and Finance change the formula for completed revenue next month, an engineer must rewrite the code, test it, and re-pull months of historical records from the live store database. Forcing repeated historical re-extractions places heavy load on our small single-box infrastructure and delays business reporting.
+- **Why rejected:** It is too rigid and fragile. When Operations and Finance change the formula for completed revenue next month, an engineer must rewrite the code, test it, and re-pull months of historical records from the live store database. Forcing repeated historical re-extractions places heavy load on our small single-box infrastructure and delays business reporting.
 
 ## Consequences
 
@@ -39,4 +39,4 @@ We implement a two-step privacy cleaning and query loading mechanism. During nig
 
 ## What this survives
 
-This decision easily survives formal Data Protection Commission regulatory audits, investor due diligence reviews, and regional expansion into Nigeria under the Nigeria Data Protection Act.
+This decision easily survives formal Data Protection Commission regulatory audits, investor due diligence reviews, and regional expansion into Nigeria, while leaving room to add country-specific controls as our legal counsel advises under Nigeria's data protection rules.

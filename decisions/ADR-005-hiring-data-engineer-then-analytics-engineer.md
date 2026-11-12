@@ -24,13 +24,13 @@ We explicitly decide **not to staff a Data Scientist or Artificial Intelligence 
 
 - **How it would work:** The first hire is a Data Scientist tasked with building predictive machine learning models in Python to forecast inventory demand and impress board investors.
 - **Why it is attractive:** It directly matches investor interest in artificial intelligence and machine learning.
-- **Why rejected on Kloud Kart's numbers:** Prediction sits on top of trustworthy history. If Monday's revenue number is disputed between Operations and Finance, and inventory records drift from physical warehouse reality, any machine learning forecast built on top of that data will produce inaccurate forecasts with mathematical confidence. A Data Scientist does not have the systems engineering skills to stop website slowdowns, configure database replication, or secure data pipelines under Act 843. Hiring a Data Scientist before basic data reliability exists is an expensive failure mode.
+- **Why rejected:** Prediction sits on top of trustworthy history. If Monday's revenue number is disputed between Operations and Finance, and inventory records drift from physical warehouse reality, any machine learning forecast built on top of that data will produce inaccurate forecasts with mathematical confidence. A Data Scientist does not have the systems engineering skills to stop website slowdowns, configure database replication, or secure data pipelines under Act 843. Hiring a Data Scientist before basic data reliability exists is an expensive failure mode.
 
 ### Alternative B: Hire two general software developers
 
 - **How it would work:** Recruit two mid-level software developers with general PHP and SQL experience to handle both web features and data reporting tasks.
 - **Why it is attractive:** Provides flexible engineering capacity across the general technology backlog.
-- **Why rejected on Kloud Kart's numbers:** Kloud Kart already has one general developer (PHP and MySQL), and the current operational crisis occurred under that model. General developers typically lack specialized training in data lifecycle architecture, data privacy regulations (Act 843 compliance), and semantic metric modeling. Without dedicated accountability, data infrastructure remains an unowned side task.
+- **Why rejected:** Kloud Kart already has one general developer (PHP and MySQL), and the current operational crisis occurred under that model. General developers typically lack specialized training in data lifecycle architecture, data privacy regulations (Act 843 compliance), and semantic metric modeling. Without dedicated accountability, data infrastructure remains an unowned side task.
 
 ## Consequences
 

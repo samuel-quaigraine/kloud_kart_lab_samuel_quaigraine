@@ -20,13 +20,13 @@ We establish an automated nightly batch schedule (running at 02:00 AM) for 99% o
 
 - **How it would work:** Every mouse click, cart update, order placement, and delivery change is published as a continuous stream of events into a messaging broker (such as Apache Kafka). A streaming software engine calculates running metrics second by second.
 - **Why it is attractive:** It produces dashboards that update every few seconds, which impresses investors and fulfills the board's interest in live data.
-- **Why rejected on Kloud Kart's numbers:** We apply the operational test: *"What business decision changes if this number is 10 seconds old instead of 24 hours old?"* Managing Director meetings, Nana's operational reviews, and Finance's bank balancing do not happen second by second. Paying for continuous streaming servers wastes money on idle hardware. More importantly, streaming introduces complex failure points (such as duplicate messages, out-of-order records, and network drops) that would overwhelm a two-person engineering team. Nightly batch processing gives 100% of the decision value at a fraction of the operational headache.
+- **Why rejected:** We apply the operational test: *"What business decision changes if this number is 10 seconds old instead of 24 hours old?"* Managing Director meetings, Nana's operational reviews, and Finance's bank balancing do not happen second by second. Paying for continuous streaming servers wastes money on idle hardware. More importantly, streaming introduces complex failure points (such as duplicate messages, out-of-order records, and network drops) that would overwhelm a two-person engineering team. Nightly batch processing gives 100% of the decision value at a fraction of the operational headache.
 
 ### Alternative B: Pure 100% nightly batch processing with zero real-time exceptions (including inventory)
 
 - **How it would work:** Everything without exception, including inventory stock levels, is updated only once every night at 02:00 AM.
 - **Why it is attractive:** Extremely simple architecture because every single record in the business follows one single nightly batch pipeline.
-- **Why rejected on Kloud Kart's numbers:** Kloud Kart ships 4,000 orders per day. If product availability numbers update only once every 24 hours, the website shows yesterday's stock. Multiple customers browsing simultaneously will buy items that are physically sold out in the warehouse. This causes overselling, angry customer calls, bank refund processing fees, and damaged brand reputation. Inventory reservation must stay live on the primary store database.
+- **Why rejected:** Kloud Kart ships 4,000 orders per day. If product availability numbers update only once every 24 hours, the website shows yesterday's stock. Multiple customers browsing simultaneously will buy items that are physically sold out in the warehouse. This causes overselling, angry customer calls, bank refund processing fees, and damaged brand reputation. Inventory reservation must stay live on the primary store database.
 
 ## Consequences
 
