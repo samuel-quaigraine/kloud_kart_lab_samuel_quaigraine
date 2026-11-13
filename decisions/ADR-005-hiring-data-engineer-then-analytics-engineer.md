@@ -14,7 +14,7 @@ Following the funding round, investors emphasized artificial intelligence and pr
 
 We sequence the two budgeted hires chronologically by operational risk:
 1. **Hire 1 (Month 1): Data Engineer.** Accountable for data infrastructure, database replication, automated nightly pipelines, data sanitization, and protecting the live shop from slowdowns.
-2. **Hire 2 (Month 3): Analytics Engineer.** Accountable for the business calculation layer, standardized metric definitions in SQL, and automated daily reconciliation dashboards.
+2. **Hire 2 (Month 3): Analytics Engineer.** Accountable for the business calculation layer, standardized metric definitions in Structured Query Language (SQL), and automated daily reconciliation dashboards.
 
 We explicitly decide **not to staff a Data Scientist or Artificial Intelligence Engineer** this year.
 

@@ -6,9 +6,9 @@
 
 ## Context
 
-Kloud Kart manages customer accounts, order checkout, and inventory on a single MySQL database hosted on the exact same physical computer as the live PHP website. Every Monday morning, Nana Adjei runs heavy reporting queries and exports large spreadsheet files containing hundreds of thousands of rows. 
+Kloud Kart manages customer accounts, order checkout, and inventory on a single MySQL database hosted on the exact same physical computer as the live PHP website. Every Monday morning, Nana Adjei runs heavy reporting queries and exports large spreadsheet files containing hundreds of thousands of rows.
 
-Twice last month, these reporting queries consumed all available computer memory and processor power, slowing website checkout page response times from under 1 second to over 20 seconds while shoppers were trying to pay. A second database server machine is already pre-approved in the company budget. The technical team consists of one software developer, and any data architecture must be maintained by our approved two-person data team.
+Twice last month, Monday reporting exports overloaded our shared server and slowed down the live website while shoppers were trying to buy. A second server (read replica) is already pre-approved in our budget. Right now, we only have one PHP/MySQL developer, so any new data system must be simple enough for our approved two-person data team to run.
 
 ## Decision
 
@@ -20,13 +20,14 @@ We deploy the pre-approved second server as an automated duplicate database mirr
 
 - **How it would work:** Kloud Kart stays on a single physical machine. Nana's export queries are rescheduled to run automatically at 02:00 AM on Monday morning with strict limits on processor usage.
 - **Why it is attractive:** Zero extra hosting cost, no second machine to configure, and no database replication links to monitor. It could be scheduled immediately by the existing PHP developer.
-- **Why rejected:** Kloud Kart ships about 4,000 orders per day and is actively expanding into Nigeria, where shopping hours and night owl habits differ from Ghana. Relying on an off-peak window on a single shared box leaves customer checkouts permanently exposed. If an unplanned daytime query is run, the live cash register freezes again, losing an estimated 280,000 Ghana Cedis per month in customer sales. Treating the symptom on a shared box is unacceptable when a second server is already pre-approved in the budget.
+- **Why rejected:** Kloud Kart ships about 4,000 orders per day and is actively expanding into Nigeria, where peak shopping hours and late-night buying habits differ from Ghana. Relying on an off-peak window on a single shared box leaves customer checkouts permanently exposed. When an unplanned daytime query is run, the live checkout process freezes again, losing sales. Treating the symptom on a shared box is unacceptable when a second server is already pre-approved in the budget.
 
 ### Alternative B: Purchase an enterprise cloud data warehouse immediately
 
-- **How it would work:** Kloud Kart signs an enterprise contract with a cloud warehouse vendor (such as Snowflake or Google BigQuery), copies data out of MySQL nightly, and points all staff dashboards there.
+- **How it would work:** Kloud Kart subscribes to a managed cloud data warehouse (such as Snowflake or Google BigQuery), copies data out of MySQL on a daily schedule, and points all staff dashboards there.
+
 - **Why it is attractive:** It completely isolates reporting from the live shop and automatically scales processor power during heavy queries. The sole developer requested this tool.
-- **Why rejected:** Kloud Kart only possesses 40 gigabytes of structured operational data. Paying monthly recurring cloud platform fees and metered compute costs for 40 gigabytes of data is a financial mistake for an early-stage company with only two data hires. Furthermore, configuring cloud network tunnels and security models would take months, whereas turning on the pre-approved duplicate server stops website slowdowns immediately.
+- **Why rejected:** Kloud Kart only has 40 gigabytes of structured data, so paying monthly cloud platform fees and usage bills is unnecessary overhead. More importantly, an external cloud warehouse adds daily operational drag on our two-person team, who would have to spend their time managing cloud security, billing, and sync pipelines while also keeping the live shop running. Setting up a new cloud environment would also delay relief, whereas turning on the pre-approved duplicate server stops website slowdowns immediately.
 
 ## Consequences
 
