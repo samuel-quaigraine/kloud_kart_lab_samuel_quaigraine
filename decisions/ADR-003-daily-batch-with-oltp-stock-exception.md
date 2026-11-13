@@ -14,7 +14,7 @@ However, Kloud Kart operates with a strict budget of two data hires who must kee
 
 We establish an automated daily batch schedule (running at 02:00 AM) for 99% of company reports, financial reconciliation ledgers, and marketing dashboards. We set warehouse physical stock counts as the single, strict real-time exception, checked live on the primary store database during customer checkout.
 
-In addition, to prevent warehouse shelf counts and online catalog numbers from drifting apart, the daily batch extraction routine executes an automated daily stock drift check comparing recorded physical warehouse barcode counts against website database balances. If a discrepancy is detected, the pipeline immediately generates an automated mismatch alert for the warehouse team at 08:00 AM so they can investigate and correct shelf numbers before online shoppers order items that are physically sold out.
+In addition, to prevent warehouse shelf counts and online catalog numbers from drifting apart, the daily batch extraction routine executes an automated daily stock drift check comparing recorded physical warehouse barcode counts against website database balances. If a discrepancy is detected, the pipeline immediately generates an automated mismatch alert for the warehouse team at 08:00 AM so they can investigate and correct shelf numbers before online shoppers order items that are physically sold out. During high-volume trading days (such as payday weekends or flash sales), warehouse supervisors can also trigger an on-demand stock check from the duplicate server at any time, catching missing items immediately without slowing down live customer checkouts.
 
 ## Alternatives considered
 
@@ -32,7 +32,7 @@ In addition, to prevent warehouse shelf counts and online catalog numbers from d
 
 ## Consequences
 
-- **What this buys:** Predictable, reliable daily pipelines that are easy to test, monitor, and rerun if a glitch happens. No midnight alerts waking engineers up. Accurate shelf stock that permanently prevents overselling cancellations, backed by automated daily stock drift alerts that catch and correct warehouse inventory mismatches before customers checkout.
+- **What this buys:** Predictable, reliable daily pipelines that are easy to test, monitor, and rerun if a glitch happens. No midnight alerts waking engineers up. Accurate shelf stock that permanently prevents overselling cancellations, backed by automated daily stock drift alerts and on-demand check capability that catch and correct warehouse inventory mismatches before customers checkout.
 - **What this costs:** Board Members must accept that operational dashboards show sales up to the close of business yesterday (up to 24 hours old).
 - **What it costs the client if I am wrong:** If the Marketing team runs intense flash sales that require adjusting social media ad spending every 30 minutes, they will lack hourly sales feedback during that single day.
 - **What would make me revisit this:** Daily sales scaling beyond 25,000 orders per day across several West African countries; automated pricing software requiring live competitor price tracking; or automated warehouse robotics requiring millisecond routing updates.

@@ -10,15 +10,15 @@
 ## 1. Operational Purpose
 
 Under Ghana's Data Protection Act, 2012 (Act 843), as I understand it, individuals have the legal right to request the deletion or correction of their personal data (with statutory handling generally requiring response within 21 calendar days). Kloud Kart faces an active complaint forwarded by the Data Protection Commission (DPC) regarding a deleted customer's data. As noted under Operating Assumptions, this complaint carries dual operational meanings:
-1. **Removing (Statutory Erasure):** A customer requested deletion under Section 33 of Act 843, but unmanaged copies lingered on employee laptops, in Marketing spreadsheets, or in backup files, requiring verified full-system erasure.
-2. **Restoring (Targeted Recovery & Anti-Resurrection):** An account was closed or deleted erroneously, or a customer complained seeking access to their past transaction records under Sections 26 and 32, or historical backup restores accidentally resurrected previously deleted personal details.
+1. **Removing (Statutory Erasure):** A customer requested deletion under Section 33 of Act 843, but unmanaged copies remained on employee laptops, in Marketing spreadsheets, or in backup files, requiring verified full-system erasure.
+2. **Restoring (Targeted Recovery and Protection Against Accidentally Restoring Deleted Data):** An account was closed or deleted erroneously, or a customer complained seeking access to their past transaction records under Sections 26 and 32, or historical backup restores accidentally restored previously deleted personal details.
 
 Company leadership has established a strict 90-day internal implementation period (Quarter 1, Months 1 to 3) to locate and retire historical spreadsheets, deploy automated privacy masking, implement a permanent deletion audit log, and formally resolve the active DPC complaint with verified audit proof.
 
 Technical database architecture alone cannot clean up unmanaged spreadsheets already saved on employee laptops. This register provides Nana Adjei with a non-technical, repeatable management tool to:
 1. Locate and inventory every copy of customer personal data across all departments.
 2. Track and verify customer deletion requests to complete compliance within the mandatory 90-day implementation period, including permanent erasure protection across system backup restores (Removing).
-3. Maintain a permanent, tamper-evident deletion audit log that proves regulatory compliance to the DPC while supporting targeted operational recovery if an account was closed in error (Restoring transaction history via anonymous surrogate keys without resurrecting private personal contact details).
+3. Maintain a permanent, tamper-evident deletion audit log that proves regulatory compliance to the DPC while supporting targeted operational recovery if an account was closed in error (Restoring transaction history via anonymous surrogate keys without bringing back private personal contact details).
 4. Reconcile and sign off on Monday revenue figures between Operations and Finance without circular arguments.
 
 ---
@@ -50,7 +50,7 @@ This register permanently records every formal customer data action (tracking an
 
 ---
 
-### 6-Step Verification Protocol for Deletion Requests (Removing Lingering Copies):
+### 6-Step Verification Protocol for Deletion Requests (Removing Extra Copies from Laptops):
 1. **Log & Timestamp:** Log the customer reference code, request date, and reason in the permanent deletion audit log to start the statutory compliance clock.
 2. **Primary Store Erase:** The developer executes a soft-delete and sets `deleted_at` on the live MySQL store database.
 3. **Reporting Schema Verification:** Verify that nightly ingestion scrubs personal identifiers and only stores the irreversible anonymous reference.
@@ -64,14 +64,14 @@ This register permanently records every formal customer data action (tracking an
 1. **Dispute Intake and Identity Verification:** Nana logs the complaint reference code, verifying the claimant's identity through standard operational procedures without creating unmanaged spreadsheet copies.
 2. **Audit Log Inspection:** Cross-reference `AUDIT_CUSTOMER_DELETION_LOG` to determine whether the customer record was erased via user request, automated clean-up script, or administrative error.
 3. **Order Fact Re-Linking:** In the analytical database, purchase records remain preserved and linked to `DIM_CUSTOMER_ANONYMOUS.customer_analytics_key`. Re-activate the customer account linkage via the surrogate key so past orders are visible to authorized support staff.
-4. **Consent-Driven Contact Re-Enrollment:** If the customer requests full account restoration on the live website, collect fresh contact details directly through the storefront customer registration portal under explicit customer consent, rather than attempting to resurrect unverified legacy data from older backup dumps.
+4. **Consent-Driven Contact Re-Enrollment:** If the customer requests full account restoration on the live website, collect fresh contact details directly through the storefront customer registration portal under explicit customer consent, rather than trying to restore old unverified data from backup dumps.
 5. **DPC Response Sign-Off:** Nana signs off on the dispute resolution certificate, confirming that legitimate order history was restored while no untracked personal data copies were generated or retained.
 
 ---
 
 ## 4. Monday Revenue and Variance Sign-Off Protocol
 
-To end the weekly circular debates between Operations and Finance, both department leads complete this sign-off sheet every Monday morning before the executive management meeting:
+To end the weekly circular debates between Operations and Finance, both department leads complete this sign-off sheet every Monday morning before the executive management meeting. During Months 1 and 2 of Quarter 1, Nana and the Finance Lead complete this reconciliation worksheet manually. Beginning in Month 4 (Quarter 2), this sign-off sheet is automated into a database-backed dashboard report delivered by the Analytics Engineer:
 
 | Week Beginning | Operations Dispatched Revenue | Finance Bank-Settled Revenue | Variance Delta | Primary Reason for Variance | Operations Sign-off | Finance Sign-off | Executive Status |
 |---|---|---|---|---|---|---|---|
