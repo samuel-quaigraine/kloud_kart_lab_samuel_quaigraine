@@ -25,6 +25,7 @@ flowchart TD
         subgraph PrivacyGateway["Privacy Protection: Ghana Act 843 Gateway"]
             IngestionProcess --> DropPII["1. Remove Personal Data<br/>Strip Names, Phone Numbers, Addresses"]
             IngestionProcess --> HashEmail["2. One-Way Anonymization<br/>Convert email to anonymous code"]
+            IngestionProcess --> AuditLog["3. Permanent Deletion Audit Log<br/>Track ID, Date, Reason (Zero PII)"]
         end
         
         PrivacyGateway -->|"Load Cleaned Rows"| WarehouseDB[("Dedicated Analytical Reporting Schema")]
@@ -158,7 +159,18 @@ erDiagram
         string drift_alert_status "NORMAL, MISMATCH_ALERT, or CORRECTED"
     }
 
+    AUDIT_CUSTOMER_DELETION_LOG {
+        int audit_deletion_id PK "Unique deletion event tracking key"
+        int source_customer_id "Masked customer identifier"
+        date request_date "Date deletion request received"
+        date completion_date "Date deletion verified across systems"
+        string deletion_reason "Account closure, marketing opt-out"
+        string regulatory_dpc_status "COMPLIANT_VERIFIED"
+        boolean backup_reapplication_flag "True: Re-apply on restore"
+    }
+
     DIM_CUSTOMER_ANONYMOUS ||--o{ FACT_ORDERS : "aggregates"
+    DIM_CUSTOMER_ANONYMOUS ||--o{ AUDIT_CUSTOMER_DELETION_LOG : "audited_in"
     DIM_PRODUCT ||--o{ FACT_ORDERS : "aggregates"
     DIM_PRODUCT ||--o{ FACT_INVENTORY_DRIFT_AUDIT : "audited_in"
     DIM_DATE ||--o{ FACT_ORDERS : "timestamps"
@@ -204,8 +216,9 @@ The table below explains what happens to each operational field during the night
    - Raw spreadsheet downloads on staff laptops are stopped.
    - Names, phone numbers, and physical addresses are removed at the gate before data enters the reporting system.
    - Customer emails are turned into anonymous codes.
-   - Disaster recovery runbooks automatically re-apply customer deletions to restored backups so historical snapshots never resurrect erased personal records.
-   - **Result:** When a customer asks for their personal data to be deleted, Kloud Kart only needs to delete the record from the primary store database. Zero personal customer records exist in the reporting database, meeting the 90-day legal response deadline with complete certainty.
+   - Every deletion event is recorded in a permanent audit log (tracking anonymous customer ID, request date, and deletion reason without storing personal details), allowing targeted recovery of anonymized order history if an account was flagged in error while keeping personal contact details permanently erased.
+   - Disaster recovery runbooks automatically re-apply customer deletions from the audit log to restored backups so historical snapshots never resurrect erased personal records.
+   - **Result:** When a customer asks for their personal data to be deleted, Kloud Kart only needs to delete the record from the primary store database. Zero personal customer records exist in the reporting database, meeting the 90-day implementation compliance target and satisfying Data Protection Commission requirements with complete certainty.
 
 4. **How Warehouse Stock Accuracy and Overselling Prevention are Guaranteed:**
    - Online shoppers check inventory live against the primary database during checkout, guaranteeing zero stale stock counts.

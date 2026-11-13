@@ -34,7 +34,7 @@
 |---|---|---|
 | **Direct Sales Loss** | Website slowdowns during peak shopping hours cause customers to abandon checkout carts. | **~800 lost customer orders per month (~280,000 Ghana Cedis monthly top-line loss).** |
 | **Wasted Leadership Time** | Operations and Finance manually extracting, formatting, and debating conflicting spreadsheets. | **416+ hours per year** (equivalent to **10+ full working weeks of senior leadership bandwidth**). |
-| **Legal and Regulatory Exposure** | 300,000 customer records stored on unmanaged laptops with a 90-day regulatory complaint clock. | Illustrative risk-weighted exposure of **500,000 to 1,200,000 Ghana Cedis** in regulatory sanctions, legal costs, and audit friction. |
+| **Legal and Regulatory Exposure** | 300,000 customer records stored on unmanaged laptops while facing an active Data Protection Commission deletion complaint with a 90-day implementation period. | Illustrative risk-weighted exposure of **500,000 to 1,200,000 Ghana Cedis** in regulatory sanctions, legal costs, and audit friction. |
 
 > **Nana's Speaker Notes:** *"This is not just a software inconvenience; it is costing us real revenue. Those two Monday slowdowns cost us an estimated 800 customer orders. Between myself and the Finance lead, we waste ten full working weeks every year manually cleaning spreadsheets. Doing nothing is already our most expensive option."*
 
@@ -59,17 +59,19 @@
 
 ## Slide 4: Data Protection and Legal Defensibility (Ghana Act 843)
 
-### Title: Protecting Customer Privacy and Meeting Our 90-Day Legal Clock
+### Title: Protecting Customer Privacy and Meeting Our 90-Day Implementation Goal
 
 - **The Legal Reality (Ghana Data Protection Act, 2012 / Act 843):**
-  - As I understand Ghana's Data Protection Act (Act 843), customers have the right to request deletion of their personal details, and Kloud Kart must answer the Data Protection Commission's active complaint within 90 days.
+  - As I understand Ghana's Data Protection Act (Act 843), customers have the statutory right to request deletion of their personal details (with standard turnaround guidelines requiring action within 21 calendar days).
+  - Kloud Kart faces an active Data Protection Commission (DPC) complaint, with management setting a strict 90-day internal implementation period to prove full-system erasure and establish repeatable ongoing compliance.
   - **The Golden Rule:** Every copy you create is a place a deletion request must reach.
-- **Our Two-Step Privacy Protection Approach:**
+- **Our Three-Step Privacy Protection Approach:**
   - **Step 1 (Sanitization at the Gate):** As operational data is moved to our reporting tables, customer names, telephone numbers, and street delivery addresses are removed. Emails are converted to anonymous account codes.
   - **Step 2 (Safe Business Calculations):** Order values, dates, and item quantities remain untouched so business reporting works perfectly, but zero personal customer contact details leak into analytics tables.
+  - **Step 3 (Permanent Audit Logging & Backup Protection):** Every customer deletion is recorded in a permanent audit log (tracking anonymous ID, date, and reason without storing private data), allowing backup restores to re-apply deletions while permitting targeted recovery if an account was flagged in error.
 - **The Outcome:** When a customer requests deletion, we only have to erase their record from our primary store database. Our reporting system is completely safe from privacy audits.
 
-> **Nana's Speaker Notes:** *"Under Ghanaian law, if a customer asks us to delete their data, we have 90 days to wipe every copy. Today, with customer spreadsheets sitting on laptops across our departments, we would fail an audit. Our new design strips out private customer details automatically before reports are created. We protect customer privacy and eliminate regulatory risk."*
+> **Nana's Speaker Notes:** *"Under Ghanaian law, customers have the right to request deletion of their personal records. We face an active complaint from the Data Protection Commission, and our 90-day implementation plan ensures we wipe every unmanaged laptop copy, scrub personal details at the gate, and keep an immutable deletion audit log. We protect customer privacy, guarantee clean backup restores, and eliminate regulatory risk."*
 
 ---
 
@@ -118,23 +120,23 @@ Goal: Guarantee Operations and Finance report identical numbers down to the last
 
 ### Title: Verifiable Quarterly Milestones
 
-- **Q1 (Months 1 to 3): Stop the Bleeding and Meet the 90-Day Privacy Deadline**
-  - **Outcome:** Reporting moves to the second server (ending Monday site slowdowns), unmanaged customer spreadsheets across departments are retired, and customer deletion works within 90 days.
-  - **Verified By:** Live checkout loads under 2 seconds during Monday 09:00 AM reporting; test deleted customer returns zero contact records before Day 90.
+- **Q1 (Months 1 to 3): End Monday Site Slowdowns and Customer Data Compliance**
+  - **Outcome:** Reporting moves to the second server (ending Monday site slowdowns), unmanaged customer spreadsheets across departments are removed, and customer deletion is fully operational within our 90-day implementation period.
+  - **Verified By:** Live checkout loads under 2 seconds during Monday 09:00 AM reporting; department leads confirm zero customer files remain on local laptops, and a test customer deletion request removes all personal contact details across the system and resolves the active Data Protection Commission (DPC) complaint.
 
-- **Q2 (Months 4 to 6): Single Source of Truth**
+- **Q2 (Months 4 to 6): Establish the Single Source of Truth**
   - **Outcome:** Operations and Finance view identical daily and monthly revenue numbers down to the last cedi.
-  - **Verified By:** Monthly revenue summaries match payment gateway settlements on the first business day.
+  - **Verified By:** Monthly revenue summaries match payment gateway settlements on the first business day; automated daily discrepancy alerts flag variances at 08:00 AM.
 
-- **Q3 (Months 7 to 9): Nigeria Expansion Visibility and Team Self-Service**
+- **Q3 (Months 7 to 9): Separate Nigeria Tracking and Self-Serve Team Reports**
   - **Outcome:** Nigeria pilot sales and delivery numbers are tracked separately from Ghana, and department leads pull their own standard reports.
   - **Verified By:** Board review displays a dedicated Nigeria view without mixing Ghana totals, and leads run monthly reports without developer help.
 
 - **Q4 (Months 10 to 12): Stock Mismatch Alerts and Permanent Customer Deletions**
-  - **Outcome:** Automated alerts flag mismatches between website stock counts and physical warehouse shelves before items oversell, and automated clean-up ensures deleted customer details stay erased even after restoring older backups.
-  - **Verified By:** Overselling cancellations drop below 0.5% of total orders by December 15, and practice backup restore tests verify zero personal records return for deleted customers by December 20.
+  - **Outcome:** Automated alerts flag mismatches between website stock counts and physical warehouse shelves before items oversell, and every customer deletion is recorded in a permanent audit log so erased customers never reappear after backup restores while allowing targeted recovery if a record was removed by mistake.
+  - **Verified By:** Overselling cancellations drop below 0.5% of total orders by December 15, and practice backup restore tests verify zero personal records return for deleted customers while accurately logging every deletion event for regulatory audits by December 20.
 
-> **Nana's Speaker Notes:** *"Here is our commitment for the next four quarters. Every milestone can be verified by myself or Finance without asking an engineer. In Quarter 1, the website stops slowing down and we meet our 90-day privacy deadline. In Quarter 2, Finance and Operations report identical revenue. In Quarter 3, Nigeria reporting is cleanly isolated and department leads self-serve. In Quarter 4, automated alerts catch stock mismatches before items oversell, and practice backup restore tests prove that deleted customer records stay permanently erased."*
+> **Nana's Speaker Notes:** *"Here is our commitment for the next four quarters. Every milestone can be verified by myself or Finance without asking an engineer. In Quarter 1, the website stops slowing down, unmanaged customer spreadsheets are removed, and we resolve our active privacy complaint within our 90-day implementation period. In Quarter 2, Finance and Operations report identical revenue. In Quarter 3, Nigeria reporting is cleanly isolated and department leads self-serve. In Quarter 4, automated alerts catch stock mismatches before items oversell, and practice backup restore tests prove that deleted customer records stay permanently erased."*
 
 ---
 

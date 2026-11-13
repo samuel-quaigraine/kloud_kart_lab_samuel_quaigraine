@@ -1,21 +1,21 @@
 # Twelve-Month Data Roadmap: Kloud Kart
 
-This roadmap is organized by quarterly business outcomes rather than internal engineering tasks. Every milestone passes the **Verification Test**: *Nana Adjei or the Finance Lead can verify that the outcome happened on their own, without needing to ask an engineer.*
+Every quarter delivers practical improvements you can see in daily operations, including a fast Monday checkout, matching revenue totals across teams, and verified customer deletions. Each milestone is measured by results Operations (Nana) and Finance can see firsthand in their regular reports.
 
 ---
 
-## Quarter 1: Stop the Bleeding and Meet the 90-Day Privacy Deadline (Months 1 to 3)
+## Quarter 1: End Monday Site Slowdowns and Customer Data Compliance (Months 1 to 3)
 
-**Guiding Principle:** Stop live website slowdowns and eliminate untracked customer data copies within the 90-day Data Protection Commission window.
+**Guiding Principle:** Improve live website performance and eliminate untracked customer data copies within a 90-day implementation period, ensuring compliance with Ghana's Data Protection Act, 2012 (Act 843).
 
 - **Outcome 1.1: Storefront Speed Protected During Monday Reports**
   - **WHO is better off:** Online shoppers and Nana Adjei (Head of Operations).
   - **WHAT changes:** Weekly reporting queries move off the live shop server onto the duplicate reporting server. Monday exports no longer slow down customer checkouts.
   - **HOW it is verified:** On the first Monday of Month 2 at 09:00 AM, Nana runs her weekly report while placing a test checkout on the website; the page loads in under two seconds with zero customer slow-site complaints.
-- **Outcome 1.2: Unmanaged Customer Spreadsheets Retired and 90-Day Deletion Operational**
-  - **WHO is better off:** Kloud Kart leadership, staff across Operations, Finance, and Marketing, and customers exercising deletion rights.
+- **Outcome 1.2: Unmanaged Customer Spreadsheets Removed and 90-Day Deletion Operational**
+  - **WHO is better off:** Kloud Kart leadership, staff across Operations, Finance, and Marketing, and customers who request that their personal data be deleted.
   - **WHAT changes:** Staff across Operations, Finance, and Marketing stop downloading unmanaged customer comma-separated values (CSV) files to local computers and access masked reporting views instead. A repeatable deletion process scrubs requested customer identifiers across live store and reporting tables within 90 days.
-  - **HOW it is verified:** Before Day 90, Nana confirms that existing customer CSV spreadsheets are cleared from staff computers across Operations, Finance, and Marketing, Data Protection Commission (DPC) registration renewal is submitted, and searching a test deleted customer identification number (ID) in the reporting dashboard returns zero personal contact details.
+  - **HOW it is verified:** Before Day 90, department leads confirm zero customer files remain on local laptops, and a test customer deletion request removes all personal contact details across the system and resolves the active Data Protection Commission (DPC) complaint.
 
 ---
 
@@ -58,6 +58,6 @@ This roadmap is organized by quarterly business outcomes rather than internal en
   - **WHAT changes:** Whenever the physical count on the warehouse shelf disagrees with the stock number shown on the website, the system alerts the warehouse team immediately so they can fix it before a shopper orders an item we do not have.
   - **HOW it is verified:** By December 15, warehouse logs show that over 95% of stock mismatches are caught and corrected before a customer checks out, keeping out-of-stock order cancellations below 0.5% of total orders.
 - **Outcome 4.2: Keeping Deleted Customers Erased After Backup Restores**
-  - **WHO is better off:** Kloud Kart leadership (Nana Adjei) and customers who asked for their personal data to be deleted.
-  - **WHAT changes:** Whenever the team restores an older system backup, an automatic clean-up step immediately re-deletes anyone on our deletion list so erased customer details never accidentally come back.
-  - **HOW it is verified:** By December 20, Nana Adjei receives a signed test report proving that after a practice backup restore, searching for a deleted customer in the reporting dashboard returns zero personal records.
+  - **WHO is better off:** Kloud Kart leadership (Nana Adjei) and customers whose records are deleted or updated.
+  - **WHAT changes:** Every customer deletion is recorded in a permanent audit log (tracking the anonymous customer ID, date, and reason without keeping private details), and any backup restore automatically re-applies the deletion list so erased customers never reappear while allowing targeted recovery if a record was ever removed by mistake.
+  - **HOW it is verified:** By December 20, Nana Adjei receives a signed test report proving that a practice backup restore leaves erased customers completely removed while accurately logging every deletion event for regulatory audits.
