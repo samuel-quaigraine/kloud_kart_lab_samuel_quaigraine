@@ -12,7 +12,7 @@ The company's total data footprint is approximately 40 gigabytes, growing by 15%
 
 ## Decision
 
-We reject building a complex data lakehouse. We establish our reporting system in a dedicated analytical schema hosted directly on the pre-approved duplicate server (read replica), storing clean, structured tables designed for standard Structured Query Language (SQL) queries with zero need for a separate third database server.
+We reject building a complex data lakehouse. We establish our reporting system in a dedicated analytical schema hosted directly on the pre-approved duplicate server (read replica), storing clean, structured tables designed for standard Structured Query Language (SQL) queries with zero need for a separate third database server. This relational reporting schema cleanly separates analytics by territory using country-dimension attributes and SQL views, allowing the business to isolate early Nigeria pilot numbers from Ghana's core revenue without needing a multi-region cloud data infrastructure.
 
 ## Alternatives considered
 
@@ -31,7 +31,7 @@ We reject building a complex data lakehouse. We establish our reporting system i
 
 ## Consequences
 
-- **What this buys:** Immediate compatibility with standard SQL queries, zero complex cluster management, zero extra hosting fees beyond the pre-approved second server, and strict enforcement of data formats. Our second hire (the Analytics Engineer) can begin writing business models on their first day.
+- **What this buys:** Immediate compatibility with standard SQL queries, zero complex cluster management, zero extra hosting fees beyond the pre-approved second server, and strict enforcement of data formats. Our second hire (the Analytics Engineer) can begin writing business models on their first day, including dedicated views that keep early Nigeria pilot metrics completely separate from core Ghana sales.
 - **What this costs:** Kloud Kart must define table formats before loading data. Any new data fields must be planned rather than dumped randomly.
 - **What it costs the client if I am wrong:** If Kloud Kart unexpectedly acquires another business with massive amounts of video data, migrating records to a cloud storage lakehouse would take several weeks of engineering time.
 - **What would make me revisit this:** Total data size growing beyond 500 gigabytes; analytical queries taking longer than 15 minutes to run despite proper database indexing; or a genuine business requirement to process billions of raw website clickstream events.

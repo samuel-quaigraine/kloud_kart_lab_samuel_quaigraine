@@ -130,11 +130,11 @@ Goal: Guarantee Operations and Finance report identical numbers down to the last
   - **Outcome:** Nigeria pilot sales and delivery numbers are tracked separately from Ghana, and department leads pull their own standard reports.
   - **Verified By:** Board review displays a dedicated Nigeria view without mixing Ghana totals, and leads run monthly reports without developer help.
 
-- **Q4 (Months 10 to 12): Automatic Stock Accuracy Alerts**
-  - **Outcome:** Automated alerts flag mismatches between website stock counts and physical warehouse shelves before items oversell.
-  - **Verified By:** Overselling refund tickets drop below 0.5% of total orders.
+- **Q4 (Months 10 to 12): Stock Mismatch Alerts and Permanent Customer Deletions**
+  - **Outcome:** Automated alerts flag mismatches between website stock counts and physical warehouse shelves before items oversell, and automated clean-up ensures deleted customer details stay erased even after restoring older backups.
+  - **Verified By:** Overselling cancellations drop below 0.5% of total orders by December 15, and practice backup restore tests verify zero personal records return for deleted customers by December 20.
 
-> **Nana's Speaker Notes:** *"Here is our commitment for the next four quarters. Every milestone can be verified by myself or Finance without asking an engineer. In Quarter 1, the website stops slowing down and we meet our 90-day privacy deadline. In Quarter 2, Finance and Operations report identical revenue. In Quarter 3, Nigeria reporting is cleanly isolated. In Quarter 4, automated alerts catch stock mismatches before items oversell."*
+> **Nana's Speaker Notes:** *"Here is our commitment for the next four quarters. Every milestone can be verified by myself or Finance without asking an engineer. In Quarter 1, the website stops slowing down and we meet our 90-day privacy deadline. In Quarter 2, Finance and Operations report identical revenue. In Quarter 3, Nigeria reporting is cleanly isolated and department leads self-serve. In Quarter 4, automated alerts catch stock mismatches before items oversell, and practice backup restore tests prove that deleted customer records stay permanently erased."*
 
 ---
 
