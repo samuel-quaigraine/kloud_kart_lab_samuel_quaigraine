@@ -6,7 +6,7 @@
 
 ## Context
 
-Kloud Kart stores personal records for over 300,000 customers across Ghana and Nigeria. Today, Marketing exports customer lists with no tracking of how many copies exist, allowing personal customer data to leak to unmonitored laptops. 
+Kloud Kart stores personal records for over 300,000 customers across Ghana and Nigeria. Today, staff across Operations, Finance, and Marketing export customer lists (including Marketing's ~300,000-person list) with no tracking of how many copies exist, allowing personal customer data to leak to unmonitored laptops and local spreadsheets. 
 
 As I understand Act 843, Kloud Kart is legally recognized as a data controller, individuals have the legal right to request the deletion or correction of their personal data, and Kloud Kart faces an active regulatory inquiry forwarded by the Data Protection Commission regarding a customer deletion request with a strict 90-day legal response deadline.
 
@@ -33,8 +33,8 @@ We implement a two-step privacy cleaning and query loading mechanism. During nig
 ## Consequences
 
 - **What this buys:** Complete legal defensibility under Ghana's Data Protection Act, 2012 (Act 843). Customer deletion requests only need to be executed in one single place: the primary store database. Zero personal customer records exist in the reporting database. Meanwhile, the Analytics Engineer retains full freedom to adjust revenue and order calculation queries in SQL without ever touching the live store.
-- **What this costs:** The ingestion process must execute the anonymization and email hashing logic on every run. Marketing staff cannot pull raw phone numbers or email addresses directly from the reporting database.
-- **What it costs the client if I am wrong:** If the Marketing team needs customer contact lists for an emergency SMS broadcast, they cannot pull it from the reporting database; they must request an authorized, logged export from the primary database administrator.
+- **What this costs:** The ingestion process must execute the anonymization and email hashing logic on every run. Staff across departments cannot pull raw phone numbers or email addresses directly from the reporting database.
+- **What it costs the client if I am wrong:** If department leads genuinely need raw customer contact lists for authorized communications, they cannot pull them from the reporting database; they must request an authorized, logged export directly from the primary database administrator.
 - **What would make me revisit this:** Implementation of an enterprise automated data privacy governance tool that automatically wipes records across all systems simultaneously; or an explicit legal requirement to store raw telephone numbers in internal financial audit logs.
 
 ## What this survives

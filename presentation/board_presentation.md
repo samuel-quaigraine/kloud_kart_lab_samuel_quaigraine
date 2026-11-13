@@ -11,12 +11,12 @@
 ### Title: Securing Our Foundation for Sustainable Growth
 
 - **Where We Are Today:**
-  - Processing approximately 4,000 orders every day across Ghana, with active pilot operations in Nigeria.
+  - Shipping about 4,000 orders every day across Ghana, with active pilot operations in Nigeria.
   - Delivering steady 15% to 20% annual growth with a single primary software developer.
 - **The Operational Crisis:**
   - **Site Slowdowns:** Twice last month, pulling Monday morning operational reports slowed our live online shop to a crawl for two hours during peak shopping time.
   - **Conflicting Numbers:** Operations and Finance calculate weekly company revenue using separate spreadsheets; the two figures never match, leading to weekly reconciliation disputes.
-  - **Customer Data Exposure:** Customer records are currently downloaded in spreadsheets across personal laptops, creating regulatory non-compliance under Ghana's Data Protection Act, 2012 (Act 843).
+  - **Customer Data Exposure:** Customer records are currently downloaded in spreadsheets across personal laptops by staff in Operations, Finance, and Marketing, creating serious regulatory exposure under Ghana's Data Protection Act, 2012 (Act 843).
 - **The Strategic Objective:**
   - Stop storefront slowdowns immediately.
   - Create one agreed-upon company revenue figure.
@@ -50,10 +50,10 @@
   - Buying massive enterprise platforms would create unpredictable monthly bills and overwhelm a small team.
 - **Our Practical Solution:**
   1. **Activate the Pre-Approved Second Server:** Create an automated, real-time mirror copy of our database on our pre-approved second server. All reporting queries run on the mirror. Shoppers on the live website never experience a slowdown again.
-  2. **Dedicated Reporting Schema on Server 2:** Store clean reporting tables inside a protected area on that same second server, requiring zero new database servers.
+  2. **Dedicated Reporting Tables on Server 2:** Store clean reporting tables inside a protected area on that same second server, requiring zero new database servers.
   3. **One Single Source of Truth:** Replace personal spreadsheets with locked, automated business definitions in standard database queries.
 
-> **Nana's Speaker Notes:** *"Investors often ask if we are building a lakehouse or buying Snowflake. The honest answer is that for a 40-gigabyte company, those tools are expensive over-engineering. We are using our already-budgeted second server to create a duplicate database for reporting. Shoppers use the store; reports read from the copy. Simple, reliable, and affordable."*
+> **Nana's Speaker Notes:** *"Investors often ask if we are building an unneeded cloud warehouse or buying Snowflake. The honest answer is that for a 40-gigabyte company, those tools are expensive over-engineering. We are using our already-budgeted second server to create a duplicate database for reporting. Shoppers use the store; reports read from the copy. Simple, reliable, and affordable."*
 
 ---
 
@@ -65,11 +65,11 @@
   - As I understand Ghana's Data Protection Act (Act 843), customers have the right to request deletion of their personal details, and Kloud Kart must answer the Data Protection Commission's active complaint within 90 days.
   - **The Golden Rule:** Every copy you create is a place a deletion request must reach.
 - **Our Two-Step Privacy Protection Approach:**
-  - **Step 1 (Sanitization at the Gate):** As operational data is moved to our reporting schema, customer names, telephone numbers, and street delivery addresses are removed. Emails are converted to anonymous account codes.
+  - **Step 1 (Sanitization at the Gate):** As operational data is moved to our reporting tables, customer names, telephone numbers, and street delivery addresses are removed. Emails are converted to anonymous account codes.
   - **Step 2 (Safe Business Calculations):** Order values, dates, and item quantities remain untouched so business reporting works perfectly, but zero personal customer contact details leak into analytics tables.
 - **The Outcome:** When a customer requests deletion, we only have to erase their record from our primary store database. Our reporting system is completely safe from privacy audits.
 
-> **Nana's Speaker Notes:** *"Under Ghanaian law, if a customer asks us to delete their data, we have 90 days to wipe every copy. Today, with marketing spreadsheets sitting on laptops, we would fail an audit. Our new design strips out private customer details automatically before reports are created. We protect customer privacy and eliminate regulatory risk."*
+> **Nana's Speaker Notes:** *"Under Ghanaian law, if a customer asks us to delete their data, we have 90 days to wipe every copy. Today, with customer spreadsheets sitting on laptops across our departments, we would fail an audit. Our new design strips out private customer details automatically before reports are created. We protect customer privacy and eliminate regulatory risk."*
 
 ---
 
@@ -101,7 +101,7 @@ Accountable for: Infrastructure, database replication, nightly automation, Act 8
 Goal: Stop the live website slowdowns within 30 days.
 
 [Month 3] Hire 2: Analytics Engineer
-Accountable for: Writing standardized revenue queries, building dashboards, reconciling numbers.
+Accountable for: Writing standardized revenue calculations, building dashboards, reconciling numbers.
 Goal: Guarantee Operations and Finance report identical numbers down to the last cedi.
 ```
 
@@ -119,7 +119,7 @@ Goal: Guarantee Operations and Finance report identical numbers down to the last
 ### Title: Verifiable Quarterly Milestones
 
 - **Q1 (Months 1 to 3): Stop the Bleeding and Meet the 90-Day Privacy Deadline**
-  - **Outcome:** Reporting moves to the second server (ending Monday site slowdowns), marketing customer spreadsheets are retired, and customer deletion works within 90 days.
+  - **Outcome:** Reporting moves to the second server (ending Monday site slowdowns), unmanaged customer spreadsheets across departments are retired, and customer deletion works within 90 days.
   - **Verified By:** Live checkout loads under 2 seconds during Monday 09:00 AM reporting; test deleted customer returns zero contact records before Day 90.
 
 - **Q2 (Months 4 to 6): Single Source of Truth**
@@ -157,7 +157,7 @@ Because we formulated this strategy with available company records, we explicitl
 
 ### Title: The Recommendation in One Sentence
 
-> *"We recommend activating our pre-approved duplicate server, establishing a nightly sanitized reporting schema on that server, and hiring one Data Engineer and one Analytics Engineer to eliminate website slowdowns and deliver a single source of truth for Kloud Kart."*
+> *"We recommend activating our pre-approved duplicate server, establishing nightly sanitized reporting tables on that server, and hiring one Data Engineer and one Analytics Engineer to eliminate website slowdowns and deliver a single source of truth for Kloud Kart."*
 
 - **Total Investment Required:**
   - Capital Hardware: Pre-approved in existing budget (second server).

@@ -13,9 +13,9 @@ This roadmap is organized by quarterly business outcomes rather than internal en
   - **WHAT changes:** Weekly reporting queries move off the live shop server onto the duplicate reporting server. Monday exports no longer slow down customer checkouts.
   - **HOW it is verified:** On the first Monday of Month 2 at 09:00 AM, Nana runs her weekly report while placing a test checkout on the website; the page loads in under two seconds with zero customer slow-site complaints.
 - **Outcome 1.2: Unmanaged Customer Spreadsheets Retired and 90-Day Deletion Operational**
-  - **WHO is better off:** Kloud Kart leadership, Marketing staff, and customers exercising deletion rights.
-  - **WHAT changes:** Marketing stops downloading raw customer CSVs to laptops and uses masked customer views instead. A repeatable deletion process scrubs requested customer identifiers across live store and reporting tables within 90 days.
-  - **HOW it is verified:** Before Day 90, Nana confirms that existing customer CSVs are cleared from Marketing computers, DPC registration renewal is submitted, and searching a test deleted customer ID in the reporting dashboard returns zero personal contact details.
+  - **WHO is better off:** Kloud Kart leadership, staff across Operations, Finance, and Marketing, and customers exercising deletion rights.
+  - **WHAT changes:** Staff across Operations, Finance, and Marketing stop downloading unmanaged customer CSVs to local computers and access masked reporting views instead. A repeatable deletion process scrubs requested customer identifiers across live store and reporting tables within 90 days.
+  - **HOW it is verified:** Before Day 90, Nana confirms that existing customer CSVs are cleared from staff computers across Operations, Finance, and Marketing, DPC registration renewal is submitted, and searching a test deleted customer ID in the reporting dashboard returns zero personal contact details.
 
 ---
 

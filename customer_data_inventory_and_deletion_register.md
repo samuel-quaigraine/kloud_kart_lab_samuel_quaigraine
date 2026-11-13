@@ -25,9 +25,9 @@ The table below catalogs every known location where personal customer details (n
 | Copy ID | Storage Location | Department Custodian | Specific Personal Data Fields | Storage Format | Current Risk Level | Mandatory Retirement Action |
 |---|---|---|---|---|---|---|
 | **LOC-01** | Nana's Personal Laptop Downloads (`C:\Users\Nana\Downloads\orders_export_*.csv`) | Operations (Nana Adjei) | Customer full names, delivery addresses, phone numbers, order amounts. | Plain CSV files | **CRITICAL** (Unsecured, unencrypted) | Purge historical files immediately. Redirect all future reporting to the duplicate mirror server using masked customer IDs. |
-| **LOC-02** | Marketing Team Workstations (`300k_customers_master.xlsx`) | Marketing Team | 300,000 customer names, phone numbers, email addresses, delivery regions. | Excel Spreadsheets | **CRITICAL** (Sent via email threads) | Revoke raw downloads. Provide marketing with an aggregated, anonymized dashboard view showing cohort metrics without plain contact info. |
+| **LOC-02** | Marketing Team Workstations (`300k_customers_master.xlsx`) | Marketing Team | 300,000 customer names, phone numbers, email addresses, delivery regions. | Excel Spreadsheets | **CRITICAL** (Untracked local spreadsheet copies) | Revoke raw downloads. Provide marketing with an aggregated, anonymized dashboard view showing cohort metrics without plain contact info. |
 | **LOC-03** | Finance Weekly Settlement Ledgers (`finance_reconciliation_2026.xlsx`) | Finance Department | Customer names, payment card references, mobile money numbers, transaction totals. | Excel Spreadsheets | **HIGH** (Unencrypted local storage) | Standardize finance reports on transaction IDs and settlement timestamps; strip customer personal names and telephone numbers. |
-| **LOC-04** | Customer Care Ticketing and Email Threads | Customer Care Team | Customer complaint notes, home delivery phone numbers, courier drop-off instructions. | Email and support inbox | **MEDIUM** (Scattered across mailboxes) | Establish a 30-day auto-purge policy for resolved courier delivery notes containing residential address details. |
+| **LOC-04** | Shared Desktop Drives and Ad-Hoc Team Exports | Staff across Operations, Finance, and Marketing | Ad-hoc customer extracts, order verification notes, customer telephone lists. | Local CSV files and desktop spreadsheets | **MEDIUM** (Unmanaged files on local storage) | Enforce mandatory deletion policy for all local export files older than 7 days once masked reporting views are deployed. |
 | **LOC-05** | Production Database Server Snapshots (`/backups/mysql_dump_*.sql.gz`) | Sole Developer | Complete operational database tables including plain customer passwords and addresses. | Compressed SQL dumps | **MEDIUM** (On-server backup storage) | Encrypt backup files at rest. Include automated deletion-log re-application in all database recovery procedures. |
 
 ---
@@ -36,7 +36,7 @@ The table below catalogs every known location where personal customer details (n
 
 This register tracks every formal customer data deletion request from initial receipt to final verification across all 5 copy locations:
 
-| Request ID | Receipt Date | Customer Identifier (Masked) | 90-Day DPC Deadline | Store Database Erased | Marketing List Purged | Operations Downloads Cleared | Support Threads Scrubbed | Verification Sign-Off | Compliance Status |
+| Request ID | Receipt Date | Customer Identifier (Masked) | 90-Day DPC Deadline | Store Database Erased | Marketing List Purged | Operations Downloads Cleared | Shared Team Copies Cleared | Verification Sign-Off | Compliance Status |
 |---|---|---|---|---|---|---|---|---|---|
 | **DPC-2026-001** *(Active DPC Complaint)* | 2026-10-15 | `cust_ref_08491` (Complaining Customer) | 2026-01-13 (Day 90) | Yes (Deleted 2026-10-18) | Pending (Target: Day 60) | Pending (Target: Day 60) | Yes (Scrubbed 2026-10-20) | Nana Adjei | **IN PROGRESS** (On schedule to meet DPC deadline) |
 | **DPC-2026-002** | 2026-11-02 | `cust_ref_11204` | 2026-01-31 (Day 90) | Yes (Deleted 2026-11-04) | Pending (Target: Day 45) | Pending (Target: Day 45) | Yes (Scrubbed 2026-11-05) | Nana Adjei | **IN PROGRESS** |
@@ -46,7 +46,7 @@ This register tracks every formal customer data deletion request from initial re
 1. **Log & Timestamp:** Log the customer reference code and start the 90-day statutory clock.
 2. **Primary Store Erase:** The developer executes a soft-delete and sets `deleted_at` on the live MySQL store database.
 3. **Reporting Schema Verification:** Verify that nightly ingestion scrubs personal identifiers and only stores the irreversible anonymous reference.
-4. **Local Copy Purge:** Confirm that Operations and Marketing have deleted any local spreadsheet extracts containing this customer.
+4. **Local Copy Purge:** Confirm that staff across Operations, Finance, and Marketing have deleted any local spreadsheet extracts containing this customer.
 5. **Final Sign-Off:** Nana Adjei signs the verification log and files the response certificate for the Data Protection Commission.
 
 ---
