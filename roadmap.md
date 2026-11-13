@@ -14,8 +14,8 @@ Every quarter delivers practical improvements you can see in daily operations, i
   - **HOW it is verified:** On the first Monday of Month 2 at 09:00 AM, Nana runs her weekly report while placing a test checkout on the website; the page loads in under two seconds with zero customer slow-site complaints.
 - **Outcome 1.2: Unmanaged Customer Spreadsheets Removed and 90-Day Deletion Operational**
   - **WHO is better off:** Kloud Kart leadership, staff across Operations, Finance, and Marketing, and customers who request that their personal data be deleted.
-  - **WHAT changes:** Staff across Operations, Finance, and Marketing stop downloading unmanaged customer comma-separated values (CSV) files to local computers and access masked reporting views instead. A repeatable deletion process scrubs requested customer identifiers across live store and reporting tables within 90 days.
-  - **HOW it is verified:** Before Day 90, department leads confirm zero customer files remain on local laptops, and a test customer deletion request removes all personal contact details across the system and resolves the active Data Protection Commission (DPC) complaint.
+  - **WHAT changes:** Staff across Operations, Finance, and Marketing stop downloading unmanaged customer comma-separated values (CSV) files to local computers and access masked reporting views instead. A repeatable protocol scrubs requested customer identifiers across live store and reporting tables within 90 days, while logging actions to handle deletion disputes.
+  - **HOW it is verified:** Before Day 90, department leads confirm zero customer files remain on local laptops, and a test customer deletion audit drill removes all personal contact details across the system, validates targeted recovery protocols, and resolves the active Data Protection Commission (DPC) complaint.
 
 ---
 
@@ -59,5 +59,5 @@ Every quarter delivers practical improvements you can see in daily operations, i
   - **HOW it is verified:** By December 15, warehouse logs show that over 95% of stock mismatches are caught and corrected before a customer checks out, keeping out-of-stock order cancellations below 0.5% of total orders.
 - **Outcome 4.2: Keeping Deleted Customers Erased After Backup Restores**
   - **WHO is better off:** Kloud Kart leadership (Nana Adjei) and customers whose records are deleted or updated.
-  - **WHAT changes:** Every customer deletion is recorded in a permanent audit log (tracking the anonymous customer ID, date, and reason without keeping private details), and any backup restore automatically re-applies the deletion list so erased customers never reappear while allowing targeted recovery if a record was ever removed by mistake.
-  - **HOW it is verified:** By December 20, Nana Adjei receives a signed test report proving that a practice backup restore leaves erased customers completely removed while accurately logging every deletion event for regulatory audits.
+  - **WHAT changes:** Every customer data action is recorded in a permanent audit log (tracking the anonymous customer ID, date, action type, and reason without keeping private details), and any backup restore automatically re-applies the deletion list so erased customers never reappear while allowing targeted recovery if a record was closed or contested by mistake.
+  - **HOW it is verified:** By December 20, Nana Adjei receives a signed test report proving that a practice backup restore leaves erased customers completely removed while accurately logging every action for regulatory audits.

@@ -52,13 +52,14 @@ Every decision in this repository respects the hard constraints set in the lab b
 
 ## 4. Assumptions Made (Where Details Were Missing)
 
-Because Nana Adjei was unavailable for interviews, this plan relies on five explicit assumptions (detailed in Section 6 of [situation_diagnosis.md](situation_diagnosis.md)):
+Because Nana Adjei was unavailable for interviews, this plan relies on six explicit assumptions (detailed in Section 6 of [situation_diagnosis.md](situation_diagnosis.md)):
 
 1. **Revenue Formula Baseline:** We assume Finance counts net paid orders (excluding refunds) while Operations counts gross placed orders. Both are tracked in Q1 and combined into one agreed SQL formula in Q2.
 2. **Financial Loss Estimates:** Lost sales, wasted leadership hours, and regulatory risk figures in `situation_diagnosis.md` are transparent analytical models rather than audited company ledgers.
 3. **Where Nigeria Pilot Data Is Stored:** We assume Nigeria pilot orders currently write into the main Accra database (tagged by country) rather than a separate server in Nigeria.
 4. **Payment Gateway Settlement Cutoffs:** We assume third-party card payment processors and mobile money providers settle customer payments on standard 24-to-48-hour rolling settlement windows.
 5. **Regulatory Timelines and the 90-Day Implementation Period:** Under Ghana's Data Protection Act, 2012 (Act 843), statutory data subject erasure requests carry standard operational turnaround timelines (typically within 21 calendar days). We assume the 90-day milestone represents Kloud Kart's internal Quarter 1 implementation sprint to eliminate untracked files, build the automated privacy gateway, implement the permanent deletion audit log, and formally conclude the active Data Protection Commission complaint with verified audit proof.
+6. **Customer Deletion Complaint Ambiguity (Removing vs Restoring):** The brief's note of 90 days to respond to a DPC complaint about a deleted customer's data could mean erasing lingering personal copies across staff laptops (removing) or restoring an account deleted in error or resurrected during a backup restore (restoring). We decided to solve both through pre-load PII scrubbing and an immutable deletion audit log.
 
 ---
 

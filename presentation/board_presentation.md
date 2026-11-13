@@ -63,15 +63,15 @@
 
 - **The Legal Reality (Ghana Data Protection Act, 2012 / Act 843):**
   - As I understand Ghana's Data Protection Act (Act 843), customers have the statutory right to request deletion of their personal details (with standard turnaround guidelines requiring action within 21 calendar days).
-  - Kloud Kart faces an active Data Protection Commission (DPC) complaint, with management setting a strict 90-day internal implementation period to prove full-system erasure and establish repeatable ongoing compliance.
+  - Kloud Kart faces an active Data Protection Commission (DPC) complaint regarding a deleted customer's data, which we have prepared to handle whether it requires full-system erasure (removing) or targeted recovery of an account closed in error (restoring).
   - **The Golden Rule:** Every copy you create is a place a deletion request must reach.
 - **Our Three-Step Privacy Protection Approach:**
   - **Step 1 (Sanitization at the Gate):** As operational data is moved to our reporting tables, customer names, telephone numbers, and street delivery addresses are removed. Emails are converted to anonymous account codes.
   - **Step 2 (Safe Business Calculations):** Order values, dates, and item quantities remain untouched so business reporting works perfectly, but zero personal customer contact details leak into analytics tables.
-  - **Step 3 (Permanent Audit Logging & Backup Protection):** Every customer deletion is recorded in a permanent audit log (tracking anonymous ID, date, and reason without storing private data), allowing backup restores to re-apply deletions while permitting targeted recovery if an account was flagged in error.
-- **The Outcome:** When a customer requests deletion, we only have to erase their record from our primary store database. Our reporting system is completely safe from privacy audits.
+  - **Step 3 (Permanent Audit Logging & Targeted Recovery):** Every customer data action is recorded in a permanent audit log (tracking anonymous ID, date, action type, and reason without storing private data), allowing backup restores to re-apply deletions while permitting targeted recovery if an account was closed or contested in error.
+- **The Outcome:** When a customer requests deletion, we only have to erase their record from our primary store database (removing). If a customer disputes an account deletion, our permanent audit log allows targeted operational recovery of their purchase history without restoring unverified personal contact details (restoring).
 
-> **Nana's Speaker Notes:** *"Under Ghanaian law, customers have the right to request deletion of their personal records. We face an active complaint from the Data Protection Commission, and our 90-day implementation plan ensures we wipe every unmanaged laptop copy, scrub personal details at the gate, and keep an immutable deletion audit log. We protect customer privacy, guarantee clean backup restores, and eliminate regulatory risk."*
+> **Nana's Speaker Notes:** *"Under Ghanaian law, customers have the right to request deletion of their personal records. We face an active complaint from the Data Protection Commission, which could mean proving complete deletion across staff laptops or recovering an account deleted in error. Our 90-day implementation plan solves both: we wipe every unmanaged laptop copy, scrub personal details at the gate, and keep an immutable deletion audit log. We protect customer privacy, guarantee clean backup restores, and resolve disputes defensibly."*
 
 ---
 
@@ -122,7 +122,7 @@ Goal: Guarantee Operations and Finance report identical numbers down to the last
 
 - **Q1 (Months 1 to 3): End Monday Site Slowdowns and Customer Data Compliance**
   - **Outcome:** Reporting moves to the second server (ending Monday site slowdowns), unmanaged customer spreadsheets across departments are removed, and customer deletion is fully operational within our 90-day implementation period.
-  - **Verified By:** Live checkout loads under 2 seconds during Monday 09:00 AM reporting; department leads confirm zero customer files remain on local laptops, and a test customer deletion request removes all personal contact details across the system and resolves the active Data Protection Commission (DPC) complaint.
+  - **Verified By:** Live checkout loads under 2 seconds during Monday 09:00 AM reporting; department leads confirm zero customer files remain on local laptops, and a test customer deletion audit drill removes all personal contact details across the system, validates targeted recovery protocols, and resolves the active Data Protection Commission (DPC) complaint.
 
 - **Q2 (Months 4 to 6): Establish the Single Source of Truth**
   - **Outcome:** Operations and Finance view identical daily and monthly revenue numbers down to the last cedi.
@@ -133,8 +133,8 @@ Goal: Guarantee Operations and Finance report identical numbers down to the last
   - **Verified By:** Board review displays a dedicated Nigeria view without mixing Ghana totals, and leads run monthly reports without developer help.
 
 - **Q4 (Months 10 to 12): Stock Mismatch Alerts and Permanent Customer Deletions**
-  - **Outcome:** Automated alerts flag mismatches between website stock counts and physical warehouse shelves before items oversell, and every customer deletion is recorded in a permanent audit log so erased customers never reappear after backup restores while allowing targeted recovery if a record was removed by mistake.
-  - **Verified By:** Overselling cancellations drop below 0.5% of total orders by December 15, and practice backup restore tests verify zero personal records return for deleted customers while accurately logging every deletion event for regulatory audits by December 20.
+  - **Outcome:** Automated alerts flag mismatches between website stock counts and physical warehouse shelves before items oversell, and every customer data action is recorded in a permanent audit log so erased customers never reappear after backup restores while allowing targeted recovery if a record was closed or contested by mistake.
+  - **Verified By:** Overselling cancellations drop below 0.5% of total orders by December 15, and practice backup restore tests verify zero personal records return for deleted customers while accurately logging every action for regulatory audits by December 20.
 
 > **Nana's Speaker Notes:** *"Here is our commitment for the next four quarters. Every milestone can be verified by myself or Finance without asking an engineer. In Quarter 1, the website stops slowing down, unmanaged customer spreadsheets are removed, and we resolve our active privacy complaint within our 90-day implementation period. In Quarter 2, Finance and Operations report identical revenue. In Quarter 3, Nigeria reporting is cleanly isolated and department leads self-serve. In Quarter 4, automated alerts catch stock mismatches before items oversell, and practice backup restore tests prove that deleted customer records stay permanently erased."*
 
@@ -150,8 +150,9 @@ Because we formulated this strategy with available company records, we explicitl
 2. **Current Server Hardware Capacity:** We assume our single hosting server has standard modern commercial specifications (at least 8 processor cores and 32 gigabytes of RAM). If smaller, activating the second server is an emergency priority.
 3. **Payment Gateway Settlement Timing:** We assume our payment processors (card payment gateways and mobile money providers) settle completed customer payments on a standard 24-to-48-hour rolling window.
 4. **Nigeria Pilot Data Storage:** We assume Nigeria pilot orders currently land in our Accra database. As I understand Act 843, our core security and privacy duties apply wherever data is stored, and we must also respect Nigerian customer privacy rules as advised by legal counsel.
+5. **Customer Deletion Complaint Ambiguity (Removing vs Restoring):** We assume the DPC complaint regarding a deleted customer's data could represent either an unfulfilled deletion request (requiring complete removal of lingering copies) or an erroneous deletion (requiring targeted account restoration). Our architecture satisfies both through pre-load PII scrubbing and an immutable deletion audit log.
 
-> **Nana's Speaker Notes:** *"A defensible plan states its assumptions openly. We have assumed our server hardware meets standard specifications, that our revenue definitions follow standard e-commerce patterns, and that Nigeria pilot data is hosted centrally in Accra. If any of these assumptions change, our architecture adapts without altering our core strategy."*
+> **Nana's Speaker Notes:** *"A defensible plan states its assumptions openly. We have assumed our server hardware meets standard specifications, that our revenue definitions follow standard e-commerce patterns, that Nigeria pilot data is hosted centrally in Accra, and that our privacy framework must cover both data removal and account restoration. If any of these assumptions change, our architecture adapts without altering our core strategy."*
 
 ---
 

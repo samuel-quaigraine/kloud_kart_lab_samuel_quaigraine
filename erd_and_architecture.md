@@ -162,9 +162,10 @@ erDiagram
     AUDIT_CUSTOMER_DELETION_LOG {
         int audit_deletion_id PK "Unique deletion event tracking key"
         int source_customer_id "Masked customer identifier"
-        date request_date "Date deletion request received"
-        date completion_date "Date deletion verified across systems"
-        string deletion_reason "Account closure, marketing opt-out"
+        string action_type "REMOVAL or RESTORATION"
+        date request_date "Date action request received"
+        date completion_date "Date action verified across systems"
+        string action_reason "Account closure, opt-out, or recovery"
         string regulatory_dpc_status "COMPLIANT_VERIFIED"
         boolean backup_reapplication_flag "True: Re-apply on restore"
     }
@@ -216,9 +217,9 @@ The table below explains what happens to each operational field during the night
    - Raw spreadsheet downloads on staff laptops are stopped.
    - Names, phone numbers, and physical addresses are removed at the gate before data enters the reporting system.
    - Customer emails are turned into anonymous codes.
-   - Every deletion event is recorded in a permanent audit log (tracking anonymous customer ID, request date, and deletion reason without storing personal details), allowing targeted recovery of anonymized order history if an account was flagged in error while keeping personal contact details permanently erased.
+   - Every customer data action is recorded in a permanent audit log (tracking anonymous customer ID, request date, action type, and reason without storing personal details), enabling automated post-restore deletion re-application so historical snapshots never resurrect erased personal records (removing), while permitting targeted recovery of order history via surrogate keys if an account was closed or contested in error (restoring).
    - Disaster recovery runbooks automatically re-apply customer deletions from the audit log to restored backups so historical snapshots never resurrect erased personal records.
-   - **Result:** When a customer asks for their personal data to be deleted, Kloud Kart only needs to delete the record from the primary store database. Zero personal customer records exist in the reporting database, meeting the 90-day implementation compliance target and satisfying Data Protection Commission requirements with complete certainty.
+   - **Result:** Defensively solves both dimensions of the DPC complaint. When a customer asks for their personal data to be deleted, Kloud Kart only needs to delete the record from the primary store database. Zero personal customer records exist in the reporting database, meeting the 90-day implementation compliance target. If an account deletion is ever contested before the DPC or performed in error, the permanent audit log and surrogate key architecture enable targeted operational restoration of purchase history without ever leaking or resurrecting raw personal contact details on employee laptops.
 
 4. **How Warehouse Stock Accuracy and Overselling Prevention are Guaranteed:**
    - Online shoppers check inventory live against the primary database during checkout, guaranteeing zero stale stock counts.
