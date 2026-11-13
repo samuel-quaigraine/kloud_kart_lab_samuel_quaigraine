@@ -1,4 +1,4 @@
-# ADR-005: Hire a Data Pipeline Engineer First, Then an Analytics Engineer (No Data Scientist)
+# ADR-005: Hire a Data Engineer First, Then an Analytics Engineer (No Data Scientist)
 
 - **Status:** Accepted
 - **Date:** 2026-11-12

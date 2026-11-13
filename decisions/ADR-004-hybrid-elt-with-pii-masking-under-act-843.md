@@ -1,4 +1,4 @@
-# ADR-004: Adopt a Hybrid Data Loading Method with Upfront Privacy Masking under Ghana Data Law (Act 843)
+# ADR-004: Clean Private Customer Information on the Way In to Follow Ghana Data Law (Act 843)
 
 - **Status:** Accepted
 - **Date:** 2026-11-12
@@ -10,9 +10,10 @@ Kloud Kart stores customer records for over 300,000 online shoppers across Ghana
 
 As I understand Ghana's Data Protection Act, 2012 (Act 843), Kloud Kart is legally recognized as a data controller. Individuals have the legal right to request the deletion or correction of their personal data. Kloud Kart currently faces an active regulatory complaint forwarded by Ghana's Data Protection Commission (DPC) regarding a customer deletion request, with a strict statutory deadline of 90 days to prove that all copies of that customer's personal data have been completely erased.
 
-The core architectural rule governing this engagement is: *Every copy you create is a place a deletion request must reach.*
+The core architectural rule governing this engagement is: _Every copy you create is a place a deletion request must reach._
 
 To build an automated reporting platform on our pre-approved duplicate server, we must decide how to extract and load data from our live store. The engineering dilemma is choosing between two standard data pipeline patterns:
+
 1. **Extract, Transform, Load (ETL):** Transforming data and stripping personal details inside custom programming code before saving it into the reporting database.
 2. **Extract, Load, Transform (ELT):** Loading raw operational data into the reporting database first, and transforming numbers later using database queries.
 
@@ -20,7 +21,7 @@ To build an automated reporting platform on our pre-approved duplicate server, w
 
 We adopt a **hybrid data loading method** (combining pre-load privacy masking with post-load query transformation). This hybrid approach bridges Extract, Transform, Load (ETL) and Extract, Load, Transform (ELT) into two distinct, deliberate stages:
 
-1. **Stage 1 (Pre-Load Privacy Transformation / The Gate):** During the nightly data extraction from the duplicate mirror database, an automated ingestion script permanently strips out all direct Personally Identifiable Information (PII), specifically customer full names, mobile telephone numbers, and residential delivery addresses, before the data ever enters the reporting database. Customer email addresses are converted into irreversible, one-way anonymous reference codes (such as turning an email into `cust_98234`).
+1. **Stage 1 (Pre-Load Privacy Transformation / The Gate):** During the daily data extraction from the duplicate mirror database, an automated ingestion script permanently strips out all direct Personally Identifiable Information (PII), specifically customer full names, mobile telephone numbers, and residential delivery addresses, before the data ever enters the reporting database. Customer email addresses are converted into irreversible, one-way anonymous reference codes (such as turning an email into `cust_98234`).
 2. **Stage 2 (Post-Load Business Transformation / Flexible Modeling):** All core business transaction records (order timestamps, item quantities, product prices, delivery regions, and order amounts in Ghana Cedis) are loaded into the dedicated reporting database untouched. Business metrics (such as confirmed revenue definitions and order fulfillment statuses) are modeled flexibly after loading using standard Structured Query Language (SQL) database queries.
 
 This hybrid method gives Kloud Kart the legal safety of privacy cleaning at the gate without sacrificing the analytical flexibility of database modeling.
@@ -42,7 +43,7 @@ This hybrid method gives Kloud Kart the legal safety of privacy cleaning at the 
 ## Consequences
 
 - **What this buys:** Complete legal defensibility under Ghana's Data Protection Act, 2012 (Act 843). When a customer requests deletion, Kloud Kart only needs to erase the record in one single place: the primary store database. Zero Personally Identifiable Information (PII) exists in the reporting database. Meanwhile, because underlying transaction rows are preserved, our Analytics Engineer retains full freedom to adjust revenue and order calculation queries in Structured Query Language (SQL) without ever touching the live store.
-- **What this costs:** The nightly automated ingestion script must run the privacy scrubbing and email hashing routine on every batch run. Staff across departments cannot look up customer telephone numbers or plain email addresses from the reporting database.
+- **What this costs:** The daily automated ingestion script must run the privacy scrubbing and email hashing routine on every batch run. Staff across departments cannot look up customer telephone numbers or plain email addresses from the reporting database.
 - **What it costs the client if I am wrong:** If department leads genuinely need raw customer contact lists for authorized communications, they cannot pull them from the reporting database; they must request an authorized, logged export directly from the primary database administrator.
 - **What would make me revisit this:** Implementation of an enterprise automated data privacy governance tool that automatically wipes records across all systems simultaneously; or an explicit legal requirement to store raw telephone numbers in internal financial audit logs.
 
