@@ -14,4 +14,5 @@
 *.xlsx binary
 *.parquet binary
 *.zip binary
+*.pptx binary
 

@@ -38,7 +38,8 @@ target/
 dbt_packages/
 logs/
 
-# Operating system
+# Operating system and temp files
 .DS_Store
 Thumbs.db
+~$*
 
