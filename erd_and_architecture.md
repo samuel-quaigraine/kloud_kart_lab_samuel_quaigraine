@@ -25,7 +25,7 @@ flowchart TD
         subgraph PrivacyGateway["Privacy Protection: Ghana Act 843 Gateway"]
             IngestionProcess --> DropPII["1. Remove Personal Data<br/>Strip Names, Phone Numbers, Addresses"]
             IngestionProcess --> HashEmail["2. One-Way Anonymization<br/>Convert email to anonymous code"]
-            IngestionProcess --> AuditLog["3. Permanent Deletion Audit Log<br/>Track ID, Date, Reason (Zero PII)"]
+            IngestionProcess --> AuditLog["3. Permanent Deletion Audit Log<br/>Track ID, Date, Reason (Zero Personal Details)"]
         end
         
         PrivacyGateway -->|"Load Cleaned Rows"| WarehouseDB[("Dedicated Analytical Reporting Schema")]
@@ -219,7 +219,7 @@ The table below explains what happens to each operational field during the night
    - Customer emails are turned into anonymous codes.
    - Every customer data action is recorded in a permanent audit log (tracking anonymous customer ID, request date, action type, and reason without storing personal details), enabling automated post-restore deletion re-application so historical backups never bring back erased personal records (removing), while permitting targeted recovery of order history via surrogate keys if an account was closed or contested in error (restoring).
    - Disaster recovery runbooks automatically re-apply customer deletions from the audit log to restored backups so historical backups never bring back erased personal records.
-   - **Result:** Defensively solves both dimensions of the DPC complaint. When a customer asks for their personal data to be deleted, Kloud Kart only needs to delete the record from the primary store database. Zero personal customer records exist in the reporting database, meeting the 90-day implementation compliance target. If an account deletion is ever contested before the DPC or performed in error, the permanent audit log and surrogate key architecture enable targeted operational restoration of purchase history without ever leaking or bringing back raw personal contact details on employee laptops.
+   - **Result:** Defensively solves both dimensions of the Data Protection Commission complaint. When a customer asks for their personal data to be deleted, Kloud Kart only needs to delete the record from the primary store database. Zero personal customer records exist in the reporting database, meeting the 90-day implementation compliance target. If an account deletion is ever contested before the Data Protection Commission or performed in error, the permanent audit log and surrogate key architecture enable targeted operational restoration of purchase history without ever leaking or bringing back raw personal contact details on employee laptops.
 
 4. **How Warehouse Stock Accuracy and Overselling Prevention are Guaranteed:**
    - Online shoppers check inventory live against the primary database during checkout, guaranteeing zero stale stock counts.

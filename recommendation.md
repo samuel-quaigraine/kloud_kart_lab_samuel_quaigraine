@@ -32,7 +32,7 @@ Our recommendation commits to an architecture with the smallest number of moving
                                                  v
                                    [Duplicate Server: Server 2 (Read Replica)]
                                    - Raw Replicated Tables (Mirror)
-                                   - Nightly Ingestion & PII Sanitization
+                                   - Nightly Ingestion & Personal Data Cleaning
                                    - Clean Reporting Schema & Marts (Pre-Packaged metrics)
                                                  |
                                   (Standardized SQL Queries)
@@ -66,7 +66,7 @@ The board has budgeted **two data hires** for this financial year. We sequence t
 
 | Role and Sequence                          | Primary Accountability                                                                                         | First 90 Days Deliverable                                                                                                                         | What They Do NOT Do                                                                |
 | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| **Hire 1: Data Engineer** _(Month 1)_      | Data movement, server replication, pipeline automation, and data protection compliance.                        | Connect the duplicate server replica, automate the nightly transfer script, mask personal customer data, and eliminate manual Monday CSV exports. | Does not define business metrics or build executive presentation slides.           |
+| **Hire 1: Data Engineer** _(Month 1)_      | Data movement, server replication, pipeline automation, and data protection compliance.                        | Connect the duplicate server replica, automate the nightly transfer script, mask personal customer data, and eliminate manual Monday spreadsheet exports. | Does not define business metrics or build executive presentation slides.           |
 | **Hire 2: Analytics Engineer** _(Month 3)_ | The business calculation layer inside the reporting database, metric definitions, and self-service dashboards. | Deliver a single standardized revenue model agreed upon by Nana and Finance, eliminating the weekly Monday reporting discrepancy.                 | Does not build predictive machine learning models or manage server infrastructure. |
 
 ### What the Two Hires Will Do in Their First 30, 60, and 90 Days
@@ -89,7 +89,7 @@ We explicitly advise against hiring a Data Scientist or Artificial Intelligence 
 - **Return on Investment:**
   1. Recovers **416 hours per year** of senior leadership time previously wasted on manual spreadsheets.
   2. Protects an estimated 280,000 Ghana Cedis per month in customer orders previously lost during Monday website slowdowns.
-  3. Substantially reduces regulatory exposure under Act 843 (as I understand it) by retiring unmanaged customer CSV spreadsheets.
+  3. Substantially reduces regulatory exposure under Act 843 (as I understand it) by retiring unmanaged customer spreadsheets.
 
 ---
 

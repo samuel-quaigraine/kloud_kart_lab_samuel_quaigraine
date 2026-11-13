@@ -9,16 +9,16 @@
 
 ## 1. Operational Purpose
 
-Under Ghana's Data Protection Act, 2012 (Act 843), as I understand it, individuals have the legal right to request the deletion or correction of their personal data (with statutory handling generally requiring response within 21 calendar days). Kloud Kart faces an active complaint forwarded by the Data Protection Commission (DPC) regarding a deleted customer's data. As noted under Operating Assumptions, this complaint carries dual operational meanings:
+Under Ghana's Data Protection Act, 2012 (Act 843), as I understand it, individuals have the legal right to request the deletion or correction of their personal data (with statutory handling generally requiring response within 21 calendar days). Kloud Kart faces an active complaint forwarded by the Data Protection Commission regarding a deleted customer's data. As noted under Operating Assumptions, this complaint carries dual operational meanings:
 1. **Removing (Statutory Erasure):** A customer requested deletion under Section 33 of Act 843, but unmanaged copies remained on employee laptops, in Marketing spreadsheets, or in backup files, requiring verified full-system erasure.
 2. **Restoring (Targeted Recovery and Protection Against Accidentally Restoring Deleted Data):** An account was closed or deleted erroneously, or a customer complained seeking access to their past transaction records under Sections 26 and 32, or historical backup restores accidentally restored previously deleted personal details.
 
-Company leadership has established a strict 90-day internal implementation period (Quarter 1, Months 1 to 3) to locate and retire historical spreadsheets, deploy automated privacy masking, implement a permanent deletion audit log, and formally resolve the active DPC complaint with verified audit proof.
+Company leadership has established a strict 90-day internal implementation period (Quarter 1, Months 1 to 3) to locate and retire historical spreadsheets, deploy automated privacy masking, implement a permanent deletion audit log, and formally resolve the active Data Protection Commission complaint with verified audit proof.
 
 Technical database architecture alone cannot clean up unmanaged spreadsheets already saved on employee laptops. This register provides Nana Adjei with a non-technical, repeatable management tool to:
 1. Locate and inventory every copy of customer personal data across all departments.
 2. Track and verify customer deletion requests to complete compliance within the mandatory 90-day implementation period, including permanent erasure protection across system backup restores (Removing).
-3. Maintain a permanent, tamper-evident deletion audit log that proves regulatory compliance to the DPC while supporting targeted operational recovery if an account was closed in error (Restoring transaction history via anonymous surrogate keys without bringing back private personal contact details).
+3. Maintain a permanent, tamper-evident deletion audit log that proves regulatory compliance to the Data Protection Commission while supporting targeted operational recovery if an account was closed in error (Restoring transaction history via anonymous surrogate keys without bringing back private personal contact details).
 4. Reconcile and sign off on Monday revenue figures between Operations and Finance without circular arguments.
 
 ---
@@ -29,24 +29,24 @@ The table below catalogs every known location where personal customer details (n
 
 | Copy ID | Storage Location | Department Custodian | Specific Personal Data Fields | Storage Format | Current Risk Level | Mandatory Retirement Action |
 |---|---|---|---|---|---|---|
-| **LOC-01** | Nana's Personal Laptop Downloads (`C:\Users\Nana\Downloads\orders_export_*.csv`) | Operations (Nana Adjei) | Customer full names, delivery addresses, phone numbers, order amounts. | Plain comma-separated values (CSV) files | **CRITICAL** (Unsecured, unencrypted) | Purge historical files immediately. Redirect all future reporting to the duplicate mirror server using masked customer identification numbers (IDs). |
+| **LOC-01** | Nana's Personal Laptop Downloads (`C:\Users\Nana\Downloads\orders_export_2026.xlsx`) | Operations (Nana Adjei) | Customer full names, delivery addresses, phone numbers, order amounts. | Plain spreadsheet files | **CRITICAL** (Unsecured, unencrypted) | Purge historical files immediately. Redirect all future reporting to the duplicate mirror server using masked customer identification numbers. |
 | **LOC-02** | Marketing Team Workstations (`300k_customers_master.xlsx`) | Marketing Team | 300,000 customer names, phone numbers, email addresses, delivery regions. | Excel Spreadsheets | **CRITICAL** (Untracked local spreadsheet copies) | Revoke raw downloads. Provide marketing with an aggregated, anonymized dashboard view showing cohort metrics without plain contact info. |
 | **LOC-03** | Finance Weekly Settlement Ledgers (`finance_reconciliation_2026.xlsx`) | Finance Department | Customer names, payment card references, mobile money numbers, transaction totals. | Excel Spreadsheets | **HIGH** (Unencrypted local storage) | Standardize finance reports on transaction IDs and settlement timestamps; strip customer personal names and telephone numbers. |
-| **LOC-04** | Shared Desktop Drives and Ad-Hoc Team Exports | Staff across Operations, Finance, and Marketing | Ad-hoc customer extracts, order verification notes, customer telephone lists. | Local CSV files and desktop spreadsheets | **MEDIUM** (Unmanaged files on local storage) | Enforce mandatory deletion policy for all local export files older than 7 days once masked reporting views are deployed. |
+| **LOC-04** | Shared Desktop Drives and Ad-Hoc Team Exports | Staff across Operations, Finance, and Marketing | Ad-hoc customer extracts, order verification notes, customer telephone lists. | Local spreadsheet files and desktop spreadsheets | **MEDIUM** (Unmanaged files on local storage) | Enforce mandatory deletion policy for all local export files older than 7 days once masked reporting views are deployed. |
 | **LOC-05** | Production Database Server Snapshots (`/backups/mysql_dump_*.sql.gz`) | Sole Developer | Complete operational database tables including plain customer passwords and addresses. | Compressed SQL dumps | **MEDIUM** (On-server backup storage) | Encrypt backup files at rest. Include automated deletion-log re-application in all database recovery procedures. |
 
 ---
 
-## 3. Permanent Deletion Audit Log, Restoration Protocol, and DPC Response Register
+## 3. Permanent Deletion Audit Log, Restoration Protocol, and Regulatory Response Register
 
 This register permanently records every formal customer data action (tracking anonymous customer reference codes, dates, action types, and reasons without storing private contact details), governing both permanent statutory erasure across all copy locations and targeted recovery if an account was closed in error:
 
 | Request ID | Receipt Date | Customer Identifier (Masked) | Action Type | Reason / Description | Target Date | Store Database Status | Marketing List Status | Operations Downloads | Shared Team Copies | Backup Restore Protection | Sign-Off | Compliance Status |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| **DPC-2026-001** *(Active DPC Complaint)* | 2026-10-15 | `cust_ref_08491` (Complaining Customer) | **REMOVAL** | Account closure and statutory erasure request | 2026-01-13 (Day 90 Sprint) | Yes (Deleted 2026-10-18) | Pending (Target: Day 60) | Pending (Target: Day 60) | Yes (Scrubbed 2026-10-20) | Yes (Enrolled in restore script) | Nana Adjei | **IN PROGRESS** (On schedule to resolve DPC complaint) |
-| **DPC-2026-002** | 2026-11-02 | `cust_ref_11204` | **REMOVAL** | Customer marketing opt-out | 2026-01-31 (Day 90 Sprint) | Yes (Deleted 2026-11-04) | Pending (Target: Day 45) | Pending (Target: Day 45) | Yes (Scrubbed 2026-11-05) | Yes (Enrolled in restore script) | Nana Adjei | **IN PROGRESS** |
-| **DPC-2026-003** *(Simulated Audit Test)* | 2026-11-10 | `cust_ref_test_001` | **REMOVAL** | Practice regulatory audit drill | 2026-02-08 (Day 90 Sprint) | Yes (Deleted 2026-11-10) | Yes (Purged 2026-11-11) | Yes (Purged 2026-11-11) | Yes (Scrubbed 2026-11-11) | Yes (Verified post-restore) | Nana Adjei | **VERIFIED COMPLIANT** (Full audit trail confirmed) |
-| **DPC-2026-004** *(Dispute Recovery Drill)* | 2026-11-12 | `cust_ref_09812` | **RESTORATION** | Erroneous deletion dispute & order history recovery | 2026-02-10 (Day 90 Sprint) | Account Link Restored | Masked Ledger Verified | Verified Clean | Verified Clean | Verified in Restore Script | Nana Adjei | **VERIFIED RESTORED** (Order history re-linked via surrogate key; zero raw PII exposed) |
+| **CASE-2026-001** *(Active Data Protection Commission Complaint)* | 2026-10-15 | `cust_ref_08491` (Complaining Customer) | **REMOVAL** | Account closure and statutory erasure request | 2026-01-13 (Day 90 Sprint) | Yes (Deleted 2026-10-18) | Pending (Target: Day 60) | Pending (Target: Day 60) | Yes (Scrubbed 2026-10-20) | Yes (Enrolled in restore script) | Nana Adjei | **IN PROGRESS** (On schedule to resolve Data Protection Commission complaint) |
+| **CASE-2026-002** | 2026-11-02 | `cust_ref_11204` | **REMOVAL** | Customer marketing opt-out | 2026-01-31 (Day 90 Sprint) | Yes (Deleted 2026-11-04) | Pending (Target: Day 45) | Pending (Target: Day 45) | Yes (Scrubbed 2026-11-05) | Yes (Enrolled in restore script) | Nana Adjei | **IN PROGRESS** |
+| **CASE-2026-003** *(Simulated Audit Test)* | 2026-11-10 | `cust_ref_test_001` | **REMOVAL** | Practice regulatory audit drill | 2026-02-08 (Day 90 Sprint) | Yes (Deleted 2026-11-10) | Yes (Purged 2026-11-11) | Yes (Purged 2026-11-11) | Yes (Scrubbed 2026-11-11) | Yes (Verified post-restore) | Nana Adjei | **VERIFIED COMPLIANT** (Full audit trail confirmed) |
+| **CASE-2026-004** *(Dispute Recovery Drill)* | 2026-11-12 | `cust_ref_09812` | **RESTORATION** | Erroneous deletion dispute & order history recovery | 2026-02-10 (Day 90 Sprint) | Account Link Restored | Masked Ledger Verified | Verified Clean | Verified Clean | Verified in Restore Script | Nana Adjei | **VERIFIED RESTORED** (Order history re-linked via surrogate key; zero raw personal contact details exposed) |
 
 ---
 
@@ -65,7 +65,7 @@ This register permanently records every formal customer data action (tracking an
 2. **Audit Log Inspection:** Cross-reference `AUDIT_CUSTOMER_DELETION_LOG` to determine whether the customer record was erased via user request, automated clean-up script, or administrative error.
 3. **Order Fact Re-Linking:** In the analytical database, purchase records remain preserved and linked to `DIM_CUSTOMER_ANONYMOUS.customer_analytics_key`. Re-activate the customer account linkage via the surrogate key so past orders are visible to authorized support staff.
 4. **Consent-Driven Contact Re-Enrollment:** If the customer requests full account restoration on the live website, collect fresh contact details directly through the storefront customer registration portal under explicit customer consent, rather than trying to restore old unverified data from backup dumps.
-5. **DPC Response Sign-Off:** Nana signs off on the dispute resolution certificate, confirming that legitimate order history was restored while no untracked personal data copies were generated or retained.
+5. **Data Protection Commission Response Sign-Off:** Nana signs off on the dispute resolution certificate, confirming that legitimate order history was restored while no untracked personal data copies were generated or retained.
 
 ---
 
