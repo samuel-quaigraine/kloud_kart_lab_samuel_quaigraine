@@ -55,9 +55,9 @@ Every decision in this repository respects the hard constraints set in the lab b
 Because Nana Adjei was unavailable for interviews, this plan relies on four explicit assumptions (detailed in Section 6 of [situation_diagnosis.md](situation_diagnosis.md)):
 
 1. **Revenue Formula Baseline:** We assume Finance counts net paid orders (excluding refunds) while Operations counts gross placed orders. Both are tracked in Q1 and combined into one agreed SQL formula in Q2.
-2. **Financial Loss Estimates:** Lost sales, wasted leadership hours, and regulatory risk figures in `situation_diagnosis.md` are transparent analytical estimates rather than audited financial statements.
+2. **Financial Loss Estimates:** Lost sales, wasted leadership hours, and regulatory risk figures in `situation_diagnosis.md` are transparent analytical models rather than audited company ledgers.
 3. **Where Nigeria Pilot Data Is Stored:** We assume Nigeria pilot orders currently write into the main Accra database (tagged by country) rather than a separate server in Nigeria.
-4. **Second Server Size & Speed:** We assume the pre-approved second server has the same memory, processor speed, and storage capacity as the main production server.
+4. **Payment Gateway Settlement Cutoffs:** We assume third-party card payment processors and mobile money providers settle customer payments on standard 24-to-48-hour rolling settlement windows.
 
 ---
 

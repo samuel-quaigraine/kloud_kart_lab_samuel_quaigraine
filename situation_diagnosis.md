@@ -32,15 +32,15 @@ Below, we separate the visible symptoms from their root causes, explain the tech
 
 To help the Board of Directors make clear investment decisions, each root cause is priced below across three distinct financial categories: direct lost retail revenue, wasted leadership labour, and legal regulatory risk.
 
-### Root Cause 1: Shared Hardware Resource Contention
+### Root Cause 1: Heavy Manual Exports Slowing Down Customer Checkout
 
 - **Where it occurs in the data lifecycle:** Storage and Querying.
 - **Data Quality Dimension affected:** Timeliness and System Availability.
 - **The Mechanism:** The live PHP shop and Nana's Monday morning reporting query run on the exact same server hardware. When Nana queries thousands of customer rows across multiple large tables, the database locks table rows and consumes a large amount of available memory and processor capacity.
-- **Costing:**
-  - _Direct Lost Sales:_ Kloud Kart averages 285 orders per hour during its 14-hour daily active window (4,000 orders per day). During a two-hour severe slowdown, checkout wait times jump from under 1 second to over 20 seconds. Industry data confirms that shopping cart abandonment spikes by approximately 70% during such delays, resulting in roughly 200 lost orders per hour.
-  - _Monthly Revenue Loss:_ 200 lost orders per hour × 2 hours × 2 slowdown incidents per month = **800 lost customer orders per month**.
-  - _Total Financial Loss:_ At an average basket value of 350 Ghana Cedis, this causes a direct, unrecoverable loss of **280,000 Ghana Cedis per month (3.36 million Ghana Cedis annually)**. Even if we conservatively halve this estimate, Kloud Kart is losing over 1.6 million Ghana Cedis every year from dropped checkouts.
+- **Costing (Illustrative Financial Impact Model):**
+  - _Direct Lost Sales:_ Kloud Kart averages 285 orders per hour during its 14-hour daily active window (shipping 4,000 orders per day). During a two-hour severe slowdown, checkout wait times jump from under 1 second to over 20 seconds. Applying standard e-commerce cart-abandonment benchmarks (estimated at a 70% checkout abandonment spike during severe delays, detailed under Operating Assumptions in Section 6), an estimated 200 orders are lost per hour.
+  - _Monthly Order Loss:_ 200 lost orders per hour × 2 hours × 2 slowdown incidents per month = **an illustrative loss of approximately 800 customer orders per month**.
+  - _Estimated Revenue Impact:_ At an assumed average basket value of 350 Ghana Cedis, this models an illustrative loss of **approximately 280,000 Ghana Cedis per month (3.36 million Ghana Cedis annually)**. Even if conservatively halved, the business models over 1.6 million Ghana Cedis in lost sales every year.
 - **What we decided to do:** We planned an immediate move of all reporting tasks to the pre-approved duplicate database server (the reporting mirror). This guarantees that reports and exports run on separate hardware and never touch the live storefront machine.
 - **Remaining risk:** Low once the second server is turned on. It only requires a basic check to ensure the mirror stays in sync with the live database.
 
@@ -65,11 +65,11 @@ To help the Board of Directors make clear investment decisions, each root cause 
 - **Where it occurs in the data lifecycle:** Transformation and Consumption.
 - **Data Quality Dimension affected:** Consistency and Accuracy.
 - **The Mechanism:** Operations and Finance have never agreed on a standardized formula for revenue, such as whether to count orders on placement, dispatch, or payment settlement, or how to handle refunds, and both teams pull separate CSV exports at different times into private spreadsheets.
-- **Costing:**
-  - _Wasted Executive Labour:_ Nana Adjei (Head of Operations), the Finance Lead, and senior department staff spend at least 4 hours every Monday morning comparing spreadsheets, tracing individual order rows, and debating which number to present to the Managing Director.
-  - _Annual Labour Waste:_ 4 hours per week × 2 senior leaders × 52 weeks = **416 executive hours wasted per year**.
-  - _Total Labour Cost:_ At an executive hourly rate of 200 Ghana Cedis, Kloud Kart wastes over **83,200 Ghana Cedis per year** in executive salaries paying senior leaders to act as human calculators.
-  - _Strategic Cost:_ More importantly, the Managing Director and the Board cannot trust weekly financial statements, making investor reporting, cash planning, and inventory restocking decisions unreliable.
+- **Costing (Illustrative Labour Impact Model):**
+  - _Wasted Executive Labour:_ Nana Adjei (Head of Operations) and the Finance Lead spend an estimated 4 hours every Monday morning comparing spreadsheets, tracing individual order rows, and debating conflicting numbers before executive meetings.
+  - _Annual Labour Waste:_ 4 hours per week × 2 senior department leaders × 52 weeks = **an illustrative 416 executive hours wasted per year** (equivalent to over 10 full working weeks of senior leadership bandwidth).
+  - _Estimated Salary Cost:_ At an assumed blended leadership rate of 200 Ghana Cedis per hour (detailed under Operating Assumptions in Section 6), this models approximately **83,200 Ghana Cedis per year** in executive payroll spent acting as manual spreadsheet calculators.
+  - _Strategic Cost:_ More importantly, the Managing Director and the Board of Directors cannot trust weekly financial statements, creating cash planning blind spots and delaying executive decisions.
 - **What we decided to do:** We planned a single, centralized reporting table where the formula for confirmed revenue is locked into clear, testable database queries (SQL) maintained by the Analytics Engineer. Both departments will read from this single source of truth.
 - **Remaining risk:** Moderate until Nana Adjei and the Finance Lead formally sign off on the standard business definitions.
 
@@ -115,7 +115,7 @@ Because Nana Adjei and company leadership were not available for direct follow-u
    - _Why this matters:_ Confirms whether the current machine has enough memory to buffer database indexes and verifies that the mirror server can take over instantly if the primary server fails.
 
 2. **Payment Gateway Settlement Schedules:**
-   - _Question:_ "What are the exact settlement cutoff hours and clearing schedules for Paystack, bank cards, and mobile money providers in Ghana and Nigeria?"
+   - _Question:_ "What are the exact settlement cutoff hours and clearing schedules for card payment processors and mobile money providers in Ghana and Nigeria?"
    - _Why this matters:_ Allows the Analytics Engineer to align the daily reporting batch schedule with actual bank deposits, closing the gap between shipped orders and cleared cash.
 
 3. **Customer Return and Refund Timelines:**
@@ -134,10 +134,12 @@ Because Nana Adjei and company leadership were not available for direct follow-u
 
 ## 6. Operating Assumptions (Where the Brief Is Silent)
 
-Because Nana Adjei is unavailable for follow-up questions, this diagnosis and the accompanying plan rely on the following explicit assumptions:
+Because Nana Adjei is unavailable for follow-up questions, this diagnosis and the accompanying architectural recommendations rely on the following explicit operating assumptions where the brief does not provide primary company data:
 
-1. **Revenue Definition:** We assume Finance reports net paid orders (excluding refunds) and Operations reports gross placed orders. We will standardize both into one SQL definition during Q1; if Finance defines revenue strictly by bank-settlement date, only the cutoff timestamp in our SQL view changes.
-2. **Financial Costing Baselines:** Lost-order estimates assume an average basket value of GH₵ 350, a 70% cart-abandonment spike during 20-second checkout delays, two slowdown incidents per month, and a blended leadership rate of GH₵ 200/hour.
-3. **Nigeria Pilot Hosting:** We assume orders from the Nigeria pilot currently write to the same Accra MySQL database rather than a separate regional server. If Nigeria runs on a separate database, our Q2 extraction scope expands to include a second source connector.
-4. **Pre-Approved Second Server:** We assume the pre-approved second server is provisioned as an isolated MySQL read replica with comparable memory and storage to the primary box (~40 GB dataset).
-5. **Stock Count Handling:** Because live inventory cannot tolerate batch delay, we assume live stock checks remain on the primary MySQL database while all daily reporting moves to the read replica.
+1. **Revenue Formula Definition:** The brief states that Nana's Monday spreadsheet never matches Finance's spreadsheet, but does not provide their exact accounting formulas. We assume Finance reports net cleared orders (paid transactions excluding customer refunds) and Operations reports gross placed orders. During Quarter 1, both formulas will be standardized into clear, auditable database queries. If company leadership defines confirmed revenue strictly by bank deposit settlement timestamp, only the filter criteria in our reporting query change.
+2. **Financial Costing Baselines (Root Causes 1 and 3):** The brief states that twice last month a Monday export slowed the live site to a crawl, and that weekly revenue numbers conflict, but provides no audited financial ledger, average order value, cart abandonment statistics, or payroll figures. To provide the Board of Directors with a concrete financial scale of impact, we modeled the following baseline parameters:
+   - _Lost Sales Model (Root Cause 1):_ Assumes an active 14-hour daily order window (~285 orders/hour from shipping 4,000 daily orders), a 70% shopping cart abandonment spike when checkout response latency jumps from under 1 second to over 20 seconds during two-hour slowdowns (~200 lost orders/hour, or ~800 lost orders across two monthly incidents), and an average basket value of 350 Ghana Cedis (~280,000 Ghana Cedis/month).
+   - _Labour Waste Model (Root Cause 3):_ Assumes an average of 4 hours spent each Monday by 2 senior leaders (Nana Adjei and the Finance Lead) reconciling conflicting spreadsheets (416 leadership hours annually), at an assumed blended leadership rate of 200 Ghana Cedis per hour (~83,200 Ghana Cedis annually).
+   - _Integrity Note:_ These costing figures represent analytical models rather than company financial records. If verified company ledgers indicate higher or lower basket sizes or salary figures, only the financial multipliers scale; the underlying root causes, operational risks, and architectural solutions remain completely identical.
+3. **Nigeria Pilot Data Tenancy:** The brief notes that Kloud Kart is shipping about 4,000 orders per day and piloting in Nigeria, with orders, inventory, and customer accounts living in one MySQL database on the same box as the website. We assume orders from the Nigeria expansion pilot write to this same Accra MySQL database (partitioned by country code attributes) rather than a separate hosted server in Nigeria. If a separate database is deployed in Nigeria later, our ingestion pipeline simply adds a second source connection.
+4. **Payment Gateway Settlement Cutoffs:** In the absence of primary payment gateway clearing schedules, we assume third-party card payment processors and mobile money providers operate on standard 24-to-48-hour rolling settlement windows.

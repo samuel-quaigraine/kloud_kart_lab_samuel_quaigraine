@@ -146,7 +146,7 @@ Because we formulated this strategy with available company records, we explicitl
 
 1. **Revenue Formula Definitions:** We assume Finance reports net paid orders (cleared in bank accounts) and Operations reports gross placed orders; neither team was available to confirm whether the gap comes from order timing or refunds.
 2. **Current Server Hardware Capacity:** We assume our single hosting server has standard modern commercial specifications (at least 8 processor cores and 32 gigabytes of RAM). If smaller, activating the second server is an emergency priority.
-3. **Payment Gateway Settlement Timing:** We assume our payment processors (such as Paystack or mobile money providers) settle completed customer payments on a standard 24-to-48-hour rolling window.
+3. **Payment Gateway Settlement Timing:** We assume our payment processors (card payment gateways and mobile money providers) settle completed customer payments on a standard 24-to-48-hour rolling window.
 4. **Nigeria Pilot Data Storage:** We assume Nigeria pilot orders currently land in our Accra database. As I understand Act 843, our core security and privacy duties apply wherever data is stored, and we must also respect Nigerian customer privacy rules as advised by legal counsel.
 
 > **Nana's Speaker Notes:** *"A defensible plan states its assumptions openly. We have assumed our server hardware meets standard specifications, that our revenue definitions follow standard e-commerce patterns, and that Nigeria pilot data is hosted centrally in Accra. If any of these assumptions change, our architecture adapts without altering our core strategy."*
