@@ -50,15 +50,15 @@ For complete reviewability directly in the repository browser, the presentation 
 
 | Slide Number and Title | Core Message for the Board | Nana's Spoken Summary |
 | :--- | :--- | :--- |
-| **Slide 1: Executive Title** | Sizing data architecture for Kloud Kart's scale (~40 gigabytes, 4,000 daily orders), not Amazon. | Commits to an affordable data plan that stops site freezes and unifies sales totals. |
-| **Slide 2: Symptoms vs. Root Causes** | Website freezes and revenue arguments come from sharing one machine and lacking agreed formulas. | Explains that running Monday reports on the live store locks up customer checkouts. |
-| **Slide 3: Two-Server Architecture** | Activating pre-approved Server 2 as a reporting mirror with clean analytical tables. | Shoppers use the store on Server 1; reports read from the mirror on Server 2. |
-| **Slide 4: Customer Privacy (Act 843)** | Privacy cleaning at the gate and an audit log to handle both deletion and account recovery. | Complies with Ghana law within 90 days by scrubbing personal contact details before reporting. |
-| **Slide 5: 99% Batch / Live Stock** | Daily 02:00 AM updates for reporting, with live checkout checks for warehouse stock. | Explains why daily reporting is 100% sufficient while physical inventory stays live. |
-| **Slide 6: Two Data Hires** | Hiring a Data Engineer in Month 1 and an Analytics Engineer in Month 3; no AI or Data Scientist. | Fixes operational plumbing first before standardizing reporting; machine learning is deferred. |
-| **Slide 7: Quarterly Roadmap** | Four quarters of visible outcomes, each verified by non-technical business tests. | Commits to measurable quarterly results that Nana and Finance can verify without engineers. |
-| **Slide 8: Operating Assumptions** | Open disclosure of assumptions (server capacity, revenue definitions, settlement timing). | Demonstrates defensibility by stating what could not be verified in available records. |
-| **Slide 9: Decision Request** | Authorize hiring the Data Engineer in Month 1 and activating the duplicate server. | Requests formal board approval to begin implementation immediately. |
+| **Slide 1: Fixing Our Data Foundation for Growth** | Sizing data architecture for Kloud Kart's scale (~40 gigabytes, 4,000 daily orders), not Amazon. | Commits to an affordable data plan that stops site freezes and unifies sales totals. |
+| **Slide 2: Three Urgent Problems Holding Us Back** | Website freezes, conflicting revenue, and customer spreadsheets on laptops hold the company back. | Explains that running Monday reports on the live store locks up customer checkouts. |
+| **Slide 3: Sized for Our Real Scale, Not Amazon's** | 40-gigabyte data footprint fits in server memory, rejecting expensive cloud platforms. | Explains why buying Snowflake is expensive over-engineering for a 40-gigabyte store. |
+| **Slide 4: Separating Live Checkout from Daily Reports** | Move all reporting queries off Server 1 onto duplicate Server 2 (read replica). | Shoppers use the store on Server 1; reports read from the duplicate mirror on Server 2. |
+| **Slide 5: Meeting Our 90-Day Customer Deletion Deadline** | Strip personal details at the gate and maintain a permanent audit log to settle complaint. | Complies with Ghana law within 90 days by scrubbing personal contact details before reporting. |
+| **Slide 6: Daily Updates for Reports, Live Checks for Stock** | Daily 02:00 AM updates for reporting, with live checkout checks for warehouse stock. | Explains why daily reporting is 100% sufficient while physical inventory stays live. |
+| **Slide 7: Two Focused Hires, Zero Unneeded Roles** | Hire Data Engineer in Month 1 and Analytics Engineer in Month 3; no AI or Data Scientist. | Fixes operational plumbing first before standardizing reporting; machine learning is deferred. |
+| **Slide 8: 12-Month Milestones You Can Verify** | Four quarters of visible outcomes, each verified by non-technical business tests. | Commits to measurable quarterly results that Nana and Finance can verify without engineers. |
+| **Slide 9: Three Immediate Actions to Launch** | Activate duplicate server, open Data Engineer hiring, and settle deletion complaint. | Requests formal board authorization to begin implementation immediately. |
 
 ---
 
