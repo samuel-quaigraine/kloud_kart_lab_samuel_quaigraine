@@ -37,7 +37,7 @@ Instead of buying expensive cloud data warehouses, we designed a simple, defensi
 | [recommendation.md](recommendation.md) | Sized for 40 gigabytes, explains the two-server architecture, 30/60/90-day hiring goals, and investor answers. | Provides Nana with an affordable, defensible technical recommendation for the board. |
 | [roadmap.md](roadmap.md) | One-page quarterly plan with non-technical verification tests for every outcome. | Gives leadership visible, quarterly milestones they can verify without engineering help. |
 | [decisions/](decisions/) (5 ADRs) | Five formal Architecture Decision Records strictly following the standard house template, evaluating real alternatives and pricing mistakes. | Documents why we chose a simple relational setup over expensive cloud platforms. |
-| [presentation/board_presentation.pptx](presentation/board_presentation.pptx) | Executive 9-slide PowerPoint presentation with complete speaker notes for Nana Adjei. | Equips Nana to present the plan confidently to investors and the board. |
+| [presentation/](presentation/) ([.pptx](presentation/board_presentation.pptx), [.md](presentation/board_presentation.md), [.txt](presentation/board_presentation.txt)) | Executive 9-slide presentation provided in visual PowerPoint, formatted Markdown, and plain text formats with complete speaker notes. | Equips Nana to present the plan confidently to investors and the board. |
 | [improvement.md](improvement.md) | Explains the built customer data register and Monday revenue sign-off tool. | Recovers 416 hours of executive time annually and provides tangible regulatory proof. |
 | [customer_data_inventory_and_deletion_register.md](customer_data_inventory_and_deletion_register.md) | Operational tool tracking five copy locations, 6-step deletion protocol, and weekly revenue sign-off ledger. | Gives operations immediate control over laptop files and stops weekly sales debates. |
 | [erd_and_architecture.md](erd_and_architecture.md) | Visual database diagrams and data flow blueprints showing how records move securely. | Provides an auditable technical map of the data pipeline and privacy gateway. |
@@ -46,7 +46,7 @@ Instead of buying expensive cloud data warehouses, we designed a simple, defensi
 
 ## 3. Executive Board Presentation: Slide Outline and Speaker Summary
 
-For complete reviewability directly in the repository browser, the table below summarizes the nine slides and speaker notes contained in [presentation/board_presentation.pptx](presentation/board_presentation.pptx):
+For complete reviewability directly in the repository browser, the presentation is provided in visual PowerPoint ([presentation/board_presentation.pptx](presentation/board_presentation.pptx)), formatted Markdown ([presentation/board_presentation.md](presentation/board_presentation.md)), and plain text ([presentation/board_presentation.txt](presentation/board_presentation.txt)). The table below summarizes the nine slides and speaker notes:
 
 | Slide Number and Title | Core Message for the Board | Nana's Spoken Summary |
 | :--- | :--- | :--- |
@@ -92,6 +92,6 @@ Because Nana Adjei was unavailable for interviews, this plan relies on six expli
 
 1. **Start with the Diagnosis:** Read [situation_diagnosis.md](situation_diagnosis.md) to see the root causes, financial costs, and assumptions.
 2. **Review the Plan and Timeline:** Read [recommendation.md](recommendation.md) for the system design and staffing plan, followed by [roadmap.md](roadmap.md) for the quarterly outcomes.
-3. **Check the Trade-Offs, Slides and Built Tool:** Open [decisions/](decisions/) for the five Architecture Decision Records, [customer_data_inventory_and_deletion_register.md](customer_data_inventory_and_deletion_register.md) for the built privacy/reconciliation tracker, and [presentation/board_presentation.pptx](presentation/board_presentation.pptx) for the board presentation deck.
+3. **Check the Trade-Offs, Slides and Built Tool:** Open [decisions/](decisions/) for the five Architecture Decision Records, [customer_data_inventory_and_deletion_register.md](customer_data_inventory_and_deletion_register.md) for the built privacy/reconciliation tracker, and [presentation/](presentation/) for the board presentation deck (available in [.pptx](presentation/board_presentation.pptx), [.md](presentation/board_presentation.md), and [.txt](presentation/board_presentation.txt)).
 
 _Note: No real database passwords, live customer records, or private personal data are stored in this repository (sample environment variables are shown in [.env.example](.env.example))._
