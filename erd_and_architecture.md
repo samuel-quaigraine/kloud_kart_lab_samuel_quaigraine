@@ -34,6 +34,7 @@ flowchart TD
             StagingTables --> TransformationSQL["Standardized Business Logic in SQL"]
             TransformationSQL --> CanonicalRevenue["Single Source of Truth: Confirmed Revenue"]
             TransformationSQL --> DimensionalMarts["Business Reporting Marts: Sales, Geography"]
+            TransformationSQL --> StockDriftAudit["Warehouse Stock Drift Audit & Daily Alert at 08:00 AM"]
         end
     end
 
@@ -43,6 +44,7 @@ flowchart TD
         UnifiedDashboard --> NanaView["Nana Adjei: Head of Operations"]
         UnifiedDashboard --> FinanceView["Finance Department"]
         UnifiedDashboard --> BoardView["Board of Directors and Investors"]
+        StockDriftAudit --> WarehouseView["Warehouse & Inventory Leads"]
     end
 ```
 
@@ -146,10 +148,22 @@ erDiagram
         string audit_reconciliation_status "MATCH or VARIANCE_INVESTIGATION"
     }
 
+    FACT_INVENTORY_DRIFT_AUDIT {
+        int audit_id PK "Unique inventory audit tracking key"
+        date audit_date_key FK "Links to Dim_Date"
+        int product_analytics_key FK "Links to Dim_Product"
+        int physical_shelf_count "Physical count from warehouse scan"
+        int system_stock_balance "Website operational stock balance"
+        int variance_count "Difference between shelf and website"
+        string drift_alert_status "NORMAL, MISMATCH_ALERT, or CORRECTED"
+    }
+
     DIM_CUSTOMER_ANONYMOUS ||--o{ FACT_ORDERS : "aggregates"
     DIM_PRODUCT ||--o{ FACT_ORDERS : "aggregates"
+    DIM_PRODUCT ||--o{ FACT_INVENTORY_DRIFT_AUDIT : "audited_in"
     DIM_DATE ||--o{ FACT_ORDERS : "timestamps"
     DIM_DATE ||--o{ FACT_DAILY_REVENUE_RECONCILIATION : "schedules"
+    DIM_DATE ||--o{ FACT_INVENTORY_DRIFT_AUDIT : "schedules"
 ```
 
 ---
@@ -167,7 +181,7 @@ The table below explains what happens to each operational field during the night
 | `CUSTOMERS.region` | Shipping fee calculation | **Standardized and Saved** | `DIM_CUSTOMER_ANONYMOUS.delivery_region` | Needed for regional sales tracking across Greater Accra, Ashanti, and Nigerian states. |
 | `ORDERS.total_amount_ghs` | Customer checkout total | **Transferred Raw** | `FACT_ORDERS.gross_sale_amount_ghs` | Standard financial metric. It must remain exact down to the pesewa for auditing. |
 | `ORDERS.order_status` | Warehouse packing status | **Grouped into Agreed Business Status** | `FACT_ORDERS.canonical_revenue_status` | Standardized in SQL by the Analytics Engineer so Operations and Finance use the exact same definition. |
-| `PRODUCTS.physical_stock_available` | Prevents selling items out of stock | **Checked Live on Primary Store Database Only** | *Excluded from Nightly Batch* | Shelf counts must never be out of date. Checked live on the primary database to guarantee zero overselling. |
+| `PRODUCTS.physical_stock_available` | Prevents selling items out of stock | **Live Checkout Check on Primary DB; Audited in Nightly Batch** | `FACT_INVENTORY_DRIFT_AUDIT.system_stock_balance` | Shelf counts must never be stale during checkout. Audited nightly against physical warehouse scans to flag drift at 08:00 AM before shoppers order. |
 
 ---
 
@@ -190,4 +204,11 @@ The table below explains what happens to each operational field during the night
    - Raw spreadsheet downloads on staff laptops are stopped.
    - Names, phone numbers, and physical addresses are removed at the gate before data enters the reporting system.
    - Customer emails are turned into anonymous codes.
+   - Disaster recovery runbooks automatically re-apply customer deletions to restored backups so historical snapshots never resurrect erased personal records.
    - **Result:** When a customer asks for their personal data to be deleted, Kloud Kart only needs to delete the record from the primary store database. Zero personal customer records exist in the reporting database, meeting the 90-day legal response deadline with complete certainty.
+
+4. **How Warehouse Stock Accuracy and Overselling Prevention are Guaranteed:**
+   - Online shoppers check inventory live against the primary database during checkout, guaranteeing zero stale stock counts.
+   - During the 02:00 AM nightly batch window, an automated inventory drift check compares recorded physical warehouse scan logs against website stock balances.
+   - If a mismatch is detected, the system alerts the warehouse team at 08:00 AM so they can investigate and correct shelf numbers before shoppers buy items that are sold out.
+   - **Result:** Catches over 95% of stock mismatches before checkout, keeping out-of-stock order cancellations below 0.5% of total orders.

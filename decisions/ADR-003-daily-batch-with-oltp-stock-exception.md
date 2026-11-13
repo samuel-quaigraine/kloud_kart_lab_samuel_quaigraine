@@ -14,7 +14,7 @@ However, Kloud Kart operates with a strict budget of two data hires who must kee
 
 We establish an automated daily batch schedule (running at 02:00 AM) for 99% of company reports, financial reconciliation ledgers, and marketing dashboards. We set warehouse physical stock counts as the single, strict real-time exception, checked live on the primary store database during customer checkout.
 
-In addition, to prevent warehouse shelf counts and online catalog numbers from drifting apart, the nightly batch extraction routine executes an automated daily stock drift check comparing recorded physical warehouse barcode counts against website database balances. If a discrepancy is detected, the pipeline immediately generates an automated mismatch alert for the warehouse team at 08:00 AM so they can investigate and correct shelf numbers before online shoppers order items that are physically sold out.
+In addition, to prevent warehouse shelf counts and online catalog numbers from drifting apart, the daily batch extraction routine executes an automated daily stock drift check comparing recorded physical warehouse barcode counts against website database balances. If a discrepancy is detected, the pipeline immediately generates an automated mismatch alert for the warehouse team at 08:00 AM so they can investigate and correct shelf numbers before online shoppers order items that are physically sold out.
 
 ## Alternatives considered
 

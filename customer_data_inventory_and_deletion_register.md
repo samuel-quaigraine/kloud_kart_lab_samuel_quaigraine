@@ -13,7 +13,7 @@ Under Ghana's Data Protection Act, 2012 (Act 843), as I understand it, individua
 
 Technical database architecture alone cannot clean up unmanaged spreadsheets already saved on employee laptops. This register provides Nana Adjei with a non-technical, repeatable management tool to:
 1. Locate and inventory every copy of customer personal data across all departments.
-2. Track and verify customer deletion requests to complete compliance within the mandatory 90-day window.
+2. Track and verify customer deletion requests to complete compliance within the mandatory 90-day window, including permanent erasure protection across system backup restores.
 3. Reconcile and sign off on Monday revenue figures between Operations and Finance without circular arguments.
 
 ---
@@ -24,7 +24,7 @@ The table below catalogs every known location where personal customer details (n
 
 | Copy ID | Storage Location | Department Custodian | Specific Personal Data Fields | Storage Format | Current Risk Level | Mandatory Retirement Action |
 |---|---|---|---|---|---|---|
-| **LOC-01** | Nana's Personal Laptop Downloads (`C:\Users\Nana\Downloads\orders_export_*.csv`) | Operations (Nana Adjei) | Customer full names, delivery addresses, phone numbers, order amounts. | Plain CSV files | **CRITICAL** (Unsecured, unencrypted) | Purge historical files immediately. Redirect all future reporting to the duplicate mirror server using masked customer IDs. |
+| **LOC-01** | Nana's Personal Laptop Downloads (`C:\Users\Nana\Downloads\orders_export_*.csv`) | Operations (Nana Adjei) | Customer full names, delivery addresses, phone numbers, order amounts. | Plain comma-separated values (CSV) files | **CRITICAL** (Unsecured, unencrypted) | Purge historical files immediately. Redirect all future reporting to the duplicate mirror server using masked customer identification numbers (IDs). |
 | **LOC-02** | Marketing Team Workstations (`300k_customers_master.xlsx`) | Marketing Team | 300,000 customer names, phone numbers, email addresses, delivery regions. | Excel Spreadsheets | **CRITICAL** (Untracked local spreadsheet copies) | Revoke raw downloads. Provide marketing with an aggregated, anonymized dashboard view showing cohort metrics without plain contact info. |
 | **LOC-03** | Finance Weekly Settlement Ledgers (`finance_reconciliation_2026.xlsx`) | Finance Department | Customer names, payment card references, mobile money numbers, transaction totals. | Excel Spreadsheets | **HIGH** (Unencrypted local storage) | Standardize finance reports on transaction IDs and settlement timestamps; strip customer personal names and telephone numbers. |
 | **LOC-04** | Shared Desktop Drives and Ad-Hoc Team Exports | Staff across Operations, Finance, and Marketing | Ad-hoc customer extracts, order verification notes, customer telephone lists. | Local CSV files and desktop spreadsheets | **MEDIUM** (Unmanaged files on local storage) | Enforce mandatory deletion policy for all local export files older than 7 days once masked reporting views are deployed. |
@@ -42,12 +42,13 @@ This register tracks every formal customer data deletion request from initial re
 | **DPC-2026-002** | 2026-11-02 | `cust_ref_11204` | 2026-01-31 (Day 90) | Yes (Deleted 2026-11-04) | Pending (Target: Day 45) | Pending (Target: Day 45) | Yes (Scrubbed 2026-11-05) | Nana Adjei | **IN PROGRESS** |
 | **DPC-2026-003** *(Simulated Audit Test)* | 2026-11-10 | `cust_ref_test_001` | 2026-02-08 (Day 90) | Yes (Deleted 2026-11-10) | Yes (Purged 2026-11-11) | Yes (Purged 2026-11-11) | Yes (Scrubbed 2026-11-11) | Nana Adjei | **VERIFIED COMPLIANT** (Full audit trail confirmed) |
 
-### 5-Step Verification Protocol for Deletion Requests:
+### 6-Step Verification Protocol for Deletion Requests:
 1. **Log & Timestamp:** Log the customer reference code and start the 90-day statutory clock.
 2. **Primary Store Erase:** The developer executes a soft-delete and sets `deleted_at` on the live MySQL store database.
 3. **Reporting Schema Verification:** Verify that nightly ingestion scrubs personal identifiers and only stores the irreversible anonymous reference.
 4. **Local Copy Purge:** Confirm that staff across Operations, Finance, and Marketing have deleted any local spreadsheet extracts containing this customer.
-5. **Final Sign-Off:** Nana Adjei signs the verification log and files the response certificate for the Data Protection Commission.
+5. **Backup Restore Safeguard:** Append the customer reference code to the permanent Automated Deletion List so that whenever an older system backup is restored during disaster recovery, the post-restore clean-up routine immediately re-deletes the customer's personal details before the database goes live.
+6. **Final Sign-Off:** Nana Adjei signs the verification log and files the response certificate for the Data Protection Commission.
 
 ---
 

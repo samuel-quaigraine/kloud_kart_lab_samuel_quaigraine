@@ -56,7 +56,7 @@ To help the Board of Directors make clear investment decisions, each root cause 
   - _The Copy-Counting Rule:_ Every copy you create is a place a deletion request must reach.
   - _Risk-Weighted Exposure:_ If a deletion verification check arrives today, Kloud Kart cannot locate or erase records sitting on staff laptops. Potential regulatory sanctions, audit and legal fees, and investor due-diligence friction create an illustrative risk-weighted exposure of **500,000 to 1,200,000 Ghana Cedis**.
 - **What we decided to do:** We planned a strict privacy gateway. Before any customer transaction data enters the reporting system, personal names, phone numbers, and physical home addresses are permanently removed at the gate. Customer emails are converted into irreversible anonymous codes (such as turning an email into `cust_98234`).
-- **Remaining risk:** Historical spreadsheets already saved on employee laptops must be identified and safely erased by company management.
+- **Remaining risk:** Historical spreadsheets already saved on employee laptops must be identified and safely erased by company management, and database recovery procedures must include automated deletion-log re-application to ensure restored backups never resurrect erased records.
 
 ---
 
